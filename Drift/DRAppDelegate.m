@@ -7,6 +7,7 @@
 //
 
 #import "DRAppDelegate.h"
+#import "DRModel.h"
 
 @implementation DRAppDelegate
 
