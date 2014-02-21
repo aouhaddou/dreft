@@ -1,0 +1,61 @@
+//
+//  _<$managedObjectClassName$>.h
+//  mogenerator Example http://github.com/apontious/mogenerator-Example
+//
+//  Created by Christoph Albert on 12 September 2013.
+//  Copyright (c) 2013 Christoph Albert.
+//  Some right reserved: http://opensource.org/licenses/mit-license.php
+//
+
+// This is Version 2 of the template files for this project, where the scalar getter/setter methods *not* implemented on 10.7 "Lion", but are generated at runtime on 10.6 "Snow Leopard" and earlier.
+
+// DO NOT EDIT. This file is machine-generated and constantly overwritten.
+// Make changes to <$managedObjectClassName$>.h instead.
+
+#import <CoreData/CoreData.h>
+<$if hasCustomSuperentity$>#import "<$customSuperentity$>.h"<$endif$>
+
+<$foreach Relationship noninheritedRelationships do$>@class <$Relationship.destinationEntity.managedObjectClassName$>;<$endforeach do$>
+
+@interface <$managedObjectClassName$>ID : NSManagedObjectID {}
+@end
+
+@interface _<$managedObjectClassName$> : <$customSuperentity$> {}
+
+<$foreach Attribute noninheritedAttributes do$><$if Attribute.hasDefinedAttributeType$><$if TemplateVar.arc$><$if Attribute.isReadonly$>
+@property (nonatomic, strong, readonly) <$Attribute.objectAttributeType$> <$Attribute.name$>;<$else$>
+@property (nonatomic, strong) <$Attribute.objectAttributeType$> <$Attribute.name$>;<$endif$><$else$><$if Attribute.isReadonly$>
+@property (nonatomic, retain, readonly) <$Attribute.objectAttributeType$> <$Attribute.name$>;<$else$>
+@property (nonatomic, retain) <$Attribute.objectAttributeType$> <$Attribute.name$>;<$endif$><$endif$><$if Attribute.hasScalarAttributeType$><$if Attribute.isReadonly$>
+@property (atomic, readonly) <$Attribute.scalarAttributeType$> <$Attribute.name$>Value;
+- (<$Attribute.scalarAttributeType$>)<$Attribute.name$>Value;<$else$>
+@property (atomic) <$Attribute.scalarAttributeType$> <$Attribute.name$>Value;
+- (<$Attribute.scalarAttributeType$>)<$Attribute.name$>Value;
+- (void)set<$Attribute.name.initialCapitalString$>Value:(<$Attribute.scalarAttributeType$>)value_;<$endif$><$endif$>
+
+<$endif$><$endforeach do$>
+<$foreach Relationship noninheritedRelationships do$>
+<$if Relationship.isToMany$>
+<$if TemplateVar.arc$>
+@property (nonatomic, strong) <$Relationship.immutableCollectionClassName$> *<$Relationship.name$>;
+<$else$>
+@property (nonatomic, retain) <$Relationship.immutableCollectionClassName$> *<$Relationship.name$>;
+<$endif$>
+- (<$Relationship.mutableCollectionClassName$>*)<$Relationship.name$>Set;
+<$else$>
+<$if TemplateVar.arc$>
+@property (nonatomic, strong) <$Relationship.destinationEntity.managedObjectClassName$> *<$Relationship.name$>;
+<$else$>
+@property (nonatomic, retain) <$Relationship.destinationEntity.managedObjectClassName$> *<$Relationship.name$>;
+<$endif$><$endif$>
+<$endforeach do$>
+@end
+
+<$foreach Relationship noninheritedRelationships do$><$if Relationship.isToMany$>
+@interface _<$managedObjectClassName$> (<$Relationship.name.initialCapitalString$>CoreDataGeneratedAccessors)
+- (void)add<$Relationship.name.initialCapitalString$>:(<$Relationship.immutableCollectionClassName$>*)value_;
+- (void)remove<$Relationship.name.initialCapitalString$>:(<$Relationship.immutableCollectionClassName$>*)value_;
+- (void)add<$Relationship.name.initialCapitalString$>Object:(<$Relationship.destinationEntity.managedObjectClassName$>*)value_;
+- (void)remove<$Relationship.name.initialCapitalString$>Object:(<$Relationship.destinationEntity.managedObjectClassName$>*)value_;
+@end
+<$endif$><$endforeach do$>

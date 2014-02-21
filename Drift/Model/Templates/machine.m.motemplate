@@ -1,0 +1,65 @@
+// DO NOT EDIT. This file is machine-generated and constantly overwritten.
+// Make changes to <$managedObjectClassName$>.m instead.
+
+#import "_<$managedObjectClassName$>.h"
+
+@implementation <$managedObjectClassName$>ID
+@end
+
+@implementation _<$managedObjectClassName$>
+
+<$foreach Attribute noninheritedAttributes do$>
+<$if Attribute.hasDefinedAttributeType$>
+
+@dynamic <$Attribute.name$>;
+
+<$if Attribute.hasScalarAttributeType$>
+
+- (<$Attribute.scalarAttributeType$>)<$Attribute.name$>Value {
+	NSNumber *result = [self <$Attribute.name$>];
+	return [result <$Attribute.scalarAccessorMethodName$>];
+}
+
+<$if ! Attribute.isReadonly$>
+- (void)set<$Attribute.name.initialCapitalString$>Value:(<$Attribute.scalarAttributeType$>)value_ {
+	[self set<$Attribute.name.initialCapitalString$>:<$if TemplateVar.noliterals$>[NSNumber <$Attribute.scalarFactoryMethodName$>value_]<$else$>@(value_)<$endif$>];
+}
+<$endif$>
+<$endif$>
+<$endif$>
+<$endforeach do$>
+
+<$foreach Relationship noninheritedRelationships do$>
+@dynamic <$Relationship.name$>;
+
+	<$if Relationship.isToMany$>
+- (<$Relationship.mutableCollectionClassName$>*)<$Relationship.name$>Set {
+	[self willAccessValueForKey:@"<$Relationship.name$>"];
+  <$if Relationship.jr_isOrdered$>
+	<$Relationship.mutableCollectionClassName$> *result = (<$Relationship.mutableCollectionClassName$>*)[self mutableOrderedSetValueForKey:@"<$Relationship.name$>"];
+  <$else$>
+	<$Relationship.mutableCollectionClassName$> *result = (<$Relationship.mutableCollectionClassName$>*)[self mutableSetValueForKey:@"<$Relationship.name$>"];
+  <$endif$>
+	[self didAccessValueForKey:@"<$Relationship.name$>"];
+	return result;
+}
+	<$endif$>
+<$endforeach do$>
+@end
+
+<$foreach Relationship noninheritedRelationships do$><$if Relationship.isToMany$><$if Relationship.jr_isOrdered$>
+@implementation _<$managedObjectClassName$> (<$Relationship.name.initialCapitalString$>CoreDataGeneratedAccessors)
+- (void)add<$Relationship.name.initialCapitalString$>:(<$Relationship.immutableCollectionClassName$>*)value_ {
+	[self.<$Relationship.name$>Set unionOrderedSet:value_];
+}
+- (void)remove<$Relationship.name.initialCapitalString$>:(<$Relationship.immutableCollectionClassName$>*)value_ {
+	[self.<$Relationship.name$>Set minusOrderedSet:value_];
+}
+- (void)add<$Relationship.name.initialCapitalString$>Object:(<$Relationship.destinationEntity.managedObjectClassName$>*)value_ {
+	[self.<$Relationship.name$>Set addObject:value_];
+}
+- (void)remove<$Relationship.name.initialCapitalString$>Object:(<$Relationship.destinationEntity.managedObjectClassName$>*)value_ {
+	[self.<$Relationship.name$>Set removeObject:value_];
+}
+@end
+<$endif$><$endif$><$endforeach do$>
