@@ -6,6 +6,6 @@
 //  Copyright (c) 2014 Christoph Albert. All rights reserved.
 //
 
-#import "MagicalRecord.h"
+#import "CoreData+MagicalRecord.h"
 #import "DRRun.h"
 #import "DRPath.h"

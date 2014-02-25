@@ -5,7 +5,7 @@
 
 
 extern const struct DRPathAttributes {
-	__unsafe_unretained NSString *date;
+	__unsafe_unretained NSString *createDate;
 	__unsafe_unretained NSString *distance;
 	__unsafe_unretained NSString *points;
 } DRPathAttributes;
@@ -36,11 +36,11 @@ extern const struct DRPathFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSDate* date;
+@property (nonatomic, strong) NSDate* createDate;
 
 
 
-//- (BOOL)validateDate:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateCreateDate:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -87,8 +87,8 @@ extern const struct DRPathFetchedProperties {
 @interface _DRPath (CoreDataGeneratedPrimitiveAccessors)
 
 
-- (NSDate*)primitiveDate;
-- (void)setPrimitiveDate:(NSDate*)value;
+- (NSDate*)primitiveCreateDate;
+- (void)setPrimitiveCreateDate:(NSDate*)value;
 
 
 
