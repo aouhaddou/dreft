@@ -30,6 +30,10 @@
 		838D12CA18BCD2AB00675187 /* CLLocation+DRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838D12C918BCD2AB00675187 /* CLLocation+DRExtensions.m */; };
 		838D12CC18BCD2CF00675187 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838D12CB18BCD2CF00675187 /* CoreLocation.framework */; };
 		838D12CF18BCD41200675187 /* NSArray+DRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838D12CE18BCD41200675187 /* NSArray+DRExtensions.m */; };
+		8392239818BE51E6003929A0 /* DRLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392239718BE51E6003929A0 /* DRLocationManager.m */; };
+		8392239B18BE5371003929A0 /* DRDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392239A18BE5371003929A0 /* DRDataProcessor.m */; };
+		839223A118BE5AF7003929A0 /* DRVisualFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392239F18BE5AF7003929A0 /* DRVisualFeedbackViewController.m */; };
+		839223A218BE5AF7003929A0 /* DRVisualFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 839223A018BE5AF7003929A0 /* DRVisualFeedbackViewController.xib */; };
 		83B988A918B256F2009AA6E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988A818B256F2009AA6E7 /* Foundation.framework */; };
 		83B988AB18B256F2009AA6E7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988AA18B256F2009AA6E7 /* CoreGraphics.framework */; };
 		83B988AD18B256F2009AA6E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988AC18B256F2009AA6E7 /* UIKit.framework */; };
@@ -76,6 +80,15 @@
 		838D12CB18BCD2CF00675187 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		838D12CD18BCD41200675187 /* NSArray+DRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+DRExtensions.h"; sourceTree = "<group>"; };
 		838D12CE18BCD41200675187 /* NSArray+DRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+DRExtensions.m"; sourceTree = "<group>"; };
+		8392239618BE51E6003929A0 /* DRLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRLocationManager.h; sourceTree = "<group>"; };
+		8392239718BE51E6003929A0 /* DRLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRLocationManager.m; sourceTree = "<group>"; };
+		8392239918BE5371003929A0 /* DRDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRDataProcessor.h; sourceTree = "<group>"; };
+		8392239A18BE5371003929A0 /* DRDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRDataProcessor.m; sourceTree = "<group>"; };
+		8392239C18BE5466003929A0 /* DRMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRMacros.h; sourceTree = "<group>"; };
+		8392239D18BE5929003929A0 /* DRFeedbackModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DRFeedbackModule.h; sourceTree = "<group>"; };
+		8392239E18BE5AF7003929A0 /* DRVisualFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRVisualFeedbackViewController.h; sourceTree = "<group>"; };
+		8392239F18BE5AF7003929A0 /* DRVisualFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRVisualFeedbackViewController.m; sourceTree = "<group>"; };
+		839223A018BE5AF7003929A0 /* DRVisualFeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DRVisualFeedbackViewController.xib; sourceTree = "<group>"; };
 		83B988A518B256F2009AA6E7 /* Drift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83B988A818B256F2009AA6E7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83B988AA18B256F2009AA6E7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -128,6 +141,10 @@
 		8376E5F218B7A335005CFB78 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8392239918BE5371003929A0 /* DRDataProcessor.h */,
+				8392239A18BE5371003929A0 /* DRDataProcessor.m */,
+				8392239618BE51E6003929A0 /* DRLocationManager.h */,
+				8392239718BE51E6003929A0 /* DRLocationManager.m */,
 				8376E60918B7A489005CFB78 /* DRModel.h */,
 				8376E5F318B7A335005CFB78 /* Drift.xcdatamodeld */,
 				8376E60018B7A464005CFB78 /* Mogenerator */,
@@ -161,6 +178,10 @@
 		838D12C618BCD23E00675187 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				8392239D18BE5929003929A0 /* DRFeedbackModule.h */,
+				8392239E18BE5AF7003929A0 /* DRVisualFeedbackViewController.h */,
+				8392239F18BE5AF7003929A0 /* DRVisualFeedbackViewController.m */,
+				839223A018BE5AF7003929A0 /* DRVisualFeedbackViewController.xib */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -168,6 +189,7 @@
 		838D12C718BCD24800675187 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				8392239C18BE5466003929A0 /* DRMacros.h */,
 				838D12C818BCD2AB00675187 /* CLLocation+DRExtensions.h */,
 				838D12C918BCD2AB00675187 /* CLLocation+DRExtensions.m */,
 				838D12CD18BCD41200675187 /* NSArray+DRExtensions.h */,
@@ -218,8 +240,8 @@
 				83B988B918B256F2009AA6E7 /* DRAppDelegate.h */,
 				83B988BA18B256F2009AA6E7 /* DRAppDelegate.m */,
 				838D12C618BCD23E00675187 /* Controllers */,
-				8376E5F218B7A335005CFB78 /* Model */,
 				838D12C718BCD24800675187 /* Utilities */,
+				8376E5F218B7A335005CFB78 /* Model */,
 				83B988BF18B256F2009AA6E7 /* Images.xcassets */,
 				83B988B118B256F2009AA6E7 /* Supporting Files */,
 			);
@@ -338,6 +360,7 @@
 			files = (
 				83B988B518B256F2009AA6E7 /* InfoPlist.strings in Resources */,
 				83B988C018B256F2009AA6E7 /* Images.xcassets in Resources */,
+				839223A218BE5AF7003929A0 /* DRVisualFeedbackViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,10 +459,13 @@
 				83B988BB18B256F2009AA6E7 /* DRAppDelegate.m in Sources */,
 				838D12CF18BCD41200675187 /* NSArray+DRExtensions.m in Sources */,
 				83B988B718B256F2009AA6E7 /* main.m in Sources */,
+				8392239B18BE5371003929A0 /* DRDataProcessor.m in Sources */,
 				8376E60818B7A464005CFB78 /* _DRRun.m in Sources */,
 				8376E60518B7A464005CFB78 /* DRPath.m in Sources */,
+				8392239818BE51E6003929A0 /* DRLocationManager.m in Sources */,
 				838D12CA18BCD2AB00675187 /* CLLocation+DRExtensions.m in Sources */,
 				8376E60718B7A464005CFB78 /* _DRPath.m in Sources */,
+				839223A118BE5AF7003929A0 /* DRVisualFeedbackViewController.m in Sources */,
 				8376E5F518B7A335005CFB78 /* Drift.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

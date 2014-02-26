@@ -7,8 +7,7 @@
 //
 
 #import "DRAppDelegate.h"
-#import "DRModel.h"
-#import "CLLocation+DRExtensions.h"
+#import "DRVisualFeedbackViewController.h"
 
 @import CoreLocation;
 
@@ -19,17 +18,27 @@
 //    [MagicalRecord setupAutoMigratingCoreDataStack];
 
 
-    CLLocation *loc1 = [[CLLocation alloc] initWithLatitude:59.3294 longitude:18.0686]; //Sthlm
-    CLLocation *loc2 = [[CLLocation alloc] initWithLatitude:52.5167 longitude:13.3833]; //Berlin 228
-    CLLocation *loc3 = [[CLLocation alloc] initWithLatitude:53.5653 longitude:10.0014]; //Hamburg 6
-    CLLocation *p = [[CLLocation alloc] initWithLatitude:55.60583 longitude:13.03583]; //Malmö
+//    CLLocation *loc1 = [[CLLocation alloc] initWithLatitude:59.3294 longitude:18.0686]; //Sthlm
+//    CLLocation *loc2 = [[CLLocation alloc] initWithLatitude:52.5167 longitude:13.3833]; //Berlin 228
+//    CLLocation *loc3 = [[CLLocation alloc] initWithLatitude:53.5653 longitude:10.0014]; //Hamburg 6
+//    CLLocation *p = [[CLLocation alloc] initWithLatitude:55.60583 longitude:13.03583]; //Malmö
+//
+//    DLog(@"Distance Berlin: %f",[p dr_perpendicularDistanceWithLocation:loc1 location:loc2]);
+//    DLog(@"Distance Hamburg: %f",[p dr_perpendicularDistanceWithLocation:loc1 location:loc3]);
 
-    NSLog(@"Distance Berlin: %f",[p dr_perpendicularDistanceWithLocation:loc1 location:loc2]);
-    NSLog(@"Distance Hamburg: %f",[p dr_perpendicularDistanceWithLocation:loc1 location:loc3]);
+
+
+    CLLocation *apple1 = [[CLLocation alloc] initWithLatitude:37.3317 longitude:-122.031844];
+    CLLocation *apple2 = [[CLLocation alloc] initWithLatitude:37.3290661 longitude:-122.0185939];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = [UIColor blackColor];
+
+    DRVisualFeedbackViewController *visual = [[DRVisualFeedbackViewController alloc] initWithPath:@[apple1,apple2]];
+
+    self.window.rootViewController = visual;
+
     [self.window makeKeyAndVisible];
     return YES;
 }
