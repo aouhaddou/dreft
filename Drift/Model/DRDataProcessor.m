@@ -73,4 +73,10 @@
     }
 }
 
+-(void)locationManager:(DRLocationManager *)manager didFailWithError:(NSError *)error {
+    if ([self.delegate respondsToSelector:@selector(dataProcessor:didFailWithError:)]) {
+        [self.delegate dataProcessor:self didFailWithError:error];
+    }
+}
+
 @end

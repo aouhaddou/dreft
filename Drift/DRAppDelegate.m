@@ -8,6 +8,7 @@
 
 #import "DRAppDelegate.h"
 #import "DRVisualFeedbackViewController.h"
+#import "DRDataProcessor.h"
 
 @import CoreLocation;
 
@@ -30,12 +31,13 @@
 
     CLLocation *apple1 = [[CLLocation alloc] initWithLatitude:37.3317 longitude:-122.031844];
     CLLocation *apple2 = [[CLLocation alloc] initWithLatitude:37.3290661 longitude:-122.0185939];
+    DRDataProcessor *proc = [[DRDataProcessor alloc] initWithPath:@[apple1,apple2]];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor blackColor];
 
-    DRVisualFeedbackViewController *visual = [[DRVisualFeedbackViewController alloc] initWithPath:@[apple1,apple2]];
+    DRVisualFeedbackViewController *visual = [[DRVisualFeedbackViewController alloc] initWithDataProcessor:proc];
 
     self.window.rootViewController = visual;
 

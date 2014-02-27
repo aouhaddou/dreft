@@ -44,7 +44,9 @@
         if (self.delegates != nil && [self.delegates count] > 0) {
             NSSet *delegatesSnapshot = [NSSet setWithSet:self.delegates];
             for (id<DRLocationManagerDelegate> delegate in delegatesSnapshot) {
-                [delegate locationManager:self didReceiveLocation:newLocation];
+                if ([delegate respondsToSelector:@selector(locationManager:didReceiveLocation:)]) {
+                    [delegate locationManager:self didReceiveLocation:newLocation];
+                }
             }
         }
     }
@@ -53,6 +55,12 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
 	DLog(@"Location Manager error: %@", [error description]);
+    NSSet *delegatesSnapshot = [NSSet setWithSet:self.delegates];
+    for (id<DRLocationManagerDelegate> delegate in delegatesSnapshot) {
+        if ([delegate respondsToSelector:@selector(locationManager:didFailWithError:)]) {
+            [delegate locationManager:self didFailWithError:error];
+        }
+    }
 }
 
 -(void)addDelegate:(id<DRLocationManagerDelegate>)delegate {

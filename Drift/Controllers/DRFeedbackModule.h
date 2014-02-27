@@ -14,12 +14,14 @@
 @class DRDataProcessor;
 @protocol DRFeedbackModule <NSObject>
 
-@property (nonatomic, strong, readonly) NSArray *path;
 @property (nonatomic, strong, readonly) DRRun *run;
 @property (nonatomic, strong, readonly) DRDataProcessor *processor;
 
--(id)initWithPath:(NSArray *)path;
+-(id)initWithDataProcessor:(DRDataProcessor *)processor;
 
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(CGFloat)drift ofLocation:(CLLocation *)location;
+
+@optional
+-(void)dataProcessor:(DRDataProcessor *)processor didFailWithError:(NSError *)error;
 
 @end

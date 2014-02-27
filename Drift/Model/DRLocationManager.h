@@ -12,7 +12,10 @@
 @class DRLocationManager;
 @protocol DRLocationManagerDelegate <NSObject>
 
--(void)locationManager:(DRLocationManager *)locationManager didReceiveLocation:(CLLocation *)location;
+-(void)locationManager:(DRLocationManager *)manager didReceiveLocation:(CLLocation *)location;
+
+@optional
+- (void)locationManager:(DRLocationManager *)manager didFailWithError:(NSError *)error;
 
 @end
 

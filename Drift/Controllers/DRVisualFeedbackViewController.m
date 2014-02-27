@@ -14,16 +14,14 @@
 @end
 
 @implementation DRVisualFeedbackViewController
-@synthesize path = _path;
 @synthesize run = _run;
 @synthesize processor = _processor;
 
-- (id)initWithPath:(NSArray *)path
+-(id)initWithDataProcessor:(DRDataProcessor *)processor
 {
     self = [super initWithNibName:@"DRVisualFeedbackViewController" bundle:nil];
     if (self) {
-        _path = path;
-        _processor = [[DRDataProcessor alloc] initWithPath:path];
+        _processor = processor;
         _processor.delegate = self;
     }
     return self;
@@ -33,6 +31,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    self.view.backgroundColor = [UIColor backgroundColor];
+    self.driftLabel.textColor = [UIColor primaryColor];
+    self.driftLabel.backgroundColor = self.view.backgroundColor;
+    self.driftLabel.text = NSLocalizedString(@"–", nil);
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -51,6 +53,10 @@
 
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(CGFloat)drift ofLocation:(CLLocation *)location {
     self.driftLabel.text = [NSString stringWithFormat:@"%.1f m",drift];
+}
+
+-(void)dataProcessor:(DRDataProcessor *)processor didFailWithError:(NSError *)error {
+    self.driftLabel.text = NSLocalizedString(@"–", nil);
 }
 
 @end

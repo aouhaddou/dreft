@@ -27,6 +27,7 @@
 		8376E60618B7A464005CFB78 /* DRRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 8376E5FF18B7A464005CFB78 /* DRRun.m */; };
 		8376E60718B7A464005CFB78 /* _DRPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 8376E60218B7A464005CFB78 /* _DRPath.m */; };
 		8376E60818B7A464005CFB78 /* _DRRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 8376E60418B7A464005CFB78 /* _DRRun.m */; };
+		838BA5E818BF6E370025A715 /* UIColor+ThemeColors.m in Sources */ = {isa = PBXBuildFile; fileRef = 838BA5E718BF6E370025A715 /* UIColor+ThemeColors.m */; };
 		838D12CA18BCD2AB00675187 /* CLLocation+DRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838D12C918BCD2AB00675187 /* CLLocation+DRExtensions.m */; };
 		838D12CC18BCD2CF00675187 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838D12CB18BCD2CF00675187 /* CoreLocation.framework */; };
 		838D12CF18BCD41200675187 /* NSArray+DRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838D12CE18BCD41200675187 /* NSArray+DRExtensions.m */; };
@@ -75,6 +76,8 @@
 		8376E60318B7A464005CFB78 /* _DRRun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _DRRun.h; sourceTree = "<group>"; };
 		8376E60418B7A464005CFB78 /* _DRRun.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _DRRun.m; sourceTree = "<group>"; };
 		8376E60918B7A489005CFB78 /* DRModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRModel.h; sourceTree = "<group>"; };
+		838BA5E618BF6E370025A715 /* UIColor+ThemeColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ThemeColors.h"; sourceTree = "<group>"; };
+		838BA5E718BF6E370025A715 /* UIColor+ThemeColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ThemeColors.m"; sourceTree = "<group>"; };
 		838D12C818BCD2AB00675187 /* CLLocation+DRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+DRExtensions.h"; sourceTree = "<group>"; };
 		838D12C918BCD2AB00675187 /* CLLocation+DRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+DRExtensions.m"; sourceTree = "<group>"; };
 		838D12CB18BCD2CF00675187 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -194,6 +197,8 @@
 				838D12C918BCD2AB00675187 /* CLLocation+DRExtensions.m */,
 				838D12CD18BCD41200675187 /* NSArray+DRExtensions.h */,
 				838D12CE18BCD41200675187 /* NSArray+DRExtensions.m */,
+				838BA5E618BF6E370025A715 /* UIColor+ThemeColors.h */,
+				838BA5E718BF6E370025A715 /* UIColor+ThemeColors.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -465,6 +470,7 @@
 				8392239818BE51E6003929A0 /* DRLocationManager.m in Sources */,
 				838D12CA18BCD2AB00675187 /* CLLocation+DRExtensions.m in Sources */,
 				8376E60718B7A464005CFB78 /* _DRPath.m in Sources */,
+				838BA5E818BF6E370025A715 /* UIColor+ThemeColors.m in Sources */,
 				839223A118BE5AF7003929A0 /* DRVisualFeedbackViewController.m in Sources */,
 				8376E5F518B7A335005CFB78 /* Drift.xcdatamodeld in Sources */,
 			);
