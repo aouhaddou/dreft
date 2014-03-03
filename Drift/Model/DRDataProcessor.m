@@ -9,6 +9,19 @@
 #import "DRDataProcessor.h"
 #import "CLLocation+DRExtensions.h"
 
+@interface DRDriftResult(Setters)
+
+@property (nonatomic, assign) CGFloat drift;
+@property (nonatomic, strong) CLLocation *location;
+@property (nonatomic, assign) NSInteger leg;
+@property (nonatomic, assign) DRDriftResultDirection direction;
+
+@end
+
+@implementation DRDriftResult
+
+@end
+
 @implementation DRDataProcessor
 
 -(id)initWithPath:(NSArray *)path {
@@ -40,36 +53,54 @@
 }
 
 -(void)locationManager:(DRLocationManager *)locationManager didReceiveLocation:(CLLocation *)location {
-    if ([self.delegate respondsToSelector:@selector(dataProcessor:didCalculateDrift:ofLocation:)]) {
-        CGFloat drift = [self minimumDriftForLocation:location];
-        [self.delegate dataProcessor:self didCalculateDrift:drift ofLocation:location];
+    if ([self.delegate respondsToSelector:@selector(dataProcessor:didCalculateDrift:)]) {
+        DRDriftResult *drift = [self minimumDriftForLocation:location];
+        [self.delegate dataProcessor:self didCalculateDrift:drift];
     }
 }
 
--(CGFloat)minimumDriftForLocation:(CLLocation *)location {
+-(DRDriftResult *)minimumDriftForLocation:(CLLocation *)location {
     NSInteger count = [self.path count];
     if (count == 0) {
         // No path, no distance
-        return 0;
+        return nil;
     } else if (count == 1) {
         //Only a point, distance to point
         CLLocation *point = self.path.firstObject;
-        return [location distanceFromLocation:point];
+        CGFloat distance = [location distanceFromLocation:point];
+        DRDriftResult *result = [DRDriftResult new];
+        result.drift = distance;
+        result.location = location;
+        result.leg = -1;
+        return result;
     } else {
         //Check all path legs and return shortest distance
         CGFloat minDrift = CGFLOAT_MAX;
+        CGFloat leg = -1;
 
-        for (NSInteger i = 1; i<count; i++) {
-            CLLocation *point1 = self.path[i-1];
-            CLLocation *point2 = self.path[i];
+        for (NSInteger i = 0; i<count-1; i++) {
+            CLLocation *point1 = self.path[i];
+            CLLocation *point2 = self.path[i+1];
 
             CGFloat drift = [location dr_perpendicularDistanceWithLocation:point1 location:point2];
             if (drift<minDrift) {
                 minDrift = drift;
+                leg = i;
             }
         }
+        DRDriftResult *result = [DRDriftResult new];
+        result.drift = minDrift;
+        result.location = location;
+        result.leg = leg;
 
-        return minDrift;
+        //Calculate left right by rotating
+        //Mercator projection of points
+        //Find checkpoint that is moved to: Keep history of drifts
+        //Rotate so that checkpoint leg is pointing north
+        //http://en.wikipedia.org/wiki/Rotation_matrix
+        //see if location.x is <(left) or >(right) than checkpoint.x
+        
+        return result;
     }
 }
 

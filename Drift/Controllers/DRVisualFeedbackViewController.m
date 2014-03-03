@@ -51,8 +51,8 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(CGFloat)drift ofLocation:(CLLocation *)location {
-    self.driftLabel.text = [NSString stringWithFormat:@"%.1f m",drift];
+-(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDriftResult *)result {
+    self.driftLabel.text = [NSString stringWithFormat:@"%.1f m",result.drift];
 }
 
 -(void)dataProcessor:(DRDataProcessor *)processor didFailWithError:(NSError *)error {

@@ -12,6 +12,7 @@
 @import CoreLocation;
 
 @class DRDataProcessor;
+@class DRDriftResult;
 @protocol DRFeedbackModule <NSObject>
 
 @property (nonatomic, strong, readonly) DRRun *run;
@@ -19,7 +20,7 @@
 
 -(id)initWithDataProcessor:(DRDataProcessor *)processor;
 
--(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(CGFloat)drift ofLocation:(CLLocation *)location;
+-(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDriftResult *)result;
 
 @optional
 -(void)dataProcessor:(DRDataProcessor *)processor didFailWithError:(NSError *)error;

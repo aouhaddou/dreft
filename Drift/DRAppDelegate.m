@@ -18,20 +18,9 @@
 {
 //    [MagicalRecord setupAutoMigratingCoreDataStack];
 
-
-//    CLLocation *loc1 = [[CLLocation alloc] initWithLatitude:59.3294 longitude:18.0686]; //Sthlm
-//    CLLocation *loc2 = [[CLLocation alloc] initWithLatitude:52.5167 longitude:13.3833]; //Berlin 228
-//    CLLocation *loc3 = [[CLLocation alloc] initWithLatitude:53.5653 longitude:10.0014]; //Hamburg 6
-//    CLLocation *p = [[CLLocation alloc] initWithLatitude:55.60583 longitude:13.03583]; //Malmö
-//
-//    DLog(@"Distance Berlin: %f",[p dr_perpendicularDistanceWithLocation:loc1 location:loc2]);
-//    DLog(@"Distance Hamburg: %f",[p dr_perpendicularDistanceWithLocation:loc1 location:loc3]);
-
-
-
-    CLLocation *apple1 = [[CLLocation alloc] initWithLatitude:37.3317 longitude:-122.031844];
-    CLLocation *apple2 = [[CLLocation alloc] initWithLatitude:37.3290661 longitude:-122.0185939];
-    DRDataProcessor *proc = [[DRDataProcessor alloc] initWithPath:@[apple1,apple2]];
+    CLLocation *lappisleft = [[CLLocation alloc] initWithLatitude:59.369667 longitude:18.057811];
+    CLLocation *lappisright = [[CLLocation alloc] initWithLatitude:59.368551 longitude:18.064678];
+    DRDataProcessor *proc = [[DRDataProcessor alloc] initWithPath:@[lappisleft,lappisright]];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.

@@ -8,7 +8,7 @@
 
 #import "CLLocation+DRExtensions.h"
 
-float const kEarthRadius = 6367500.f;
+float const kWGS84Radius = 6378137.f;
 
 float degreesToRadians(float angle) {
     return ((angle) / 180.f * M_PI);
@@ -30,39 +30,39 @@ float degreesToRadians(float angle) {
 
 -(CGFloat)dr_perpendicularDistanceWithLocation:(CLLocation *)firstLocation location:(CLLocation *)secondLocation {
     //http://biodiversityinformatics.amnh.org/open_source/pdc/documentation.php
-    GLKVector3 vec1 = [firstLocation cartesianVector];
-    GLKVector3 vec2 = [secondLocation cartesianVector];
-    GLKVector3 P = [self cartesianVector];
+    GLKVector3 vec1 = [firstLocation dr_cartesianVector];
+    GLKVector3 vec2 = [secondLocation dr_cartesianVector];
+    GLKVector3 P = [self dr_cartesianVector];
 
     GLKVector3 cross = GLKVector3CrossProduct(vec1, vec2);
     GLKVector3 T = GLKVector3Normalize(cross);
 
     CGFloat cosTOPooi = GLKVector3DotProduct(T, P)/GLKVector3Length(P);
     CGFloat TOPooi = acos(cosTOPooi);
-    CGFloat result = fabs((M_PI_2-TOPooi))*kEarthRadius;
+    CGFloat result = fabs((M_PI_2-TOPooi))*kWGS84Radius;
 
     return result;
 }
 
--(GLKVector3)cartesianVector {
+-(GLKVector3)dr_cartesianVector {
     CGFloat lat = self.coordinate.latitude;
     CGFloat lon = self.coordinate.longitude;
 
-    GLKVector3 vec = GLKVector3Make(kEarthRadius*cos([self longitudeTo2Pi:lon])*sin([self colatitude:lat]),
-                                     kEarthRadius*sin([self longitudeTo2Pi:lon])*sin([self colatitude:lat]),
-                                     kEarthRadius*cos([self colatitude:lat]));
+    GLKVector3 vec = GLKVector3Make(kWGS84Radius*cos([self dr_longitudeTo2Pi:lon])*sin([self dr_colatitude:lat]),
+                                     kWGS84Radius*sin([self dr_longitudeTo2Pi:lon])*sin([self dr_colatitude:lat]),
+                                     kWGS84Radius*cos([self dr_colatitude:lat]));
 
     return vec;
 }
 
--(CGFloat)longitudeTo2Pi:(CGFloat)longitude {
+-(CGFloat)dr_longitudeTo2Pi:(CGFloat)longitude {
     if (longitude < 0) {
         return degreesToRadians(360.f+longitude);
     }
     return degreesToRadians(longitude);
 }
 
--(CGFloat)colatitude:(CGFloat)latitude {
+-(CGFloat)dr_colatitude:(CGFloat)latitude {
     return degreesToRadians(90.f-latitude);
 }
 
