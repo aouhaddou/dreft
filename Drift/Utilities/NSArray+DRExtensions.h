@@ -23,6 +23,6 @@ typedef NS_ENUM(NSUInteger, NSArrayRelativePointsHorizontalAlignment) {
 @interface NSArray (DRExtensions)
 
 -(NSArray *)dr_convertCLLocationsToRelativeMercatorPoints;
--(NSArray *)dr_zoomRelativeCoordinatesWithHorizontalAlignment:(NSArrayRelativePointsHorizontalAlignment)horizontalAlignment verticalAlignment:(NSArrayRelativePointsVerticalAlignment)verticalAlignment;
+-(NSArray *)dr_zoomArraysOfRelativeCoordinatesWithHorizontalAlignment:(NSArrayRelativePointsHorizontalAlignment)horizontalAlignment verticalAlignment:(NSArrayRelativePointsVerticalAlignment)verticalAlignment;
 
 @end
