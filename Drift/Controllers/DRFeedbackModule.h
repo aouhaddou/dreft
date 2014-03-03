@@ -7,15 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DRModel.h"
-
-@import CoreLocation;
 
 @class DRDataProcessor;
 @class DRDriftResult;
 @protocol DRFeedbackModule <NSObject>
 
-@property (nonatomic, strong, readonly) DRRun *run;
 @property (nonatomic, strong, readonly) DRDataProcessor *processor;
 
 -(id)initWithDataProcessor:(DRDataProcessor *)processor;

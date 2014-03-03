@@ -96,6 +96,7 @@
         //Calculate left right by rotating
         //Mercator projection of points
         //Find checkpoint that is moved to: Keep history of drifts
+        //OR course of location, better because no history
         //Rotate so that checkpoint leg is pointing north
         //http://en.wikipedia.org/wiki/Rotation_matrix
         //see if location.x is <(left) or >(right) than checkpoint.x

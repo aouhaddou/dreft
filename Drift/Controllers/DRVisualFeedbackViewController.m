@@ -11,10 +11,11 @@
 
 @interface DRVisualFeedbackViewController ()
 
+@property (nonatomic, strong) DRRun *run;
+
 @end
 
 @implementation DRVisualFeedbackViewController
-@synthesize run = _run;
 @synthesize processor = _processor;
 
 -(id)initWithDataProcessor:(DRDataProcessor *)processor
@@ -31,8 +32,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.view.backgroundColor = [UIColor backgroundColor];
-    self.driftLabel.textColor = [UIColor primaryColor];
+    self.view.backgroundColor = [UIColor dr_backgroundColor];
+    self.driftLabel.textColor = [UIColor dr_base1];
     self.driftLabel.backgroundColor = self.view.backgroundColor;
     self.driftLabel.text = NSLocalizedString(@"–", nil);
 }

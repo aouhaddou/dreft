@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "DRFeedbackModule.h"
+#import "DRModel.h"
+@import CoreLocation;
 
 @interface DRVisualFeedbackViewController : UIViewController <DRFeedbackModule>
 
