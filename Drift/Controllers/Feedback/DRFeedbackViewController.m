@@ -9,10 +9,12 @@
 #import "DRFeedbackViewController.h"
 #import "DRDataProcessor.h"
 #import "SIAlertView.h"
+#import "DRGPSStrengthView.h"
 
 @interface DRFeedbackViewController ()
 
 @property (nonatomic, strong) DRRun *run;
+@property (nonatomic, strong) DRGPSStrengthView *gpsStrength;
 
 @end
 
@@ -47,6 +49,12 @@
     [self.bottomButton addTarget:self action:@selector(stopButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.bottomButton.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;
     [self.view addSubview:self.bottomButton];
+
+    DRGPSStrengthView *gps = [[DRGPSStrengthView alloc] init];
+    gps.y = self.navigationBar.height-7-gps.height;
+    gps.x = self.navigationBar.width-10-gps.width;
+    [self.navigationBar addSubview:gps];
+    self.gpsStrength = gps;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -74,6 +82,7 @@
 
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDriftResult *)result {
     self.driftLabel.text = [NSString stringWithFormat:@"%.1f m",result.drift];
+    [self.gpsStrength updateSignalStrengthWithLocation:result.location];
 }
 
 -(void)dataProcessor:(DRDataProcessor *)processor didFailWithError:(NSError *)error {

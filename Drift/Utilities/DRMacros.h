@@ -37,3 +37,5 @@
 
 //Global stuff
 #define kSideMargin 20.f
+#define kGPSTwoBarThresh 15.f
+#define kGPSThreeBarThresh 6.f

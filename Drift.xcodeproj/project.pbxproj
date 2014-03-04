@@ -47,6 +47,8 @@
 		8384DEA418C6298B002B551B /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8384DEA318C6298B002B551B /* OpenSans-Regular.ttf */; };
 		8384DEAA18C6305A002B551B /* DRFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384DEA818C6305A002B551B /* DRFeedbackViewController.m */; };
 		8384DEAB18C6305A002B551B /* DRFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8384DEA918C6305A002B551B /* DRFeedbackViewController.xib */; };
+		8384DEAE18C631D9002B551B /* DRGPSStrengthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384DEAD18C631D9002B551B /* DRGPSStrengthView.m */; };
+		8384DEB118C63399002B551B /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384DEB018C63399002B551B /* NSDate+Utilities.m */; };
 		838D12CA18BCD2AB00675187 /* CLLocation+DRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838D12C918BCD2AB00675187 /* CLLocation+DRExtensions.m */; };
 		838D12CC18BCD2CF00675187 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838D12CB18BCD2CF00675187 /* CoreLocation.framework */; };
 		838D12CF18BCD41200675187 /* NSArray+DRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838D12CE18BCD41200675187 /* NSArray+DRExtensions.m */; };
@@ -131,6 +133,10 @@
 		8384DEA718C6305A002B551B /* DRFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRFeedbackViewController.h; sourceTree = "<group>"; };
 		8384DEA818C6305A002B551B /* DRFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRFeedbackViewController.m; sourceTree = "<group>"; };
 		8384DEA918C6305A002B551B /* DRFeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DRFeedbackViewController.xib; sourceTree = "<group>"; };
+		8384DEAC18C631D9002B551B /* DRGPSStrengthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRGPSStrengthView.h; sourceTree = "<group>"; };
+		8384DEAD18C631D9002B551B /* DRGPSStrengthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRGPSStrengthView.m; sourceTree = "<group>"; };
+		8384DEAF18C63399002B551B /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
+		8384DEB018C63399002B551B /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
 		838D12C818BCD2AB00675187 /* CLLocation+DRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+DRExtensions.h"; sourceTree = "<group>"; };
 		838D12C918BCD2AB00675187 /* CLLocation+DRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+DRExtensions.m"; sourceTree = "<group>"; };
 		838D12CB18BCD2CF00675187 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -262,6 +268,8 @@
 				8384DEA718C6305A002B551B /* DRFeedbackViewController.h */,
 				8384DEA818C6305A002B551B /* DRFeedbackViewController.m */,
 				8384DEA918C6305A002B551B /* DRFeedbackViewController.xib */,
+				8384DEAC18C631D9002B551B /* DRGPSStrengthView.h */,
+				8384DEAD18C631D9002B551B /* DRGPSStrengthView.m */,
 			);
 			path = Feedback;
 			sourceTree = "<group>";
@@ -302,6 +310,8 @@
 				8384DE9B18C624E2002B551B /* CALayer+KeyframeAnimations.m */,
 				8384DE9D18C62514002B551B /* UIImage+ImageEffects.h */,
 				8384DE9E18C62514002B551B /* UIImage+ImageEffects.m */,
+				8384DEAF18C63399002B551B /* NSDate+Utilities.h */,
+				8384DEB018C63399002B551B /* NSDate+Utilities.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -581,10 +591,12 @@
 				8384DEAA18C6305A002B551B /* DRFeedbackViewController.m in Sources */,
 				8376E60518B7A464005CFB78 /* DRPath.m in Sources */,
 				8384DE7418C542A2002B551B /* DRNavigationBar.m in Sources */,
+				8384DEAE18C631D9002B551B /* DRGPSStrengthView.m in Sources */,
 				8384DE8618C544B0002B551B /* BRBackArrow.m in Sources */,
 				8384DE8918C544B0002B551B /* BRDisclosureIcon.m in Sources */,
 				8392239818BE51E6003929A0 /* DRLocationManager.m in Sources */,
 				8384DE9F18C62514002B551B /* UIImage+ImageEffects.m in Sources */,
+				8384DEB118C63399002B551B /* NSDate+Utilities.m in Sources */,
 				8384DE8A18C544B0002B551B /* BRDrawing.m in Sources */,
 				838D12CA18BCD2AB00675187 /* CLLocation+DRExtensions.m in Sources */,
 				8376E60718B7A464005CFB78 /* _DRPath.m in Sources */,
