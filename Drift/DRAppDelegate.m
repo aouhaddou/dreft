@@ -7,7 +7,7 @@
 //
 
 #import "DRAppDelegate.h"
-#import "DRVisualFeedbackViewController.h"
+#import "DRFeedbackViewController.h"
 #import "DRDataProcessor.h"
 
 @import CoreLocation;
@@ -26,7 +26,7 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor blackColor];
 
-    DRVisualFeedbackViewController *visual = [[DRVisualFeedbackViewController alloc] initWithDataProcessor:proc];
+    DRFeedbackViewController *visual = [[DRFeedbackViewController alloc] initWithDataProcessor:proc];
 
     self.window.rootViewController = visual;
 

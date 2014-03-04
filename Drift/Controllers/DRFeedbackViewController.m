@@ -6,21 +6,21 @@
 //  Copyright (c) 2014 Christoph Albert. All rights reserved.
 //
 
-#import "DRVisualFeedbackViewController.h"
+#import "DRFeedbackViewController.h"
 #import "DRDataProcessor.h"
 
-@interface DRVisualFeedbackViewController ()
+@interface DRFeedbackViewController ()
 
 @property (nonatomic, strong) DRRun *run;
 
 @end
 
-@implementation DRVisualFeedbackViewController
+@implementation DRFeedbackViewController
 @synthesize processor = _processor;
 
 -(id)initWithDataProcessor:(DRDataProcessor *)processor
 {
-    self = [super initWithNibName:@"DRVisualFeedbackViewController" bundle:nil];
+    self = [super initWithNibName:@"DRFeedbackViewController" bundle:nil];
     if (self) {
         _processor = processor;
         _processor.delegate = self;
@@ -32,8 +32,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.view.backgroundColor = [UIColor dr_backgroundColor];
-    self.driftLabel.textColor = [UIColor dr_base1];
+    self.view.backgroundColor = [DRTheme backgroundColor];
+    self.driftLabel.textColor = [DRTheme base4];
     self.driftLabel.backgroundColor = self.view.backgroundColor;
     self.driftLabel.text = NSLocalizedString(@"–", nil);
 }

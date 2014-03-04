@@ -15,5 +15,6 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
     #import "DRMacros.h"
-    #import "UIColor+ThemeColors.h"
+    #import "DRTheme.h"
+    #import "FrameAccessor.h"
 #endif

@@ -13,4 +13,16 @@
 +(void)apply;
 +(UIFont *)fontWithSize:(CGFloat)size;
 
++(UIColor *)backgroundColor;
+
++(UIColor *)base4;
++(UIColor *)transparentBase4;
++(UIColor *)base3;
++(UIColor *)base2;
++(UIColor *)base1;
++(UIColor *)base0;
+
++(UIColor *)dangerColor;
++(UIColor *)confirmColor;
+
 @end

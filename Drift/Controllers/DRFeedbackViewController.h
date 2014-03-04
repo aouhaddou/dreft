@@ -11,7 +11,7 @@
 #import "DRModel.h"
 @import CoreLocation;
 
-@interface DRVisualFeedbackViewController : UIViewController <DRFeedbackModule>
+@interface DRFeedbackViewController : UIViewController <DRFeedbackModule>
 
 @property (nonatomic, strong) IBOutlet UILabel *driftLabel;
 
