@@ -37,6 +37,16 @@
     self.driftLabel.textColor = [DRTheme base4];
     self.driftLabel.backgroundColor = self.view.backgroundColor;
     self.driftLabel.text = NSLocalizedString(@"–", nil);
+
+    self.navigationBar.showsShadow = NO;
+    self.navigationBar.topItem.title = [NSLocalizedString(@"Run", nil) uppercaseString];
+
+    self.bottomButton = [BRButton buttonWithColor:[DRTheme base4] titleColor:[DRTheme base1]];
+    self.bottomButton.frame = CGRectMake(kSideMargin, self.view.height-kSideMargin-44.f, self.view.width-2*kSideMargin, 44.f);
+    [self.bottomButton setTitle:NSLocalizedString(@"Finish", nil) forState:UIControlStateNormal];
+    [self.bottomButton addTarget:self action:@selector(stopButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    self.bottomButton.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;
+    [self.view addSubview:self.bottomButton];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -45,10 +55,14 @@
 
 -(void)start {
     [_processor start];
+}
 
-    SIAlertView *alert = [[SIAlertView alloc] initWithTitle:@"Damn!" andMessage:@"You started recording some stuff. Nice! Don't go to far off the path…"];
-    [alert addButtonWithTitle:@"Cancel" type:SIAlertViewButtonTypeDestructive handler:nil];
-    [alert addButtonWithTitle:@"Cancel" type:SIAlertViewButtonTypeDefault handler:nil];
+-(void)stopButtonPressed:(id)sender {
+    SIAlertView *alert = [[SIAlertView alloc] initWithTitle:nil andMessage:NSLocalizedString(@"Do you really want to finish your run?", nil)];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil) type:SIAlertViewButtonTypeCancel handler:nil];
+    [alert addButtonWithTitle:NSLocalizedString(@"Finish", nil) type:SIAlertViewButtonTypeDefault handler:^(SIAlertView *alertView) {
+        [_processor stop];
+    }];
     [alert show];
 }
 

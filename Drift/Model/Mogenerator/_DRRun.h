@@ -7,7 +7,9 @@
 extern const struct DRRunAttributes {
 	__unsafe_unretained NSString *averageDrift;
 	__unsafe_unretained NSString *coordinates;
-	__unsafe_unretained NSString *date;
+	__unsafe_unretained NSString *createDate;
+	__unsafe_unretained NSString *endDate;
+	__unsafe_unretained NSString *startDate;
 	__unsafe_unretained NSString *steps;
 	__unsafe_unretained NSString *time;
 	__unsafe_unretained NSString *totalDistance;
@@ -24,6 +26,8 @@ extern const struct DRRunFetchedProperties {
 
 
 @class NSObject;
+
+
 
 
 
@@ -66,11 +70,31 @@ extern const struct DRRunFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSDate* date;
+@property (nonatomic, strong) NSDate* createDate;
 
 
 
-//- (BOOL)validateDate:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateCreateDate:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSDate* endDate;
+
+
+
+//- (BOOL)validateEndDate:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSDate* startDate;
+
+
+
+//- (BOOL)validateStartDate:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -80,9 +104,9 @@ extern const struct DRRunFetchedProperties {
 
 
 
-@property int64_t stepsValue;
-- (int64_t)stepsValue;
-- (void)setStepsValue:(int64_t)value_;
+@property int32_t stepsValue;
+- (int32_t)stepsValue;
+- (void)setStepsValue:(int32_t)value_;
 
 //- (BOOL)validateSteps:(id*)value_ error:(NSError**)error_;
 
@@ -150,8 +174,20 @@ extern const struct DRRunFetchedProperties {
 
 
 
-- (NSDate*)primitiveDate;
-- (void)setPrimitiveDate:(NSDate*)value;
+- (NSDate*)primitiveCreateDate;
+- (void)setPrimitiveCreateDate:(NSDate*)value;
+
+
+
+
+- (NSDate*)primitiveEndDate;
+- (void)setPrimitiveEndDate:(NSDate*)value;
+
+
+
+
+- (NSDate*)primitiveStartDate;
+- (void)setPrimitiveStartDate:(NSDate*)value;
 
 
 
@@ -159,8 +195,8 @@ extern const struct DRRunFetchedProperties {
 - (NSNumber*)primitiveSteps;
 - (void)setPrimitiveSteps:(NSNumber*)value;
 
-- (int64_t)primitiveStepsValue;
-- (void)setPrimitiveStepsValue:(int64_t)value_;
+- (int32_t)primitiveStepsValue;
+- (void)setPrimitiveStepsValue:(int32_t)value_;
 
 
 

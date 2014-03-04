@@ -6,7 +6,9 @@
 const struct DRRunAttributes DRRunAttributes = {
 	.averageDrift = @"averageDrift",
 	.coordinates = @"coordinates",
-	.date = @"date",
+	.createDate = @"createDate",
+	.endDate = @"endDate",
+	.startDate = @"startDate",
 	.steps = @"steps",
 	.time = @"time",
 	.totalDistance = @"totalDistance",
@@ -105,7 +107,21 @@ const struct DRRunFetchedProperties DRRunFetchedProperties = {
 
 
 
-@dynamic date;
+@dynamic createDate;
+
+
+
+
+
+
+@dynamic endDate;
+
+
+
+
+
+
+@dynamic startDate;
 
 
 
@@ -116,22 +132,22 @@ const struct DRRunFetchedProperties DRRunFetchedProperties = {
 
 
 
-- (int64_t)stepsValue {
+- (int32_t)stepsValue {
 	NSNumber *result = [self steps];
-	return [result longLongValue];
+	return [result intValue];
 }
 
-- (void)setStepsValue:(int64_t)value_ {
-	[self setSteps:[NSNumber numberWithLongLong:value_]];
+- (void)setStepsValue:(int32_t)value_ {
+	[self setSteps:[NSNumber numberWithInt:value_]];
 }
 
-- (int64_t)primitiveStepsValue {
+- (int32_t)primitiveStepsValue {
 	NSNumber *result = [self primitiveSteps];
-	return [result longLongValue];
+	return [result intValue];
 }
 
-- (void)setPrimitiveStepsValue:(int64_t)value_ {
-	[self setPrimitiveSteps:[NSNumber numberWithLongLong:value_]];
+- (void)setPrimitiveStepsValue:(int32_t)value_ {
+	[self setPrimitiveSteps:[NSNumber numberWithInt:value_]];
 }
 
 

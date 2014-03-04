@@ -15,7 +15,7 @@
 +(void)apply {
     DRNavigationBar *navigationBar = [DRNavigationBar appearance];
     NSDictionary *textAttributes = @{NSForegroundColorAttributeName:[DRTheme base4],
-                                     NSFontAttributeName:[self fontWithSize:16.0]};
+                                     NSFontAttributeName:[DRTheme boldFontWithSize:16.0]};
     [navigationBar setTitleTextAttributes:textAttributes];
     navigationBar.barTintColor = [DRTheme backgroundColor];
     navigationBar.tintColor = [DRTheme base4];

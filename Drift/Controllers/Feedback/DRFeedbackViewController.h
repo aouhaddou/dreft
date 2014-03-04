@@ -9,10 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "DRFeedbackModule.h"
 #import "DRModel.h"
+#import "BRButton.h"
+#import "DRNavigationBar.h"
+
 @import CoreLocation;
 
 @interface DRFeedbackViewController : UIViewController <DRFeedbackModule>
 
+@property (strong, nonatomic) IBOutlet DRNavigationBar *navigationBar;
+@property (strong, nonatomic) BRButton *bottomButton;
 @property (nonatomic, strong) IBOutlet UILabel *driftLabel;
 
 @end

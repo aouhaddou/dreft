@@ -18,6 +18,8 @@
 {
 //    [MagicalRecord setupAutoMigratingCoreDataStack];
 
+    [DRTheme apply];
+
     CLLocation *lappisleft = [[CLLocation alloc] initWithLatitude:59.369667 longitude:18.057811];
     CLLocation *lappisright = [[CLLocation alloc] initWithLatitude:59.368551 longitude:18.064678];
     DRDataProcessor *proc = [[DRDataProcessor alloc] initWithPath:@[lappisleft,lappisright]];
