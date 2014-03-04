@@ -39,60 +39,70 @@ float degreesToRadians(float angle) {
 }
 
 -(CGFloat)dr_perpendicularDistanceWithLocation:(CLLocation *)firstLocation location:(CLLocation *)secondLocation {
-    //http://biodiversityinformatics.amnh.org/open_source/pdc/documentation.php
-    GLKVector3 vec1 = [firstLocation dr_cartesianVector];
-    GLKVector3 vec2 = [secondLocation dr_cartesianVector];
-    GLKVector3 P = [self dr_cartesianVector];
-
-    GLKVector3 cross = GLKVector3CrossProduct(vec1, vec2);
-    GLKVector3 T = GLKVector3Normalize(cross);
-
-    CGFloat cosTOPooi = GLKVector3DotProduct(T, P)/GLKVector3Length(P);
-    CGFloat TOPooi = acos(cosTOPooi);
-    CGFloat result = fabs((M_PI_2-TOPooi))*kWGS84Radius;
-
-    return result;
-}
-
--(GLKVector3)dr_cartesianVector {
-    CGFloat lat = self.coordinate.latitude;
-    CGFloat lon = self.coordinate.longitude;
-
-    GLKVector3 vec = GLKVector3Make(kWGS84Radius*cos([self dr_longitudeTo2Pi:lon])*sin([self dr_colatitude:lat]),
-                                     kWGS84Radius*sin([self dr_longitudeTo2Pi:lon])*sin([self dr_colatitude:lat]),
-                                     kWGS84Radius*cos([self dr_colatitude:lat]));
-
-    return vec;
-}
-
--(CGFloat)dr_longitudeTo2Pi:(CGFloat)longitude {
-    if (longitude < 0) {
-        return degreesToRadians(360.f+longitude);
-    }
-    return degreesToRadians(longitude);
-}
-
--(CGFloat)dr_colatitude:(CGFloat)latitude {
-    return degreesToRadians(90.f-latitude);
+    CLLocation *perp = [self dr_perpendicularLocationWithLocation:firstLocation location:secondLocation];
+    return [self distanceFromLocation:perp];
 }
 
 -(CLLocation *)dr_perpendicularLocationWithLocation:(CLLocation *)firstLocation location:(CLLocation *)secondLocation {
+    //Project points into 2 dimensional plance using mercator projection
     CGPoint P = [self dr_relativeMercatorCoordinate];
 
     CGPoint T1 = [firstLocation dr_relativeMercatorCoordinate];
     CGPoint T2 = [secondLocation dr_relativeMercatorCoordinate];
 
-    //Linear Equation for T1, T2
-    CGFloat aT = (T1.y-T2.y)/(T1.x-T2.x);
-    CGFloat nT = T1.y-aT*T1.x;
+    //Calculate Perpendicular Point
+    CGPoint R;
 
-    CGFloat aP = -1.f/aT;
-    CGFloat nP = P.y-aP*P.x;
+    //Check for special cases
+    if (T1.x == T2.x) {
+        //aT infinite because line is vertical
+        //Perpendicular is horizontal
+        R = CGPointMake(T1.x, P.y);
+    } else if (T1.y == T2.y) {
+        //aT 0 because line is horizontal
+        //Perpendicular is vertical
+        R = CGPointMake(P.x, T1.y);
+    } else {
+        //Linear Equation for T1, T2
+        CGFloat aT = (T1.y-T2.y)/(T1.x-T2.x);
+        CGFloat nT = T1.y-aT*T1.x;
 
-    CGFloat rX = (nP-nT)/(aT-aP);
-    CGFloat rY = aP*rX+nP;
+        CGFloat aP = -1.f/aT;
+        CGFloat nP = P.y-aP*P.x;
 
-    return [CLLocation dr_locationFromRelativeMercatorCoordinateWithX:rX y:rY];
+        CGFloat rX = (nP-nT)/(aT-aP);
+        CGFloat rY = aP*rX+nP;
+
+        R = CGPointMake(rX, rY);
+    }
+
+    //Check if R is on line segment
+    BOOL yInRange = NO;
+    BOOL xInRange = NO;
+
+    if (T1.y <= T2.y) {
+        yInRange = T1.y <= R.y && R.y <= T2.y;
+    } else {
+        yInRange = T2.y <= R.y && R.y <= T1.y;
+    }
+    if (T1.x <= T2.x) {
+        xInRange = T1.x <= R.x && R.x <= T2.x;
+    } else {
+        xInRange = T2.x <= R.x && R.x <= T1.x;
+    }
+
+    if (yInRange && xInRange) {
+        return [CLLocation dr_locationFromRelativeMercatorCoordinateWithX:R.x y:R.y];
+    } else {
+        //Find nearest corner
+        CGFloat d1 = [self distanceFromLocation:firstLocation];
+        CGFloat d2 = [self distanceFromLocation:secondLocation];
+        if (d1 <= d2) {
+            return firstLocation;
+        } else {
+            return secondLocation;
+        }
+    }
 }
 
 @end

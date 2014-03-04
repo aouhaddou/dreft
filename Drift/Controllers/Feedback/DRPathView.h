@@ -11,7 +11,9 @@
 @interface DRPathView : UIView
 
 @property (nonatomic, strong) NSArray *primaryPoints;
+@property (nonatomic, strong) NSArray *primaryLocations;
 @property (nonatomic, strong) NSArray *secondaryPoints;
+@property (nonatomic, strong) NSArray *secondaryLocations;
 @property (nonatomic, assign) BOOL marksEndOfPrimaryLine;
 
 @end
