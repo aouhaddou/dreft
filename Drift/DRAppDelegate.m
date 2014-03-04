@@ -34,7 +34,7 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor blackColor];
 
-    DRVisualFeedbackViewController *visual = [[DRVisualFeedbackViewController alloc] initWithDataProcessor:proc2];
+    DRVisualFeedbackViewController *visual = [[DRVisualFeedbackViewController alloc] initWithDataProcessor:proc];
 
     self.window.rootViewController = visual;
 
