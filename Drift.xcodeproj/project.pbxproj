@@ -43,6 +43,8 @@
 		8384DE9618C621C9002B551B /* SIAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384DE9318C621C9002B551B /* SIAlertView.m */; };
 		8384DE9C18C624E2002B551B /* CALayer+KeyframeAnimations.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384DE9B18C624E2002B551B /* CALayer+KeyframeAnimations.m */; };
 		8384DE9F18C62514002B551B /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384DE9E18C62514002B551B /* UIImage+ImageEffects.m */; };
+		8384DEA218C62910002B551B /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8384DEA118C62910002B551B /* OpenSans-Semibold.ttf */; };
+		8384DEA418C6298B002B551B /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8384DEA318C6298B002B551B /* OpenSans-Regular.ttf */; };
 		838D12CA18BCD2AB00675187 /* CLLocation+DRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838D12C918BCD2AB00675187 /* CLLocation+DRExtensions.m */; };
 		838D12CC18BCD2CF00675187 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838D12CB18BCD2CF00675187 /* CoreLocation.framework */; };
 		838D12CF18BCD41200675187 /* NSArray+DRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838D12CE18BCD41200675187 /* NSArray+DRExtensions.m */; };
@@ -123,6 +125,8 @@
 		8384DE9B18C624E2002B551B /* CALayer+KeyframeAnimations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CALayer+KeyframeAnimations.m"; sourceTree = "<group>"; };
 		8384DE9D18C62514002B551B /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		8384DE9E18C62514002B551B /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		8384DEA118C62910002B551B /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		8384DEA318C6298B002B551B /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		838D12C818BCD2AB00675187 /* CLLocation+DRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+DRExtensions.h"; sourceTree = "<group>"; };
 		838D12C918BCD2AB00675187 /* CLLocation+DRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+DRExtensions.m"; sourceTree = "<group>"; };
 		838D12CB18BCD2CF00675187 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -242,6 +246,15 @@
 			path = Icons;
 			sourceTree = "<group>";
 		};
+		8384DEA018C62910002B551B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8384DEA318C6298B002B551B /* OpenSans-Regular.ttf */,
+				8384DEA118C62910002B551B /* OpenSans-Semibold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		838D12C618BCD23E00675187 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,6 +343,7 @@
 				838D12C718BCD24800675187 /* Utilities */,
 				8384DE7818C5448C002B551B /* Icons */,
 				8376E5F218B7A335005CFB78 /* Model */,
+				8384DEA018C62910002B551B /* Fonts */,
 				83B988BF18B256F2009AA6E7 /* Images.xcassets */,
 				83B988B118B256F2009AA6E7 /* Supporting Files */,
 			);
@@ -446,6 +460,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8384DEA418C6298B002B551B /* OpenSans-Regular.ttf in Resources */,
+				8384DEA218C62910002B551B /* OpenSans-Semibold.ttf in Resources */,
 				83B988B518B256F2009AA6E7 /* InfoPlist.strings in Resources */,
 				83B988C018B256F2009AA6E7 /* Images.xcassets in Resources */,
 				839223A218BE5AF7003929A0 /* DRFeedbackViewController.xib in Resources */,

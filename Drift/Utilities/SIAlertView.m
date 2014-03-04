@@ -96,7 +96,7 @@
         _message = message;
 		self.items = [[NSMutableArray alloc] init];
 
-        self.backgroundColor = [DRTheme base4];
+        self.backgroundColor = [DRTheme base0];
         self.layer.cornerRadius = self.cornerRadius;
         self.layer.shadowOffset = CGSizeZero;
         self.layer.shadowRadius = self.shadowRadius;

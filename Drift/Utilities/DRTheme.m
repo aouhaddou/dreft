@@ -30,7 +30,11 @@
 }
 
 +(UIFont *)fontWithSize:(CGFloat)size {
-    return [UIFont fontWithName:@"GothamHTF-Medium" size:size];
+    return [UIFont fontWithName:@"OpenSans-Regular" size:size];
+}
+
++(UIFont *)boldFontWithSize:(CGFloat)size {
+    return [UIFont fontWithName:@"OpenSans-Semibold" size:size];
 }
 
 #pragma mark Colors
@@ -60,7 +64,7 @@
 }
 
 +(UIColor *)base0 {
-    return [UIColor colorWithWhite:0.166 alpha:1];
+    return [UIColor colorWithWhite:0.083 alpha:1];
 }
 
 +(UIColor *)dangerColor {

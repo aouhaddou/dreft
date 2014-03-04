@@ -11,14 +11,27 @@
 
 @interface DRDriftResult(Setters)
 
-@property (nonatomic, assign) CGFloat drift;
-@property (nonatomic, strong) CLLocation *location;
-@property (nonatomic, assign) NSInteger leg;
-@property (nonatomic, assign) DRDriftResultDirection direction;
+-(void)setDrift:(CGFloat)drift;
+-(void)setLocation:(CLLocation *)location;
+-(void)setLeg:(NSInteger)leg;
+-(void)setDirection:(DRDriftResultDirection)direction;
 
 @end
 
 @implementation DRDriftResult
+
+-(void)setDrift:(CGFloat)drift {
+    _drift = drift;
+}
+-(void)setLocation:(CLLocation *)location {
+    _location = location;
+}
+-(void)setLeg:(NSInteger)leg {
+    _leg = leg;
+}
+-(void)setDirection:(DRDriftResultDirection)direction {
+    _direction = direction;
+}
 
 @end
 

@@ -8,6 +8,7 @@
 
 #import "DRFeedbackViewController.h"
 #import "DRDataProcessor.h"
+#import "SIAlertView.h"
 
 @interface DRFeedbackViewController ()
 
@@ -44,6 +45,11 @@
 
 -(void)start {
     [_processor start];
+
+    SIAlertView *alert = [[SIAlertView alloc] initWithTitle:@"Damn!" andMessage:@"You started recording some stuff. Nice! Don't go to far off the path…"];
+    [alert addButtonWithTitle:@"Cancel" type:SIAlertViewButtonTypeDestructive handler:nil];
+    [alert addButtonWithTitle:@"Cancel" type:SIAlertViewButtonTypeDefault handler:nil];
+    [alert show];
 }
 
 - (void)didReceiveMemoryWarning
