@@ -104,9 +104,9 @@
         }
     }
     NSMutableArray *zoomedArrays = [[NSMutableArray alloc] init];
-    for (NSArray *arrayofPoints in self) {
+    for (NSArray *arrayOfPoints in self) {
         NSMutableArray *zoomedPoints = [[NSMutableArray alloc] init];
-        for (NSValue *value in arrayofPoints) {
+        for (NSValue *value in arrayOfPoints) {
             CGPoint point = [value CGPointValue];
             CGPoint zoomed;
             if (dX > dY) {

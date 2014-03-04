@@ -7,9 +7,9 @@
 //
 
 #import "DRFeedbackViewController.h"
-#import "DRDataProcessor.h"
 #import "SIAlertView.h"
 #import "DRGPSStrengthView.h"
+#import "BRCancelIcon.h"
 
 @interface DRFeedbackViewController ()
 
@@ -36,12 +36,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.view.backgroundColor = [DRTheme backgroundColor];
-    self.driftLabel.textColor = [DRTheme base4];
-    self.driftLabel.backgroundColor = self.view.backgroundColor;
-    self.driftLabel.text = NSLocalizedString(@"–", nil);
 
     self.navigationBar.showsShadow = NO;
     self.navigationBar.topItem.title = [NSLocalizedString(@"Run", nil) uppercaseString];
+    self.navigationBar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[BRCancelIcon imageWithColor:[DRTheme base4]] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemPressed:)];
 
     self.bottomButton = [BRButton buttonWithColor:[DRTheme base4] titleColor:[DRTheme base1]];
     self.bottomButton.frame = CGRectMake(kSideMargin, self.view.height-kSideMargin-44.f, self.view.width-2*kSideMargin, 44.f);
@@ -51,8 +49,8 @@
     [self.view addSubview:self.bottomButton];
 
     DRGPSStrengthView *gps = [[DRGPSStrengthView alloc] init];
-    gps.y = self.navigationBar.height-7-gps.height;
-    gps.x = self.navigationBar.width-10-gps.width;
+    gps.y = self.navigationBar.height-8-gps.height;
+    gps.x = self.navigationBar.width-15-gps.width;
     [self.navigationBar addSubview:gps];
     self.gpsStrength = gps;
 }
@@ -74,6 +72,10 @@
     [alert show];
 }
 
+-(void)leftBarButtonItemPressed:(id)sender {
+
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -81,12 +83,11 @@
 }
 
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDriftResult *)result {
-    self.driftLabel.text = [NSString stringWithFormat:@"%.1f m",result.drift];
     [self.gpsStrength updateSignalStrengthWithLocation:result.location];
 }
 
 -(void)dataProcessor:(DRDataProcessor *)processor didFailWithError:(NSError *)error {
-    self.driftLabel.text = NSLocalizedString(@"–", nil);
+    //
 }
 
 @end

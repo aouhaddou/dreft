@@ -49,6 +49,8 @@
 		8384DEAB18C6305A002B551B /* DRFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8384DEA918C6305A002B551B /* DRFeedbackViewController.xib */; };
 		8384DEAE18C631D9002B551B /* DRGPSStrengthView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384DEAD18C631D9002B551B /* DRGPSStrengthView.m */; };
 		8384DEB118C63399002B551B /* NSDate+Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384DEB018C63399002B551B /* NSDate+Utilities.m */; };
+		8384DEB418C639EF002B551B /* DRVisualFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384DEB318C639EF002B551B /* DRVisualFeedbackViewController.m */; };
+		8384DEB718C63B85002B551B /* DRPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384DEB618C63B85002B551B /* DRPathView.m */; };
 		838D12CA18BCD2AB00675187 /* CLLocation+DRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838D12C918BCD2AB00675187 /* CLLocation+DRExtensions.m */; };
 		838D12CC18BCD2CF00675187 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 838D12CB18BCD2CF00675187 /* CoreLocation.framework */; };
 		838D12CF18BCD41200675187 /* NSArray+DRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838D12CE18BCD41200675187 /* NSArray+DRExtensions.m */; };
@@ -137,6 +139,10 @@
 		8384DEAD18C631D9002B551B /* DRGPSStrengthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRGPSStrengthView.m; sourceTree = "<group>"; };
 		8384DEAF18C63399002B551B /* NSDate+Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Utilities.h"; sourceTree = "<group>"; };
 		8384DEB018C63399002B551B /* NSDate+Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Utilities.m"; sourceTree = "<group>"; };
+		8384DEB218C639EF002B551B /* DRVisualFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRVisualFeedbackViewController.h; sourceTree = "<group>"; };
+		8384DEB318C639EF002B551B /* DRVisualFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRVisualFeedbackViewController.m; sourceTree = "<group>"; };
+		8384DEB518C63B85002B551B /* DRPathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRPathView.h; sourceTree = "<group>"; };
+		8384DEB618C63B85002B551B /* DRPathView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRPathView.m; sourceTree = "<group>"; };
 		838D12C818BCD2AB00675187 /* CLLocation+DRExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+DRExtensions.h"; sourceTree = "<group>"; };
 		838D12C918BCD2AB00675187 /* CLLocation+DRExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+DRExtensions.m"; sourceTree = "<group>"; };
 		838D12CB18BCD2CF00675187 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -270,6 +276,10 @@
 				8384DEA918C6305A002B551B /* DRFeedbackViewController.xib */,
 				8384DEAC18C631D9002B551B /* DRGPSStrengthView.h */,
 				8384DEAD18C631D9002B551B /* DRGPSStrengthView.m */,
+				8384DEB218C639EF002B551B /* DRVisualFeedbackViewController.h */,
+				8384DEB318C639EF002B551B /* DRVisualFeedbackViewController.m */,
+				8384DEB518C63B85002B551B /* DRPathView.h */,
+				8384DEB618C63B85002B551B /* DRPathView.m */,
 			);
 			path = Feedback;
 			sourceTree = "<group>";
@@ -579,8 +589,10 @@
 			files = (
 				8384DE9618C621C9002B551B /* SIAlertView.m in Sources */,
 				8384DE9418C621C9002B551B /* BRButton.m in Sources */,
+				8384DEB418C639EF002B551B /* DRVisualFeedbackViewController.m in Sources */,
 				8384DE8818C544B0002B551B /* BRCheckmarkIcon.m in Sources */,
 				8384DE8718C544B0002B551B /* BRCancelIcon.m in Sources */,
+				8384DEB718C63B85002B551B /* DRPathView.m in Sources */,
 				8376E60618B7A464005CFB78 /* DRRun.m in Sources */,
 				83B988BB18B256F2009AA6E7 /* DRAppDelegate.m in Sources */,
 				8384DE9C18C624E2002B551B /* CALayer+KeyframeAnimations.m in Sources */,

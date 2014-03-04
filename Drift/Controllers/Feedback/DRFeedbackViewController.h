@@ -11,6 +11,7 @@
 #import "DRModel.h"
 #import "BRButton.h"
 #import "DRNavigationBar.h"
+#import "DRDataProcessor.h"
 
 @import CoreLocation;
 
@@ -18,6 +19,5 @@
 
 @property (strong, nonatomic) IBOutlet DRNavigationBar *navigationBar;
 @property (strong, nonatomic) BRButton *bottomButton;
-@property (nonatomic, strong) IBOutlet UILabel *driftLabel;
 
 @end
