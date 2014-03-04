@@ -38,35 +38,43 @@
 - (void)drawRect:(CGRect)rect
 {
     if ([self.secondaryPoints count] > 1) {
-        NSArray *primaryArray = self.primaryPoints == nil ? [NSArray array] : self.primaryPoints;
-        NSArray *secondaryArray = self.secondaryPoints == nil ? [NSArray array] : self.secondaryPoints;
-        NSArray *results = [@[primaryArray, secondaryArray] dr_zoomArraysOfRelativeCoordinatesWithHorizontalAlignment:NSArrayRelativePointsHorizontalAlignmentCenter verticalAlignment:NSArrayRelativePointsVerticalAlignmentCenter];
-        if ([results count] == 2) {
-            NSArray *secondary = results[1];
+        if ([self.primaryPoints count] > 0) {
+            NSArray *allPoints = [self.primaryPoints arrayByAddingObjectsFromArray:self.secondaryPoints];
+            NSArray *results = [allPoints dr_zoomRelativeCoordinatesWithHorizontalAlignment:NSArrayRelativePointsHorizontalAlignmentCenter verticalAlignment:NSArrayRelativePointsVerticalAlignmentCenter];
+
+            NSRange primaryRange;
+            primaryRange.location = 0;
+            primaryRange.length = [self.primaryPoints count];
+            NSArray *primary = [results subarrayWithRange:primaryRange];
+
+            NSRange secondaryRange;
+            secondaryRange.location = primaryRange.length;
+            secondaryRange.length = [results count]-primaryRange.length;
+            NSArray *secondary = [results subarrayWithRange:secondaryRange];
+
             [self drawLineWithArray:secondary color:[DRTheme transparentBase4]];
 
-            if ([self.primaryPoints count] > 0) {
-                NSArray *primary = results[0];
-                if (self.marksEndOfPrimaryLine) {
-                    CGPoint point = [[primary lastObject] CGPointValue];
-                    CGPoint viewPoint = [self pointInViewForRelativePoint:point];
-                    CGFloat bigRadius = 24.f;
-                    CGFloat smallRadius = 12.f;
+            if (self.marksEndOfPrimaryLine) {
+                CGPoint point = [[primary lastObject] CGPointValue];
+                CGPoint viewPoint = [self pointInViewForRelativePoint:point];
+                CGFloat bigRadius = 24.f;
+                CGFloat smallRadius = 12.f;
 
-                    UIBezierPath *bigCircle = [self bezierPathForCircleWithRadius:bigRadius atPoint:viewPoint];
-                    bigCircle.lineWidth = 3.f;
-                    [[DRTheme backgroundColor] setFill];
-                    [bigCircle fill];
-                    [[DRTheme base4] setStroke];
-                    [bigCircle stroke];
+                UIBezierPath *bigCircle = [self bezierPathForCircleWithRadius:bigRadius atPoint:viewPoint];
+                bigCircle.lineWidth = 3.f;
+                [[DRTheme base4] setStroke];
+                [bigCircle stroke];
 
-                    UIBezierPath *smallCircle = [self bezierPathForCircleWithRadius:smallRadius atPoint:viewPoint];
-                    [[DRTheme base4] setFill];
-                    [smallCircle fill];
-                }
-
-                [self drawLineWithArray:primary color:[DRTheme base4]];
+                UIBezierPath *smallCircle = [self bezierPathForCircleWithRadius:smallRadius atPoint:viewPoint];
+                [[DRTheme base4] setFill];
+                [smallCircle fill];
             }
+
+            [self drawLineWithArray:primary color:[DRTheme base4]];
+        } else {
+            NSArray *results = [self.secondaryPoints dr_zoomRelativeCoordinatesWithHorizontalAlignment:NSArrayRelativePointsHorizontalAlignmentCenter verticalAlignment:NSArrayRelativePointsVerticalAlignmentCenter];
+
+            [self drawLineWithArray:results color:[DRTheme transparentBase4]];
         }
     }
 }
