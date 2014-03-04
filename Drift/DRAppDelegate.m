@@ -9,6 +9,7 @@
 #import "DRAppDelegate.h"
 #import "DRVisualFeedbackViewController.h"
 #import "DRDataProcessor.h"
+#import "CLLocation+DRExtensions.h"
 
 @import CoreLocation;
 
@@ -39,6 +40,7 @@
     self.window.rootViewController = visual;
 
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

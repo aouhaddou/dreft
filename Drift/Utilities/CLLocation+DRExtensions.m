@@ -23,9 +23,19 @@ float degreesToRadians(float angle) {
     CGFloat height = 1.f;
 
     CGFloat x = (self.coordinate.longitude+180.f)*(width/360.f);
-    CGFloat y = (height/2.f)-(width*log(tan((M_PI/4.f)+((self.coordinate.latitude*M_PI/180.f)/2.f)))/(2.f*M_PI));
+    CGFloat y = (height/2.f)-(width*log(tan((M_PI/4.f)+(self.coordinate.latitude*M_PI/360.f)))/(2.f*M_PI));
 
     return CGPointMake(x, y);
+}
+
++(CLLocation *)dr_locationFromRelativeMercatorCoordinateWithX:(CGFloat)x y:(CGFloat)y {
+    CGFloat width = 1.f;
+    CGFloat height = 1.f;
+
+    CGFloat lon = x/(width/360.f)-180.f;
+    CGFloat lat = (atan(exp((2.f*M_PI)*(-y+(height/2.f))/width))-(M_PI/4.f))*360.f/M_PI;
+
+    return [[CLLocation alloc] initWithLatitude:lat longitude:lon];
 }
 
 -(CGFloat)dr_perpendicularDistanceWithLocation:(CLLocation *)firstLocation location:(CLLocation *)secondLocation {
@@ -66,8 +76,23 @@ float degreesToRadians(float angle) {
     return degreesToRadians(90.f-latitude);
 }
 
-//-(CLLocation *)dr_perpendicularLocationWithLocation:(CLLocation *)firstLocation location:(CLLocation *)secondLocation {
-//    return secondLocation;
-//}
+-(CLLocation *)dr_perpendicularLocationWithLocation:(CLLocation *)firstLocation location:(CLLocation *)secondLocation {
+    CGPoint P = [self dr_relativeMercatorCoordinate];
+
+    CGPoint T1 = [firstLocation dr_relativeMercatorCoordinate];
+    CGPoint T2 = [secondLocation dr_relativeMercatorCoordinate];
+
+    //Linear Equation for T1, T2
+    CGFloat aT = (T1.y-T2.y)/(T1.x-T2.x);
+    CGFloat nT = T1.y-aT*T1.x;
+
+    CGFloat aP = -1.f/aT;
+    CGFloat nP = P.y-aP*P.x;
+
+    CGFloat rX = (nP-nT)/(aT-aP);
+    CGFloat rY = aP*rX+nP;
+
+    return [CLLocation dr_locationFromRelativeMercatorCoordinateWithX:rX y:rY];
+}
 
 @end
