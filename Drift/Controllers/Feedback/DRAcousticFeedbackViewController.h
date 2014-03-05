@@ -7,8 +7,7 @@
 //
 
 #import "DRFeedbackViewController.h"
-#import "DRVisualFeedbackViewController.h"
 
-@interface DRAcousticFeedbackViewController : DRVisualFeedbackViewController
+@interface DRAcousticFeedbackViewController : DRFeedbackViewController
 
 @end

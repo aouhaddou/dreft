@@ -25,8 +25,8 @@
 {
     self = [super initWithNibName:@"DRFeedbackViewController" bundle:nil];
     if (self) {
-        _processor = processor;
-        _processor.delegate = self;
+//        _processor = processor;
+//        _processor.delegate = self;
     }
     return self;
 }
@@ -67,22 +67,32 @@
 }
 
 -(void)stopButtonPressed:(id)sender {
+    __weak DRFeedbackViewController *weakSelf = self;
     SIAlertView *alert = [[SIAlertView alloc] initWithTitle:nil andMessage:NSLocalizedString(@"Do you really want to finish your run?", nil)];
     [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil) type:SIAlertViewButtonTypeCancel handler:nil];
     [alert addButtonWithTitle:NSLocalizedString(@"Finish", nil) type:SIAlertViewButtonTypeDefault handler:^(SIAlertView *alertView) {
-        [_processor stop];
+        [weakSelf stopRun];
     }];
     [alert show];
 }
 
+-(void)stopRun {
+    [_processor stop];
+}
+
 -(void)leftBarButtonItemPressed:(id)sender {
-    SIAlertView *alert = [[SIAlertView alloc] initWithTitle:nil andMessage:NSLocalizedString(@"Do you really want to cancel recording run?", nil)];
-    [alert addButtonWithTitle:NSLocalizedString(@"Continue", nil) type:SIAlertViewButtonTypeCancel handler:nil];
-    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil) type:SIAlertViewButtonTypeDestructive handler:^(SIAlertView *alertView) {
-        [_processor stop];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+    __weak DRFeedbackViewController *weakSelf = self;
+    SIAlertView *alert = [[SIAlertView alloc] initWithTitle:nil andMessage:NSLocalizedString(@"Do you really want to discard this run?", nil)];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil) type:SIAlertViewButtonTypeCancel handler:nil];
+    [alert addButtonWithTitle:NSLocalizedString(@"Discard", nil) type:SIAlertViewButtonTypeDestructive handler:^(SIAlertView *alertView) {
+        [weakSelf cancelRun];
     }];
     [alert show];
+}
+
+-(void)cancelRun {
+    [_processor stop];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

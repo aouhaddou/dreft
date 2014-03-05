@@ -42,12 +42,12 @@
     NSError *error = NULL;
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:&error];
     if(error) {
-        NSLog(@"Error setting category of audio session: %@",error.description);
+        DLog(@"Error setting category of audio session: %@",error.description);
     }
     error = NULL;
     [[AVAudioSession sharedInstance] setActive:YES error: &error];
     if (error) {
-        NSLog(@"Error activating audio session: %@",error.description);
+        DLog(@"Error activating audio session: %@",error.description);
     }
 }
 
@@ -57,10 +57,14 @@
     self.feedbackTimer = [NSTimer scheduledTimerWithTimeInterval:[[[DRVariableManager sharedManager] baseRateForAcousticFeedback] floatValue] target:self selector:@selector(feedbackTimerFired) userInfo:nil repeats:YES];
 }
 
--(void)stopButtonPressed:(id)sender {
-    [super stopButtonPressed:sender];
+-(void)stopRun {
+    [super stopRun];
     [self.feedbackTimer invalidate];
-    [self speakString:NSLocalizedString(@"Finished Run", nil)];
+}
+
+-(void)cancelRun {
+    [super cancelRun];
+    [self.feedbackTimer invalidate];
 }
 
 -(void)feedbackTimerFired {
@@ -73,6 +77,7 @@
     if (_distanceFormatterSound == nil) {
         DRDistanceFormatter *distance = [[DRDistanceFormatter alloc] init];
         distance.abbreviate = NO;
+        distance.maximumFractionDigits = 0;
         _distanceFormatterSound = distance;
     }
     return _distanceFormatterSound;
@@ -80,7 +85,7 @@
 
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDriftResult *)result {
     [super dataProcessor:processor didCalculateDrift:result];
-    NSString *stringDistance = [self.distanceFormatterSound stringFromDistance:result.drift];
+    NSString *stringDistance = [self.distanceFormatterSound stringFromDistance:floor(result.drift)];
 
     self.lastFeedbackString = [NSString stringWithFormat:NSLocalizedString(@"You are off by %@", nil),stringDistance];
 }

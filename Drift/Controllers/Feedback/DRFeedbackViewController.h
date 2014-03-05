@@ -19,6 +19,7 @@
 @property (strong, nonatomic) BRButton *bottomButton;
 
 -(void)start;
--(void)stopButtonPressed:(id)sender;
+-(void)cancelRun;
+-(void)stopRun;
 
 @end
