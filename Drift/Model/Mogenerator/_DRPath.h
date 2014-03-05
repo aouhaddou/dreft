@@ -7,7 +7,7 @@
 extern const struct DRPathAttributes {
 	__unsafe_unretained NSString *created;
 	__unsafe_unretained NSString *distance;
-	__unsafe_unretained NSString *points;
+	__unsafe_unretained NSString *locations;
 	__unsafe_unretained NSString *uniqueID;
 } DRPathAttributes;
 
@@ -62,11 +62,11 @@ extern const struct DRPathFetchedProperties {
 
 
 
-@property (nonatomic, strong) id points;
+@property (nonatomic, strong) id locations;
 
 
 
-//- (BOOL)validatePoints:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateLocations:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -114,8 +114,8 @@ extern const struct DRPathFetchedProperties {
 
 
 
-- (id)primitivePoints;
-- (void)setPrimitivePoints:(id)value;
+- (id)primitiveLocations;
+- (void)setPrimitiveLocations:(id)value;
 
 
 

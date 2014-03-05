@@ -45,7 +45,12 @@ const BOOL debug = NO;
     path.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:path];
     path.marksEndOfPrimaryLine = YES;
-    path.secondaryPoints = self.processor.path;
+    path.secondaryLocations = self.processor.path;
+    path.primaryLineColor = [DRTheme base4];
+    path.secondaryLineColor = [DRTheme transparentBase4];
+    path.lineWidth = 4;
+    path.verticalAlignment = NSArrayRelativePointsVerticalAlignmentCenter;
+    path.horizontalAlignment = NSArrayRelativePointsHorizontalAlignmentCenter;
     self.pathView = path;
 
     if (debug) {
@@ -61,7 +66,7 @@ const BOOL debug = NO;
     [super dataProcessor:processor didCalculateDrift:result];
     self.driftLabel.text = [NSString stringWithFormat:@"%.1f m",result.drift];
     [self addLocationToHistory:result.location];
-    self.pathView.primaryPoints = self.locationHistory;
+    self.pathView.primaryLocations = self.locationHistory;
 
     if (debug) {
         [self drawPathsOnMapViewWithLocation:result.location leg:result.leg];

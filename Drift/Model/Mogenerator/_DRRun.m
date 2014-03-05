@@ -5,9 +5,9 @@
 
 const struct DRRunAttributes DRRunAttributes = {
 	.averageDrift = @"averageDrift",
-	.coordinates = @"coordinates",
 	.created = @"created",
 	.endDate = @"endDate",
+	.locations = @"locations",
 	.startDate = @"startDate",
 	.steps = @"steps",
 	.time = @"time",
@@ -101,13 +101,6 @@ const struct DRRunFetchedProperties DRRunFetchedProperties = {
 
 
 
-@dynamic coordinates;
-
-
-
-
-
-
 @dynamic created;
 
 
@@ -116,6 +109,13 @@ const struct DRRunFetchedProperties DRRunFetchedProperties = {
 
 
 @dynamic endDate;
+
+
+
+
+
+
+@dynamic locations;
 
 
 

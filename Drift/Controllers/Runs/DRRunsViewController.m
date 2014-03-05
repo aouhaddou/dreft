@@ -8,12 +8,13 @@
 
 #import "DRRunsViewController.h"
 #import "DRModel.h"
-#import "DRCoursesTableViewCell.h"
+#import "DRShowPathsTableViewCell.h"
 #import "DRRunTableViewCell.h"
 #import "UIView+Image.h"
 #import "UIColor+Extensions.h"
 #import "DRVisualFeedbackViewController.h"
 #import "DRDataProcessor.h"
+#import "DRPathsViewController.h"
 
 static NSString *const kCoursesCellIdentifier = @"CoursesCell";
 static NSString *const kRunCellIdentifier = @"RunCell";
@@ -34,7 +35,7 @@ static CGFloat const headerHeight = 82.f;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.fetchedResultsController = [DRRun MR_fetchAllSortedBy:@"createDate" ascending:NO withPredicate:nil groupBy:nil delegate:nil];
+        self.fetchedResultsController = [DRRun MR_fetchAllSortedBy:@"created" ascending:NO withPredicate:nil groupBy:nil delegate:nil];
     }
     return self;
 }
@@ -102,7 +103,7 @@ static CGFloat const headerHeight = 82.f;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-    [self.tableView registerClass:[DRCoursesTableViewCell class] forCellReuseIdentifier:kCoursesCellIdentifier];
+    [self.tableView registerClass:[DRShowPathsTableViewCell class] forCellReuseIdentifier:kCoursesCellIdentifier];
     [self.tableView registerClass:[DRRunTableViewCell class] forCellReuseIdentifier:kRunCellIdentifier];
 
     self.tableView.tableHeaderView = self.headerView;
@@ -130,7 +131,7 @@ static CGFloat const headerHeight = 82.f;
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
-        DRCoursesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCoursesCellIdentifier forIndexPath:indexPath];
+        DRShowPathsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCoursesCellIdentifier forIndexPath:indexPath];
         cell.textLabel.text = [NSLocalizedString(@"Add a course", nil) uppercaseString];
         return cell;
     } else {
@@ -144,7 +145,7 @@ static CGFloat const headerHeight = 82.f;
     if (section == 0) {
         return 0;
     } else {
-        CGFloat titleHeight = [DRCoursesTableViewCell height];
+        CGFloat titleHeight = [DRShowPathsTableViewCell height];
         CGFloat labelHeight = 24;
         CGFloat sepHeight = 3;
 
@@ -197,6 +198,14 @@ static CGFloat const headerHeight = 82.f;
     } else {
         return headerHeight;
     }
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        DRPathsViewController *paths = [[DRPathsViewController alloc] init];
+        [self.navigationController pushViewController:paths animated:YES];
+    }
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

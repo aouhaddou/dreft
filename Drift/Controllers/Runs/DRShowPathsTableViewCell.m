@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Christoph Albert. All rights reserved.
 //
 
-#import "DRCoursesTableViewCell.h"
+#import "DRShowPathsTableViewCell.h"
 
-@implementation DRCoursesTableViewCell
+@implementation DRShowPathsTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

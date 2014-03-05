@@ -43,8 +43,9 @@
     self.navigationBar.topItem.title = [NSLocalizedString(@"Run", nil) uppercaseString];
     self.navigationBar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[BRCancelIcon imageWithColor:[DRTheme base4]] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemPressed:)];
 
+    CGFloat buttonHeight = 50.f;
     self.bottomButton = [BRButton buttonWithColor:[DRTheme base4] titleColor:[DRTheme base1]];
-    self.bottomButton.frame = CGRectMake(kSideMargin, self.view.height-kSideMargin-44.f, self.view.width-2*kSideMargin, 44.f);
+    self.bottomButton.frame = CGRectMake(kSideMargin, self.view.height-kSideMargin-buttonHeight, self.view.width-2*kSideMargin, buttonHeight);
     [self.bottomButton setTitle:NSLocalizedString(@"Finish", nil) forState:UIControlStateNormal];
     [self.bottomButton addTarget:self action:@selector(stopButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     self.bottomButton.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleTopMargin;

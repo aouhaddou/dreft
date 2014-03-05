@@ -6,7 +6,7 @@
 const struct DRPathAttributes DRPathAttributes = {
 	.created = @"created",
 	.distance = @"distance",
-	.points = @"points",
+	.locations = @"locations",
 	.uniqueID = @"uniqueID",
 };
 
@@ -88,7 +88,7 @@ const struct DRPathFetchedProperties DRPathFetchedProperties = {
 
 
 
-@dynamic points;
+@dynamic locations;
 
 
 

@@ -8,6 +8,6 @@
 
 #import "DRTableViewCell.h"
 
-@interface DRCoursesTableViewCell : DRTableViewCell
+@interface DRShowPathsTableViewCell : DRTableViewCell
 
 @end
