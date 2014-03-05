@@ -37,9 +37,3 @@
 
 //Global stuff
 #define kSideMargin 20.f
-#define kGPSOneBarThresh 50.f
-#define kGPSTwoBarThresh 15.f
-#define kGPSThreeBarThresh 6.f
-
-#define kSpeechRate 0.13f
-#define kBaseAcousticInterval 20

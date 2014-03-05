@@ -84,6 +84,7 @@
 		83B988D418B256F2009AA6E7 /* DriftTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B988D318B256F2009AA6E7 /* DriftTests.m */; };
 		83DCECC818C7BE7F004D0B34 /* DRDistanceFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DCECC718C7BE7F004D0B34 /* DRDistanceFormatter.m */; };
 		83DCECCB18C7C1DD004D0B34 /* DRAcousticFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DCECCA18C7C1DD004D0B34 /* DRAcousticFeedbackViewController.m */; };
+		83DCECCE18C7CD6F004D0B34 /* DRVariableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DCECCD18C7CD6F004D0B34 /* DRVariableManager.m */; };
 		97FFDB5FF92D437ABAD935A2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6182D03EDE384F918A26C950 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -208,6 +209,8 @@
 		83DCECC718C7BE7F004D0B34 /* DRDistanceFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRDistanceFormatter.m; sourceTree = "<group>"; };
 		83DCECC918C7C1DD004D0B34 /* DRAcousticFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRAcousticFeedbackViewController.h; sourceTree = "<group>"; };
 		83DCECCA18C7C1DD004D0B34 /* DRAcousticFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRAcousticFeedbackViewController.m; sourceTree = "<group>"; };
+		83DCECCC18C7CD6F004D0B34 /* DRVariableManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRVariableManager.h; sourceTree = "<group>"; };
+		83DCECCD18C7CD6F004D0B34 /* DRVariableManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRVariableManager.m; sourceTree = "<group>"; };
 		8EDFAB2D72D24F72BBCBD699 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -377,6 +380,8 @@
 			isa = PBXGroup;
 			children = (
 				8392239C18BE5466003929A0 /* DRMacros.h */,
+				83DCECCC18C7CD6F004D0B34 /* DRVariableManager.h */,
+				83DCECCD18C7CD6F004D0B34 /* DRVariableManager.m */,
 				8384DE6F18C5419E002B551B /* DRTheme.h */,
 				8384DE7018C5419E002B551B /* DRTheme.m */,
 				838D12C818BCD2AB00675187 /* CLLocation+DRExtensions.h */,
@@ -699,6 +704,7 @@
 				8384DE7418C542A2002B551B /* DRNavigationBar.m in Sources */,
 				8382942B18C78908003F1FF6 /* DRRunTableViewCell.m in Sources */,
 				8384DEAE18C631D9002B551B /* DRGPSStrengthView.m in Sources */,
+				83DCECCE18C7CD6F004D0B34 /* DRVariableManager.m in Sources */,
 				8382943418C78A0B003F1FF6 /* DRPathTableViewCell.m in Sources */,
 				8384DE8618C544B0002B551B /* BRBackArrow.m in Sources */,
 				8384DE8918C544B0002B551B /* BRDisclosureIcon.m in Sources */,

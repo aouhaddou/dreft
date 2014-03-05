@@ -17,4 +17,5 @@
     #import "DRMacros.h"
     #import "DRTheme.h"
     #import "FrameAccessor.h"
+    #import "DRVariableManager.h"
 #endif

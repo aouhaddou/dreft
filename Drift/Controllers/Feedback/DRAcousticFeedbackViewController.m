@@ -30,17 +30,31 @@
 -(void)speakString:(NSString *)string {
     if (self.synthesizer == nil) {
         self.synthesizer = [[AVSpeechSynthesizer alloc] init];
+        [self configureAudioSession];
     }
     AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:string];
     utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
-    utterance.rate = kSpeechRate;
+    utterance.rate = 0.13f;
     [self.synthesizer speakUtterance:utterance];
+}
+
+- (void)configureAudioSession{
+    NSError *error = NULL;
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:&error];
+    if(error) {
+        NSLog(@"Error setting category of audio session: %@",error.description);
+    }
+    error = NULL;
+    [[AVAudioSession sharedInstance] setActive:YES error: &error];
+    if (error) {
+        NSLog(@"Error activating audio session: %@",error.description);
+    }
 }
 
 -(void)start {
     [super start];
     [self speakString:NSLocalizedString(@"Started Run", nil)];
-    self.feedbackTimer = [NSTimer scheduledTimerWithTimeInterval:kBaseAcousticInterval target:self selector:@selector(feedbackTimerFired) userInfo:nil repeats:YES];
+    self.feedbackTimer = [NSTimer scheduledTimerWithTimeInterval:[[[DRVariableManager sharedManager] baseRateForAcousticFeedback] floatValue] target:self selector:@selector(feedbackTimerFired) userInfo:nil repeats:YES];
 }
 
 -(void)stopButtonPressed:(id)sender {
