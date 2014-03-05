@@ -7,12 +7,10 @@
 extern const struct DRRunAttributes {
 	__unsafe_unretained NSString *averageDrift;
 	__unsafe_unretained NSString *created;
+	__unsafe_unretained NSString *distance;
 	__unsafe_unretained NSString *endDate;
 	__unsafe_unretained NSString *locations;
 	__unsafe_unretained NSString *startDate;
-	__unsafe_unretained NSString *steps;
-	__unsafe_unretained NSString *time;
-	__unsafe_unretained NSString *totalDistance;
 	__unsafe_unretained NSString *uniqueID;
 } DRRunAttributes;
 
@@ -28,10 +26,8 @@ extern const struct DRRunFetchedProperties {
 
 
 
+
 @class NSObject;
-
-
-
 
 
 
@@ -72,6 +68,20 @@ extern const struct DRRunFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSNumber* distance;
+
+
+
+@property float distanceValue;
+- (float)distanceValue;
+- (void)setDistanceValue:(float)value_;
+
+//- (BOOL)validateDistance:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSDate* endDate;
 
 
@@ -97,48 +107,6 @@ extern const struct DRRunFetchedProperties {
 
 
 //- (BOOL)validateStartDate:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
-@property (nonatomic, strong) NSNumber* steps;
-
-
-
-@property int32_t stepsValue;
-- (int32_t)stepsValue;
-- (void)setStepsValue:(int32_t)value_;
-
-//- (BOOL)validateSteps:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
-@property (nonatomic, strong) NSNumber* time;
-
-
-
-@property float timeValue;
-- (float)timeValue;
-- (void)setTimeValue:(float)value_;
-
-//- (BOOL)validateTime:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
-@property (nonatomic, strong) NSNumber* totalDistance;
-
-
-
-@property float totalDistanceValue;
-- (float)totalDistanceValue;
-- (void)setTotalDistanceValue:(float)value_;
-
-//- (BOOL)validateTotalDistance:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -186,6 +154,15 @@ extern const struct DRRunFetchedProperties {
 
 
 
+- (NSNumber*)primitiveDistance;
+- (void)setPrimitiveDistance:(NSNumber*)value;
+
+- (float)primitiveDistanceValue;
+- (void)setPrimitiveDistanceValue:(float)value_;
+
+
+
+
 - (NSDate*)primitiveEndDate;
 - (void)setPrimitiveEndDate:(NSDate*)value;
 
@@ -200,33 +177,6 @@ extern const struct DRRunFetchedProperties {
 
 - (NSDate*)primitiveStartDate;
 - (void)setPrimitiveStartDate:(NSDate*)value;
-
-
-
-
-- (NSNumber*)primitiveSteps;
-- (void)setPrimitiveSteps:(NSNumber*)value;
-
-- (int32_t)primitiveStepsValue;
-- (void)setPrimitiveStepsValue:(int32_t)value_;
-
-
-
-
-- (NSNumber*)primitiveTime;
-- (void)setPrimitiveTime:(NSNumber*)value;
-
-- (float)primitiveTimeValue;
-- (void)setPrimitiveTimeValue:(float)value_;
-
-
-
-
-- (NSNumber*)primitiveTotalDistance;
-- (void)setPrimitiveTotalDistance:(NSNumber*)value;
-
-- (float)primitiveTotalDistanceValue;
-- (void)setPrimitiveTotalDistanceValue:(float)value_;
 
 
 

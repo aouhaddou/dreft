@@ -5,9 +5,13 @@
 #import "SSManagedObject.h"
 
 extern const struct DRPathAttributes {
+	__unsafe_unretained NSString *city;
+	__unsafe_unretained NSString *country;
 	__unsafe_unretained NSString *created;
 	__unsafe_unretained NSString *distance;
 	__unsafe_unretained NSString *locations;
+	__unsafe_unretained NSString *street;
+	__unsafe_unretained NSString *sublocality;
 	__unsafe_unretained NSString *uniqueID;
 } DRPathAttributes;
 
@@ -22,7 +26,11 @@ extern const struct DRPathFetchedProperties {
 
 
 
+
+
 @class NSObject;
+
+
 
 
 @interface DRPathID : NSManagedObjectID {}
@@ -33,6 +41,26 @@ extern const struct DRPathFetchedProperties {
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
 - (DRPathID*)objectID;
+
+
+
+
+
+@property (nonatomic, strong) NSString* city;
+
+
+
+//- (BOOL)validateCity:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSString* country;
+
+
+
+//- (BOOL)validateCountry:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -72,6 +100,26 @@ extern const struct DRPathFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSString* street;
+
+
+
+//- (BOOL)validateStreet:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
+@property (nonatomic, strong) NSString* sublocality;
+
+
+
+//- (BOOL)validateSublocality:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSString* uniqueID;
 
 
@@ -99,6 +147,18 @@ extern const struct DRPathFetchedProperties {
 @interface _DRPath (CoreDataGeneratedPrimitiveAccessors)
 
 
+- (NSString*)primitiveCity;
+- (void)setPrimitiveCity:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveCountry;
+- (void)setPrimitiveCountry:(NSString*)value;
+
+
+
+
 - (NSDate*)primitiveCreated;
 - (void)setPrimitiveCreated:(NSDate*)value;
 
@@ -116,6 +176,18 @@ extern const struct DRPathFetchedProperties {
 
 - (id)primitiveLocations;
 - (void)setPrimitiveLocations:(id)value;
+
+
+
+
+- (NSString*)primitiveStreet;
+- (void)setPrimitiveStreet:(NSString*)value;
+
+
+
+
+- (NSString*)primitiveSublocality;
+- (void)setPrimitiveSublocality:(NSString*)value;
 
 
 

@@ -4,9 +4,13 @@
 #import "_DRPath.h"
 
 const struct DRPathAttributes DRPathAttributes = {
+	.city = @"city",
+	.country = @"country",
 	.created = @"created",
 	.distance = @"distance",
 	.locations = @"locations",
+	.street = @"street",
+	.sublocality = @"sublocality",
 	.uniqueID = @"uniqueID",
 };
 
@@ -55,6 +59,20 @@ const struct DRPathFetchedProperties DRPathFetchedProperties = {
 
 
 
+@dynamic city;
+
+
+
+
+
+
+@dynamic country;
+
+
+
+
+
+
 @dynamic created;
 
 
@@ -89,6 +107,20 @@ const struct DRPathFetchedProperties DRPathFetchedProperties = {
 
 
 @dynamic locations;
+
+
+
+
+
+
+@dynamic street;
+
+
+
+
+
+
+@dynamic sublocality;
 
 
 

@@ -10,6 +10,9 @@
 
 @implementation DRPath
 
-// Custom logic goes here.
+-(void)setLocations:(id)locations {
+    [super setLocations:locations];
+    //Calculate and set distance
+}
 
 @end
