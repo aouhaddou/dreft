@@ -25,7 +25,7 @@
 
     UITableView *tableView = [UITableView appearance];
     tableView.backgroundColor = [DRTheme base4];
-    tableView.separatorColor = [DRTheme base1];
+    tableView.separatorColor = [DRTheme base2];
     tableView.separatorInset = UIEdgeInsetsMake(0, kSideMargin, 0, 0);
 }
 
@@ -33,8 +33,12 @@
     return [UIFont fontWithName:@"OpenSans-Regular" size:size];
 }
 
-+(UIFont *)boldFontWithSize:(CGFloat)size {
++(UIFont *)semiboldFontWithSize:(CGFloat)size {
     return [UIFont fontWithName:@"OpenSans-Semibold" size:size];
+}
+
++(UIFont *)boldFontWithSize:(CGFloat)size {
+    return [UIFont fontWithName:@"OpenSans-Bold" size:size];
 }
 
 #pragma mark Colors

@@ -7,9 +7,8 @@
 //
 
 #import "DRAppDelegate.h"
-#import "DRVisualFeedbackViewController.h"
-#import "DRDataProcessor.h"
-#import "CLLocation+DRExtensions.h"
+#import "DRRunsViewController.h"
+#import "CoreData+MagicalRecord.h"
 
 @import CoreLocation;
 
@@ -17,27 +16,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    [MagicalRecord setupAutoMigratingCoreDataStack];
+    [MagicalRecord setupAutoMigratingCoreDataStack];
 
     [DRTheme apply];
-
-    CLLocation *lappisleft = [[CLLocation alloc] initWithLatitude:59.369667 longitude:18.057811];
-    CLLocation *lappisright = [[CLLocation alloc] initWithLatitude:59.368551 longitude:18.064678];
-
-    CLLocation *applehq = [[CLLocation alloc] initWithLatitude:37.3303991 longitude:-122.0323301];
-    CLLocation *appleschool = [[CLLocation alloc] initWithLatitude:37.3287548 longitude:-122.0278099];
-    CLLocation *appletree = [[CLLocation alloc] initWithLatitude:37.332519 longitude:-122.026464];
-
-    DRDataProcessor *proc = [[DRDataProcessor alloc] initWithPath:@[lappisleft,lappisright]];
-    DRDataProcessor *proc2 = [[DRDataProcessor alloc] initWithPath:@[applehq,appleschool,appletree]];
 
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor blackColor];
 
-    DRVisualFeedbackViewController *visual = [[DRVisualFeedbackViewController alloc] initWithDataProcessor:proc2];
-
-    self.window.rootViewController = visual;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[[DRRunsViewController alloc] init]];
+    nav.navigationBarHidden = YES;
+    self.window.rootViewController = nav;
 
     [self.window makeKeyAndVisible];
     

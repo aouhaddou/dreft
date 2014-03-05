@@ -34,7 +34,7 @@ const BOOL debug = NO;
     driftLabel.backgroundColor = self.view.backgroundColor;
     driftLabel.adjustsFontSizeToFitWidth = YES;
     driftLabel.minimumScaleFactor = 0.25;
-    driftLabel.font = [DRTheme boldFontWithSize:64.f];
+    driftLabel.font = [DRTheme semiboldFontWithSize:64.f];
     driftLabel.text = NSLocalizedString(@"–", nil);
     driftLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:driftLabel];

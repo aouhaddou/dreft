@@ -34,7 +34,7 @@
         label.adjustsFontSizeToFitWidth = YES;
         label.numberOfLines = 1;
         label.backgroundColor = self.backgroundColor;
-        label.font = [DRTheme boldFontWithSize:11.f];
+        label.font = [DRTheme semiboldFontWithSize:11.f];
         label.text = NSLocalizedString(@"GPS", nil);
         label.textAlignment = NSTextAlignmentCenter;
         label.textColor = [DRTheme base4];

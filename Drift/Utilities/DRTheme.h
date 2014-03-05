@@ -12,6 +12,7 @@
 
 +(void)apply;
 +(UIFont *)fontWithSize:(CGFloat)size;
++(UIFont *)semiboldFontWithSize:(CGFloat)size;
 +(UIFont *)boldFontWithSize:(CGFloat)size;
 
 +(UIColor *)backgroundColor;

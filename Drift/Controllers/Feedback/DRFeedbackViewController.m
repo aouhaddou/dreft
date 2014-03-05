@@ -34,7 +34,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+
     self.view.backgroundColor = [DRTheme backgroundColor];
 
     self.navigationBar.showsShadow = NO;
@@ -73,7 +75,13 @@
 }
 
 -(void)leftBarButtonItemPressed:(id)sender {
-
+    SIAlertView *alert = [[SIAlertView alloc] initWithTitle:nil andMessage:NSLocalizedString(@"Do you really want to cancel recording run?", nil)];
+    [alert addButtonWithTitle:NSLocalizedString(@"Continue", nil) type:SIAlertViewButtonTypeCancel handler:nil];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil) type:SIAlertViewButtonTypeDestructive handler:^(SIAlertView *alertView) {
+        [_processor stop];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }];
+    [alert show];
 }
 
 - (void)didReceiveMemoryWarning

@@ -24,7 +24,7 @@
     button.shadowHeight = 3;
     [button setTitleColor:titleColor forState:UIControlStateNormal];
     button.titleLabel.shadowColor = [UIColor clearColor];
-    button.titleLabel.font = [DRTheme boldFontWithSize:fontSize];
+    button.titleLabel.font = [DRTheme semiboldFontWithSize:fontSize];
     return button;
 }
 
