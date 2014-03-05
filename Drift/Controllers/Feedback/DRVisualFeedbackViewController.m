@@ -10,13 +10,16 @@
 #import "DRPathView.h"
 #import "NSDate+Utilities.h"
 #import "NSArray+DRExtensions.h"
+#import "CLLocation+DRExtensions.h"
+
+const BOOL debug = NO;
 
 @interface DRVisualFeedbackViewController ()
 
 @property (nonatomic, strong) UILabel *driftLabel;
 @property (nonatomic, strong) NSMutableArray *locationHistory;
 @property (nonatomic, strong) DRPathView *pathView;
-
+@property (nonatomic, strong) MKMapView *map;
 @end
 
 @implementation DRVisualFeedbackViewController
@@ -44,6 +47,14 @@
     path.marksEndOfPrimaryLine = YES;
     path.secondaryPoints = self.processor.path;
     self.pathView = path;
+
+    if (debug) {
+        MKMapView *map = [[MKMapView alloc] initWithFrame:self.pathView.frame];
+        map.delegate = self;
+        map.showsUserLocation = NO;
+        [self.view addSubview:map];
+        self.map = map;
+    }
 }
 
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDriftResult *)result {
@@ -51,6 +62,10 @@
     self.driftLabel.text = [NSString stringWithFormat:@"%.1f m",result.drift];
     [self addLocationToHistory:result.location];
     self.pathView.primaryPoints = self.locationHistory;
+
+    if (debug) {
+        [self drawPathsOnMapViewWithLocation:result.location leg:result.leg];
+    }
 }
 
 -(void)dataProcessor:(DRDataProcessor *)processor didFailWithError:(NSError *)error {
@@ -67,6 +82,39 @@
     if (last == nil || [last.timestamp isEarlierThanDate:location.timestamp]) {
         [self.locationHistory addObject:location];
     }
+}
+
+#pragma mark map for debugging
+
+-(void)drawPathsOnMapViewWithLocation:(CLLocation *)location leg:(NSInteger)leg {
+    NSUInteger count = self.processor.path.count;
+    CLLocationCoordinate2D path[count];
+    for (NSInteger i = 0; i<count; i++) {
+        path[i] = [self.processor.path[i] coordinate];
+    }
+    MKPolyline *pathLine = [MKPolyline polylineWithCoordinates:path count:count];
+
+    CLLocation *perpLocation = [location dr_perpendicularLocationWithLocation:self.processor.path[leg] location:self.processor.path[leg+1]];
+    CLLocationCoordinate2D perpCoords[2];
+    perpCoords[0] = location.coordinate;
+    perpCoords[1] = perpLocation.coordinate;
+    MKPolyline *perpLine = [MKPolyline polylineWithCoordinates:perpCoords count:2];
+
+    [self.map removeOverlays:self.map.overlays];
+    [self.map addOverlay:pathLine];
+    [self.map addOverlay:perpLine];
+
+    MKCoordinateRegion region = MKCoordinateRegionForMapRect([perpLine boundingMapRect]);
+    region.span = MKCoordinateSpanMake(region.span.latitudeDelta+0.003, region.span.longitudeDelta+0.003);
+    [self.map setRegion:region animated:YES];
+}
+
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay {
+    MKPolylineView *polylineView = [[MKPolylineView alloc] initWithPolyline:overlay];
+    polylineView.strokeColor = [DRTheme confirmColor];
+    polylineView.lineWidth = 4.0;
+
+    return polylineView;
 }
 
 @end

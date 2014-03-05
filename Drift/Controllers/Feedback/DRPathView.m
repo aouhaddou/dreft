@@ -44,14 +44,6 @@
         if ([self.primaryPoints count] > 0) {
             NSArray *allPoints = [self.primaryPoints arrayByAddingObjectsFromArray:self.secondaryPoints];
 
-            BOOL debug = NO;
-            if (debug) {
-                CLLocation *current = [self.primaryLocations lastObject];
-                CLLocation *perp = [current dr_perpendicularLocationWithLocation:self.secondaryLocations[0] location:self.secondaryLocations[1]];
-                CGPoint perpPoint = [perp dr_relativeMercatorCoordinate];
-                allPoints = [allPoints arrayByAddingObject:[NSValue valueWithCGPoint:perpPoint]];
-            }
-
             NSArray *results = [allPoints dr_zoomRelativeCoordinatesWithHorizontalAlignment:NSArrayRelativePointsHorizontalAlignmentCenter verticalAlignment:NSArrayRelativePointsVerticalAlignmentCenter];
 
             NSRange primaryRange;
@@ -62,9 +54,6 @@
             NSRange secondaryRange;
             secondaryRange.location = primaryRange.length;
             secondaryRange.length = [results count]-primaryRange.length;
-            if (debug) {
-                secondaryRange.length -= 1;
-            }
             NSArray *secondary = [results subarrayWithRange:secondaryRange];
 
             [self drawLineWithArray:secondary color:[DRTheme transparentBase4]];
@@ -83,10 +72,6 @@
                 UIBezierPath *smallCircle = [self bezierPathForCircleWithRadius:smallRadius atPoint:viewPoint];
                 [[DRTheme base4] setFill];
                 [smallCircle fill];
-
-                if (debug) {
-                    [self drawLineWithArray:@[[primary lastObject], [results lastObject]] color:[DRTheme transparentBase4]];
-                }
             }
 
             [self drawLineWithArray:primary color:[DRTheme base4]];
