@@ -10,6 +10,7 @@
 #import "DRModel.h"
 #import "DRPathTableViewCell.h"
 #import "BRBackArrow.h"
+#import "BRAddIcon.h"
 
 @import CoreLocation;
 
@@ -40,12 +41,17 @@ static NSString *const kPathCellIdentifier = @"kPathCell";
     self.navigationBar.showsShadow = NO;
     self.navigationBar.topItem.title = [NSLocalizedString(@"Courses", nil) uppercaseString];
     self.navigationBar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[BRBackArrow imageWithColor:[DRTheme base4]] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemPressed:)];
+    self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[BRAddIcon imageWithColor:[DRTheme base4]] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemPressed:)];
 
     [self.tableView registerClass:[DRPathTableViewCell class] forCellReuseIdentifier:kPathCellIdentifier];
 }
 
 -(void)leftBarButtonItemPressed:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+-(void)rightBarButtonItemPressed:(id)sender {
+    //
 }
 
 - (void)didReceiveMemoryWarning

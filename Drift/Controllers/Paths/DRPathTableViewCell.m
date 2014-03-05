@@ -68,7 +68,7 @@
     CGFloat topMargin = 15;
 
     CGFloat pathWidth = 80;
-    self.pathView.frame = CGRectMake(self.contentView.width-kSideMargin-pathWidth-10, kSideMargin, pathWidth, [DRPathTableViewCell height]-2*kSideMargin);
+    self.pathView.frame = CGRectMake(self.contentView.width-kSideMargin-pathWidth-14, kSideMargin, pathWidth, [DRPathTableViewCell height]-2*kSideMargin);
 
     self.textLabel.x = kSideMargin;
     self.textLabel.y = topMargin;
