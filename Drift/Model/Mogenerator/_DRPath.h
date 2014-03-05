@@ -2,12 +2,13 @@
 // Make changes to DRPath.h instead.
 
 #import <CoreData/CoreData.h>
-
+#import "SSManagedObject.h"
 
 extern const struct DRPathAttributes {
-	__unsafe_unretained NSString *createDate;
+	__unsafe_unretained NSString *created;
 	__unsafe_unretained NSString *distance;
 	__unsafe_unretained NSString *points;
+	__unsafe_unretained NSString *uniqueID;
 } DRPathAttributes;
 
 extern const struct DRPathRelationships {
@@ -23,10 +24,11 @@ extern const struct DRPathFetchedProperties {
 
 @class NSObject;
 
+
 @interface DRPathID : NSManagedObjectID {}
 @end
 
-@interface _DRPath : NSManagedObject {}
+@interface _DRPath : SSManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
@@ -36,11 +38,11 @@ extern const struct DRPathFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSDate* createDate;
+@property (nonatomic, strong) NSDate* created;
 
 
 
-//- (BOOL)validateCreateDate:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateCreated:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -70,6 +72,16 @@ extern const struct DRPathFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSString* uniqueID;
+
+
+
+//- (BOOL)validateUniqueID:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) DRRun *runs;
 
 //- (BOOL)validateRuns:(id*)value_ error:(NSError**)error_;
@@ -87,8 +99,8 @@ extern const struct DRPathFetchedProperties {
 @interface _DRPath (CoreDataGeneratedPrimitiveAccessors)
 
 
-- (NSDate*)primitiveCreateDate;
-- (void)setPrimitiveCreateDate:(NSDate*)value;
+- (NSDate*)primitiveCreated;
+- (void)setPrimitiveCreated:(NSDate*)value;
 
 
 
@@ -104,6 +116,12 @@ extern const struct DRPathFetchedProperties {
 
 - (id)primitivePoints;
 - (void)setPrimitivePoints:(id)value;
+
+
+
+
+- (NSString*)primitiveUniqueID;
+- (void)setPrimitiveUniqueID:(NSString*)value;
 
 
 

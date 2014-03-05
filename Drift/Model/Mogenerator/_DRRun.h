@@ -2,17 +2,18 @@
 // Make changes to DRRun.h instead.
 
 #import <CoreData/CoreData.h>
-
+#import "SSManagedObject.h"
 
 extern const struct DRRunAttributes {
 	__unsafe_unretained NSString *averageDrift;
 	__unsafe_unretained NSString *coordinates;
-	__unsafe_unretained NSString *createDate;
+	__unsafe_unretained NSString *created;
 	__unsafe_unretained NSString *endDate;
 	__unsafe_unretained NSString *startDate;
 	__unsafe_unretained NSString *steps;
 	__unsafe_unretained NSString *time;
 	__unsafe_unretained NSString *totalDistance;
+	__unsafe_unretained NSString *uniqueID;
 } DRRunAttributes;
 
 extern const struct DRRunRelationships {
@@ -33,10 +34,11 @@ extern const struct DRRunFetchedProperties {
 
 
 
+
 @interface DRRunID : NSManagedObjectID {}
 @end
 
-@interface _DRRun : NSManagedObject {}
+@interface _DRRun : SSManagedObject {}
 + (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
 + (NSString*)entityName;
 + (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
@@ -70,11 +72,11 @@ extern const struct DRRunFetchedProperties {
 
 
 
-@property (nonatomic, strong) NSDate* createDate;
+@property (nonatomic, strong) NSDate* created;
 
 
 
-//- (BOOL)validateCreateDate:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateCreated:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -142,6 +144,16 @@ extern const struct DRRunFetchedProperties {
 
 
 
+@property (nonatomic, strong) NSString* uniqueID;
+
+
+
+//- (BOOL)validateUniqueID:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) DRPath *path;
 
 //- (BOOL)validatePath:(id*)value_ error:(NSError**)error_;
@@ -174,8 +186,8 @@ extern const struct DRRunFetchedProperties {
 
 
 
-- (NSDate*)primitiveCreateDate;
-- (void)setPrimitiveCreateDate:(NSDate*)value;
+- (NSDate*)primitiveCreated;
+- (void)setPrimitiveCreated:(NSDate*)value;
 
 
 
@@ -215,6 +227,12 @@ extern const struct DRRunFetchedProperties {
 
 - (float)primitiveTotalDistanceValue;
 - (void)setPrimitiveTotalDistanceValue:(float)value_;
+
+
+
+
+- (NSString*)primitiveUniqueID;
+- (void)setPrimitiveUniqueID:(NSString*)value;
 
 
 

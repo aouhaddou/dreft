@@ -34,6 +34,8 @@
 		8382941118C76B81003F1FF6 /* DRRunTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8382941018C76B81003F1FF6 /* DRRunTableViewCell.m */; };
 		8382941318C7729D003F1FF6 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8382941218C7729D003F1FF6 /* OpenSans-Bold.ttf */; };
 		8382941918C77653003F1FF6 /* Play@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8382941818C77653003F1FF6 /* Play@2x.png */; };
+		8382941C18C779D2003F1FF6 /* SSManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8382941B18C779D2003F1FF6 /* SSManagedObject.m */; };
+		8382941F18C77A24003F1FF6 /* NSString+UniqueIdentifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8382941E18C77A24003F1FF6 /* NSString+UniqueIdentifier.m */; };
 		8384DE6E18C53DB9002B551B /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384DE6D18C53DB9002B551B /* UIColor+Hex.m */; };
 		8384DE7118C5419E002B551B /* DRTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384DE7018C5419E002B551B /* DRTheme.m */; };
 		8384DE7418C542A2002B551B /* DRNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8384DE7318C542A2002B551B /* DRNavigationBar.m */; };
@@ -115,6 +117,10 @@
 		8382941018C76B81003F1FF6 /* DRRunTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRRunTableViewCell.m; sourceTree = "<group>"; };
 		8382941218C7729D003F1FF6 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		8382941818C77653003F1FF6 /* Play@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Play@2x.png"; sourceTree = "<group>"; };
+		8382941A18C779D2003F1FF6 /* SSManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSManagedObject.h; sourceTree = "<group>"; };
+		8382941B18C779D2003F1FF6 /* SSManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSManagedObject.m; sourceTree = "<group>"; };
+		8382941D18C77A24003F1FF6 /* NSString+UniqueIdentifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+UniqueIdentifier.h"; sourceTree = "<group>"; };
+		8382941E18C77A24003F1FF6 /* NSString+UniqueIdentifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+UniqueIdentifier.m"; sourceTree = "<group>"; };
 		8384DE6C18C53DB9002B551B /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Hex.h"; sourceTree = "<group>"; };
 		8384DE6D18C53DB9002B551B /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Hex.m"; sourceTree = "<group>"; };
 		8384DE6F18C5419E002B551B /* DRTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRTheme.h; sourceTree = "<group>"; };
@@ -229,6 +235,8 @@
 				8392239718BE51E6003929A0 /* DRLocationManager.m */,
 				8376E60918B7A489005CFB78 /* DRModel.h */,
 				8376E5F318B7A335005CFB78 /* Drift.xcdatamodeld */,
+				8382941A18C779D2003F1FF6 /* SSManagedObject.h */,
+				8382941B18C779D2003F1FF6 /* SSManagedObject.m */,
 				8376E60018B7A464005CFB78 /* Mogenerator */,
 				8376E5FB18B7A464005CFB78 /* Entities */,
 			);
@@ -358,6 +366,8 @@
 				8384DE9E18C62514002B551B /* UIImage+ImageEffects.m */,
 				8384DEAF18C63399002B551B /* NSDate+Utilities.h */,
 				8384DEB018C63399002B551B /* NSDate+Utilities.m */,
+				8382941D18C77A24003F1FF6 /* NSString+UniqueIdentifier.h */,
+				8382941E18C77A24003F1FF6 /* NSString+UniqueIdentifier.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -630,6 +640,7 @@
 				8384DE9618C621C9002B551B /* SIAlertView.m in Sources */,
 				8384DE9418C621C9002B551B /* BRButton.m in Sources */,
 				8384DEB418C639EF002B551B /* DRVisualFeedbackViewController.m in Sources */,
+				8382941F18C77A24003F1FF6 /* NSString+UniqueIdentifier.m in Sources */,
 				8384DE8818C544B0002B551B /* BRCheckmarkIcon.m in Sources */,
 				8384DE8718C544B0002B551B /* BRCancelIcon.m in Sources */,
 				8384DEB718C63B85002B551B /* DRPathView.m in Sources */,
@@ -661,6 +672,7 @@
 				8382940718C7680F003F1FF6 /* DRRunsViewController.m in Sources */,
 				8384DE7118C5419E002B551B /* DRTheme.m in Sources */,
 				8382941118C76B81003F1FF6 /* DRRunTableViewCell.m in Sources */,
+				8382941C18C779D2003F1FF6 /* SSManagedObject.m in Sources */,
 				8384DE8518C544B0002B551B /* BRAddIcon.m in Sources */,
 				8376E5F518B7A335005CFB78 /* Drift.xcdatamodeld in Sources */,
 			);

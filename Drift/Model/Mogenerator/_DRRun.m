@@ -6,12 +6,13 @@
 const struct DRRunAttributes DRRunAttributes = {
 	.averageDrift = @"averageDrift",
 	.coordinates = @"coordinates",
-	.createDate = @"createDate",
+	.created = @"created",
 	.endDate = @"endDate",
 	.startDate = @"startDate",
 	.steps = @"steps",
 	.time = @"time",
 	.totalDistance = @"totalDistance",
+	.uniqueID = @"uniqueID",
 };
 
 const struct DRRunRelationships DRRunRelationships = {
@@ -107,7 +108,7 @@ const struct DRRunFetchedProperties DRRunFetchedProperties = {
 
 
 
-@dynamic createDate;
+@dynamic created;
 
 
 
@@ -201,6 +202,13 @@ const struct DRRunFetchedProperties DRRunFetchedProperties = {
 - (void)setPrimitiveTotalDistanceValue:(float)value_ {
 	[self setPrimitiveTotalDistance:[NSNumber numberWithFloat:value_]];
 }
+
+
+
+
+
+@dynamic uniqueID;
+
 
 
 

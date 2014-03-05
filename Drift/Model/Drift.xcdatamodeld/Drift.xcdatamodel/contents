@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13C64" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="DRPath" representedClassName="DRPath" syncable="YES">
-        <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="distance" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="points" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="uniqueID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="runs" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DRRun" inverseName="path" inverseEntity="DRRun" syncable="YES"/>
+        <userInfo>
+            <entry key="mogenerator.customBaseClass" value="SSManagedObject"/>
+        </userInfo>
     </entity>
     <entity name="DRRun" representedClassName="DRRun" syncable="YES">
         <attribute name="averageDrift" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="coordinates" optional="YES" attributeType="Transformable" syncable="YES"/>
-        <attribute name="createDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="created" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="endDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="startDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="steps" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="totalDistance" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="uniqueID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="path" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DRPath" inverseName="runs" inverseEntity="DRPath" syncable="YES"/>
+        <userInfo>
+            <entry key="mogenerator.customBaseClass" value="SSManagedObject"/>
+        </userInfo>
     </entity>
     <elements>
         <element name="DRPath" positionX="0" positionY="0" width="0" height="0"/>

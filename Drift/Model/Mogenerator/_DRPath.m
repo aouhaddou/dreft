@@ -4,9 +4,10 @@
 #import "_DRPath.h"
 
 const struct DRPathAttributes DRPathAttributes = {
-	.createDate = @"createDate",
+	.created = @"created",
 	.distance = @"distance",
 	.points = @"points",
+	.uniqueID = @"uniqueID",
 };
 
 const struct DRPathRelationships DRPathRelationships = {
@@ -54,7 +55,7 @@ const struct DRPathFetchedProperties DRPathFetchedProperties = {
 
 
 
-@dynamic createDate;
+@dynamic created;
 
 
 
@@ -88,6 +89,13 @@ const struct DRPathFetchedProperties DRPathFetchedProperties = {
 
 
 @dynamic points;
+
+
+
+
+
+
+@dynamic uniqueID;
 
 
 

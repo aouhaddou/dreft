@@ -7,5 +7,6 @@
 //
 
 #import "CoreData+MagicalRecord.h"
+#import "SSManagedObject.h"
 #import "DRRun.h"
 #import "DRPath.h"
