@@ -54,7 +54,7 @@
 -(void)start {
     [super start];
     [self speakString:NSLocalizedString(@"Started Run", nil)];
-    self.feedbackTimer = [NSTimer scheduledTimerWithTimeInterval:[[[DRVariableManager sharedManager] baseRateForAcousticFeedback] floatValue] target:self selector:@selector(feedbackTimerFired) userInfo:nil repeats:YES];
+    self.feedbackTimer = [NSTimer scheduledTimerWithTimeInterval:[[DRVariableManager sharedManager] baseRateForAcousticFeedback] target:self selector:@selector(feedbackTimerFired) userInfo:nil repeats:YES];
 }
 
 -(void)stopRun {

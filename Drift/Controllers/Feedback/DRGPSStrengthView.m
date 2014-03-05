@@ -59,9 +59,9 @@
 
     NSInteger strength = 0;
     if (self.location) {
-        if (self.location.horizontalAccuracy <= [[[DRVariableManager sharedManager] GPSThreeBarThresh] floatValue]) {
+        if (self.location.horizontalAccuracy <= [[DRVariableManager sharedManager] GPSThreeBarThresh]) {
             strength = 3;
-        } else if (self.location.horizontalAccuracy <= [[[DRVariableManager sharedManager] GPSTwoBarThresh] floatValue]) {
+        } else if (self.location.horizontalAccuracy <= [[DRVariableManager sharedManager] GPSTwoBarThresh]) {
             strength = 2;
         } else {
             strength = 1;
