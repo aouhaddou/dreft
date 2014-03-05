@@ -39,8 +39,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation *newLocation = [locations lastObject];
-    DLog(@"Updated Location: %@", newLocation.description);
-    if (newLocation.timestamp.timeIntervalSinceNow > -20) { //not older than 20 seconds
+    if (newLocation.timestamp.timeIntervalSinceNow > -20 && newLocation.horizontalAccuracy <= kGPSOneBarThresh) { //not older than 20 seconds and more accurate than 50m
         if (self.delegates != nil && [self.delegates count] > 0) {
             NSSet *delegatesSnapshot = [NSSet setWithSet:self.delegates];
             for (id<DRLocationManagerDelegate> delegate in delegatesSnapshot) {

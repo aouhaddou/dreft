@@ -13,11 +13,12 @@
 #import "DRNavigationBar.h"
 #import "DRDataProcessor.h"
 
-@import CoreLocation;
-
 @interface DRFeedbackViewController : UIViewController <DRFeedbackModule>
 
 @property (strong, nonatomic) IBOutlet DRNavigationBar *navigationBar;
 @property (strong, nonatomic) BRButton *bottomButton;
+
+-(void)start;
+-(void)stopButtonPressed:(id)sender;
 
 @end

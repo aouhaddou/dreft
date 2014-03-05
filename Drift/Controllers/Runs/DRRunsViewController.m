@@ -13,6 +13,7 @@
 #import "UIView+Image.h"
 #import "UIColor+Extensions.h"
 #import "DRVisualFeedbackViewController.h"
+#import "DRAcousticFeedbackViewController.h"
 #import "DRDataProcessor.h"
 #import "DRPathsViewController.h"
 
@@ -92,7 +93,7 @@ static CGFloat const headerHeight = 82.f;
     DRDataProcessor *proc = [[DRDataProcessor alloc] initWithPath:@[lappisleft,lappisright]];
     DRDataProcessor *proc2 = [[DRDataProcessor alloc] initWithPath:@[applehq,appleschool,appletree]];
 
-    DRVisualFeedbackViewController *visual = [[DRVisualFeedbackViewController alloc] initWithDataProcessor:proc2];
+    DRAcousticFeedbackViewController *visual = [[DRAcousticFeedbackViewController alloc] initWithDataProcessor:proc];
 
     [self.navigationController pushViewController:visual animated:YES];
 }

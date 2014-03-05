@@ -14,7 +14,7 @@
 -(void)setDrift:(CGFloat)drift;
 -(void)setLocation:(CLLocation *)location;
 -(void)setLeg:(NSInteger)leg;
--(void)setDirection:(DRDriftResultDirection)direction;
+-(void)setDirection:(DRDriftDirection)direction;
 
 @end
 
@@ -29,7 +29,7 @@
 -(void)setLeg:(NSInteger)leg {
     _leg = leg;
 }
--(void)setDirection:(DRDriftResultDirection)direction {
+-(void)setDirection:(DRDriftDirection)direction {
     _direction = direction;
 }
 
@@ -88,14 +88,14 @@
         return result;
     } else {
         //Check all path legs and return shortest distance
-        CGFloat minDrift = CGFLOAT_MAX;
+        CLLocationDistance minDrift = DBL_MAX;
         CGFloat leg = -1;
 
         for (NSInteger i = 0; i<count-1; i++) {
             CLLocation *point1 = self.path[i];
             CLLocation *point2 = self.path[i+1];
 
-            CGFloat drift = [location dr_perpendicularDistanceWithLocation:point1 location:point2];
+            CLLocationDistance drift = [location dr_perpendicularDistanceWithLocation:point1 location:point2];
             if (drift<minDrift) {
                 minDrift = drift;
                 leg = i;

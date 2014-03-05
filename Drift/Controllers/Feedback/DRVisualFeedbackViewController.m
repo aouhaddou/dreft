@@ -11,6 +11,7 @@
 #import "NSDate+Utilities.h"
 #import "NSArray+DRExtensions.h"
 #import "CLLocation+DRExtensions.h"
+#import "DRDistanceFormatter.h"
 
 const BOOL debug = NO;
 
@@ -20,6 +21,8 @@ const BOOL debug = NO;
 @property (nonatomic, strong) NSMutableArray *locationHistory;
 @property (nonatomic, strong) DRPathView *pathView;
 @property (nonatomic, strong) MKMapView *map;
+@property (nonatomic, strong) DRDistanceFormatter *distanceFormatter;
+
 @end
 
 @implementation DRVisualFeedbackViewController
@@ -62,9 +65,18 @@ const BOOL debug = NO;
     }
 }
 
+-(DRDistanceFormatter *)distanceFormatter {
+    if (_distanceFormatter == nil) {
+        DRDistanceFormatter *distance = [[DRDistanceFormatter alloc] init];
+        distance.abbreviate = YES;
+        _distanceFormatter = distance;
+    }
+    return _distanceFormatter;
+}
+
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDriftResult *)result {
     [super dataProcessor:processor didCalculateDrift:result];
-    self.driftLabel.text = [NSString stringWithFormat:@"%.1f m",result.drift];
+    self.driftLabel.text = [self.distanceFormatter stringFromDistance:result.drift];
     [self addLocationToHistory:result.location];
     self.pathView.primaryLocations = self.locationHistory;
 
