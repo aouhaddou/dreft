@@ -10,7 +10,7 @@
 #import "DRNavigationBar.h"
 @import MapKit;
 
-@interface DRNewPathViewController : UIViewController <UITextFieldDelegate>
+@interface DRNewPathViewController : UIViewController <UITextFieldDelegate, MKMapViewDelegate>
 
 @property (strong, nonatomic) IBOutlet DRNavigationBar *navigationBar;
 @property (strong, nonatomic) IBOutlet UITextField *textField;
