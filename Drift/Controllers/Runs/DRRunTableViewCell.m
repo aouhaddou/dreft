@@ -57,7 +57,7 @@
 }
 
 +(CGFloat)courseMargin {
-    return 214.f;
+    return 210.f;
 }
 
 -(void)setRun:(DRRun *)run {

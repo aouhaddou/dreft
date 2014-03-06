@@ -42,7 +42,7 @@
         DRPathView *path = [[DRPathView alloc] init];
         path.backgroundColor = self.contentView.backgroundColor;
         path.marksEndOfPrimaryLine = NO;
-        path.primaryLineColor = [DRTheme base1];
+        path.primaryLineColor = [DRTheme base2];
         path.lineWidth = 2;
         path.verticalAlignment = NSArrayRelativePointsVerticalAlignmentCenter;
         path.horizontalAlignment = NSArrayRelativePointsHorizontalAlignmentRight;

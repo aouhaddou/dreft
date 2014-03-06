@@ -192,7 +192,8 @@ static CGFloat const headerHeight = 82.f;
         [view addSubview:length];
         length.text = [NSLocalizedString(@"Length", nil) uppercaseString];
 
-        UILabel *course = [[UILabel alloc] initWithFrame:CGRectMake([DRRunTableViewCell courseMargin], title.bottom, tableView.width-[DRRunTableViewCell courseMargin], labelHeight)];
+        CGFloat courseMargin = [DRRunTableViewCell courseMargin]+4;
+        UILabel *course = [[UILabel alloc] initWithFrame:CGRectMake(courseMargin, title.bottom, tableView.width-courseMargin, labelHeight)];
         course.backgroundColor = [DRTheme base4];
         course.font = [DRTheme boldFontWithSize:14.f];
         course.textColor = [DRTheme base2];
@@ -242,26 +243,28 @@ static CGFloat const headerHeight = 82.f;
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
 
     UITableView *tableView = self.tableView;
+    NSIndexPath *indexPathTrans = [NSIndexPath indexPathForRow:indexPath.row inSection:1];
+    NSIndexPath *newIndexPathTrans = [NSIndexPath indexPathForRow:newIndexPath.row inSection:1];
 
     switch(type) {
 
         case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPathTrans] withRowAnimation:UITableViewRowAnimationFade];
             break;
 
         case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPathTrans] withRowAnimation:UITableViewRowAnimationFade];
             break;
 
         case NSFetchedResultsChangeUpdate:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPathTrans] atIndexPath:indexPathTrans];
             break;
 
         case NSFetchedResultsChangeMove:
             [tableView deleteRowsAtIndexPaths:[NSArray
-                                               arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+                                               arrayWithObject:indexPathTrans] withRowAnimation:UITableViewRowAnimationFade];
             [tableView insertRowsAtIndexPaths:[NSArray
-                                               arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+                                               arrayWithObject:newIndexPathTrans] withRowAnimation:UITableViewRowAnimationFade];
             break;
     }
 }
