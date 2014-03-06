@@ -56,9 +56,10 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
 
     self.navigationBar.showsShadow = YES;
-    self.navigationBar.topItem.title = [NSLocalizedString(@"Add Course", nil) uppercaseString];
+    self.navigationBar.topItem.title = [NSLocalizedString(@"New Course", nil) uppercaseString];
     self.navigationBar.topItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[BRBackArrow imageWithColor:[DRTheme base4]] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonItemPressed:)];
     self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[BRCheckmarkIcon imageWithColor:[DRTheme base4]] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemPressed:)];
+    self.navigationBar.topItem.rightBarButtonItem.enabled = NO;
 
     self.textField.placeholder = [NSLocalizedString(@"Enter Coordinate", nil) uppercaseString];
 
@@ -143,6 +144,9 @@
             [self reverseGeocodeLocation:location];
         }
         [self.locations addObject:location];
+        if ([self.locations count] > 1) {
+            self.navigationBar.topItem.rightBarButtonItem.enabled = YES;
+        }
     }
 }
 

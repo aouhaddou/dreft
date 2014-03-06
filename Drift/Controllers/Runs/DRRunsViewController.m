@@ -135,7 +135,14 @@ static CGFloat const headerHeight = 82.f;
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == 0) {
         DRShowPathsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCoursesCellIdentifier forIndexPath:indexPath];
-        cell.textLabel.text = [NSLocalizedString(@"Add a course", nil) uppercaseString];
+        NSInteger count = [DRPath MR_countOfEntities];
+        if (count == 0) {
+            cell.textLabel.text = [NSLocalizedString(@"Add a course", nil) uppercaseString];
+        } else if (count == 1) {
+            cell.textLabel.text = [[NSString stringWithFormat:NSLocalizedString(@"View %li course", nil),count] uppercaseString];
+        } else {
+            cell.textLabel.text = [[NSString stringWithFormat:NSLocalizedString(@"View %li courses", nil),count] uppercaseString];
+        }
         return cell;
     } else {
         DRRunTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRunCellIdentifier forIndexPath:indexPath];

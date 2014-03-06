@@ -54,6 +54,10 @@ static NSString *const kPathCellIdentifier = @"kPathCell";
     [self.tableView registerClass:[DRPathTableViewCell class] forCellReuseIdentifier:kPathCellIdentifier];
 }
 
+-(void)setTitle:(NSString *)title {
+    self.navigationBar.topItem.title = [title uppercaseString];
+}
+
 -(void)leftBarButtonItemPressed:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
