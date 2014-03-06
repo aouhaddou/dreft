@@ -7,22 +7,45 @@
 //
 
 #import "DRRunTableViewCell.h"
+#import "DRPathView.h"
+#import "DRDataProcessor.h"
+
+@interface DRRunTableViewCell()
+
+@property (nonatomic, strong) DRPathView *pathView;
+
+@end
 
 @implementation DRRunTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+    self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
     if (self) {
         self.textLabel.font = [DRTheme boldFontWithSize:18.f];
         self.textLabel.textColor = [DRTheme base1];
         self.textLabel.backgroundColor = self.contentView.backgroundColor;
+
+        self.detailTextLabel.font = [DRTheme boldFontWithSize:18.f];
+        self.detailTextLabel.textColor = [DRTheme base1];
+        self.detailTextLabel.backgroundColor = self.contentView.backgroundColor;
+
+        DRPathView *pathView = [[DRPathView alloc] init];
+        pathView.backgroundColor = self.contentView.backgroundColor;
+        pathView.marksEndOfPrimaryLine = NO;
+        pathView.primaryLineColor = [DRTheme base1];
+        pathView.secondaryLineColor = [DRTheme base2];
+        pathView.lineWidth = 2;
+        pathView.horizontalAlignment = NSArrayRelativePointsHorizontalAlignmentLeft;
+        pathView.verticalAlignment = NSArrayRelativePointsVerticalAlignmentCenter;
+        [self.contentView addSubview:pathView];
+        self.pathView = pathView;
     }
     return self;
 }
 
 +(CGFloat)height {
-    return 76.f;
+    return 79.f;
 }
 
 +(CGFloat)driftMargin {
@@ -34,12 +57,39 @@
 }
 
 +(CGFloat)courseMargin {
-    return 206.f;
+    return 214.f;
+}
+
+-(void)setRun:(DRRun *)run {
+    NSMutableArray *primary = [NSMutableArray array];
+    for (DRDriftResult *drift in run.drifts) {
+        if (drift.location) {
+            [primary addObject:drift.location];
+        }
+    }
+    self.pathView.primaryLocations = primary;
+    self.pathView.secondaryLocations = run.path.locations;
 }
 
 -(void)layoutSubviews {
     [super layoutSubviews];
-    self.textLabel.x = kSideMargin;
+
+    CGFloat pathMargin = 10;
+    self.pathView.width = self.contentView.width-[DRRunTableViewCell courseMargin]-25;
+    self.pathView.height = [DRRunTableViewCell height]-2*pathMargin;
+    self.pathView.x = [DRRunTableViewCell courseMargin];
+    self.pathView.y = pathMargin;
+
+    self.textLabel.x = [DRRunTableViewCell driftMargin];
+    self.detailTextLabel.x = [DRRunTableViewCell lengthMargin];
+
+    self.textLabel.width = self.detailTextLabel.left-self.textLabel.left-5;
+    self.textLabel.height = [DRRunTableViewCell height]-20;
+    self.textLabel.y = ([DRRunTableViewCell height]-self.textLabel.height)/2.f;
+
+    self.detailTextLabel.width = self.pathView.left-self.detailTextLabel.left-5;
+    self.detailTextLabel.height = self.textLabel.height;
+    self.detailTextLabel.y = self.textLabel.y;
 }
 
 @end

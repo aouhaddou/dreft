@@ -26,4 +26,8 @@
     self.textLabel.x = kSideMargin;
 }
 
++(CGFloat)height {
+    return 44.f;
+}
+
 @end

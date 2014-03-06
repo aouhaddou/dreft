@@ -7,12 +7,14 @@
 //
 
 #import "DRTableViewCell.h"
+#import "DRModel.h"
 
 @interface DRRunTableViewCell : DRTableViewCell
 
-+(CGFloat)height;
 +(CGFloat)driftMargin;
 +(CGFloat)lengthMargin;
 +(CGFloat)courseMargin;
+
+-(void)setRun:(DRRun *)run;
 
 @end

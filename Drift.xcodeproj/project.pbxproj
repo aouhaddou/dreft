@@ -312,11 +312,11 @@
 		8382942018C78908003F1FF6 /* Runs */ = {
 			isa = PBXGroup;
 			children = (
-				8382942118C78908003F1FF6 /* DRShowPathsTableViewCell.h */,
-				8382942218C78908003F1FF6 /* DRShowPathsTableViewCell.m */,
 				8382942318C78908003F1FF6 /* DRRunsViewController.h */,
 				8382942418C78908003F1FF6 /* DRRunsViewController.m */,
 				8382942518C78908003F1FF6 /* DRRunsViewController.xib */,
+				8382942118C78908003F1FF6 /* DRShowPathsTableViewCell.h */,
+				8382942218C78908003F1FF6 /* DRShowPathsTableViewCell.m */,
 				8382942618C78908003F1FF6 /* DRRunTableViewCell.h */,
 				8382942718C78908003F1FF6 /* DRRunTableViewCell.m */,
 				83FF2BBB18C8FA850011E79F /* DRRunViewController.h */,

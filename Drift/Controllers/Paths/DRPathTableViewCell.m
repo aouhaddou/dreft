@@ -43,7 +43,7 @@
         path.backgroundColor = self.contentView.backgroundColor;
         path.marksEndOfPrimaryLine = NO;
         path.primaryLineColor = [DRTheme base1];
-        path.lineWidth = 3;
+        path.lineWidth = 2;
         path.verticalAlignment = NSArrayRelativePointsVerticalAlignmentCenter;
         path.horizontalAlignment = NSArrayRelativePointsHorizontalAlignmentRight;
         [self.contentView addSubview:path];

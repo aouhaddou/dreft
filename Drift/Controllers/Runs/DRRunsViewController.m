@@ -13,6 +13,7 @@
 #import "UIView+Image.h"
 #import "UIColor+Extensions.h"
 #import "DRChoosePathViewController.h"
+#import "DRDistanceFormatter.h"
 
 static NSString *const kCoursesCellIdentifier = @"CoursesCell";
 static NSString *const kRunCellIdentifier = @"RunCell";
@@ -24,6 +25,7 @@ static CGFloat const headerHeight = 82.f;
 @property (nonatomic ,strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic ,strong) UIView *headerView;
 @property (nonatomic ,strong) UIButton *startButton;
+@property (nonatomic, strong) DRDistanceFormatter *distanceFormatter;
 
 @end
 
@@ -34,6 +36,10 @@ static CGFloat const headerHeight = 82.f;
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.fetchedResultsController = [DRRun MR_fetchAllSortedBy:@"created" ascending:NO withPredicate:nil groupBy:nil delegate:self];
+
+        self.distanceFormatter = [[DRDistanceFormatter alloc] init];
+        self.distanceFormatter.maximumFractionDigits = 0;
+        self.distanceFormatter.abbreviate = YES;
     }
     return self;
 }
@@ -143,7 +149,10 @@ static CGFloat const headerHeight = 82.f;
         }
     } else if ([cell isKindOfClass:[DRRunTableViewCell class]]) {
         DRRunTableViewCell *runCell = (DRRunTableViewCell *)cell;
-        runCell.textLabel.text = [NSString stringWithFormat:@"4 km"];
+        DRRun *run = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+        runCell.textLabel.text = [self.distanceFormatter stringFromDistance:run.averageDriftValue];
+        runCell.detailTextLabel.text = [self.distanceFormatter stringFromDistance:run.distanceValue];
+        [runCell setRun:run];
     }
 }
 
@@ -203,6 +212,14 @@ static CGFloat const headerHeight = 82.f;
         return 0;
     } else {
         return headerHeight;
+    }
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 0) {
+        return [DRShowPathsTableViewCell height];
+    } else {
+        return [DRRunTableViewCell height];
     }
 }
 

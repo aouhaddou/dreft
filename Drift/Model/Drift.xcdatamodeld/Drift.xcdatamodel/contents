@@ -6,7 +6,7 @@
         <attribute name="locations" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="placemark" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="uniqueID" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="runs" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="DRRun" inverseName="path" inverseEntity="DRRun" syncable="YES"/>
+        <relationship name="runs" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="DRRun" inverseName="path" inverseEntity="DRRun" syncable="YES"/>
         <userInfo>
             <entry key="mogenerator.customBaseClass" value="SSManagedObject"/>
         </userInfo>

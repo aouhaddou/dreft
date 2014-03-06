@@ -92,7 +92,14 @@
             run.startDate = self.startDate;
             run.endDate = end;
             run.drifts = self.driftHistory;
-            [context MR_saveToPersistentStoreAndWait];
+            [context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+                DLog(@"%@",success ? @"YES" : @"NO");
+                DLog(@"%@",[error userInfo]);
+                DLog(@"%f",run.averageDriftValue);
+                DLog(@"%f",run.distanceValue);
+                DLog(@"%lu",[DRRun MR_countOfEntities]);
+            }];
+
             //Show result controller
         } else {
             [self.navigationController popToRootViewControllerAnimated:YES];
