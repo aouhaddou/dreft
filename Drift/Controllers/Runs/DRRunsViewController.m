@@ -44,6 +44,40 @@ static CGFloat const headerHeight = 82.f;
     return self;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view.backgroundColor = [DRTheme backgroundColor];
+
+    self.navigationController.interactivePopGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
+
+    [self.tableView registerClass:[DRShowPathsTableViewCell class] forCellReuseIdentifier:kCoursesCellIdentifier];
+    [self.tableView registerClass:[DRRunTableViewCell class] forCellReuseIdentifier:kRunCellIdentifier];
+
+    [self.view addSubview:self.headerView];
+    UIView *placeholder = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.headerView.width, self.headerView.height-20)];
+    placeholder.backgroundColor = self.headerView.backgroundColor;
+    self.tableView.tableHeaderView = placeholder;
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.tableView) {
+        CGFloat yPos = -scrollView.contentOffsetY;
+        if (yPos > 0) {
+            yPos = 0;
+        }
+        self.headerView.y = yPos;
+    }
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 -(UIView *)headerView {
     if (_headerView == nil) {
         UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, 240.f)];
@@ -88,26 +122,6 @@ static CGFloat const headerHeight = 82.f;
 -(void)startButtonTapped:(id)sender {
     DRChoosePathViewController *choose = [[DRChoosePathViewController alloc] init];
     [self.navigationController pushViewController:choose animated:YES];
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.automaticallyAdjustsScrollViewInsets = NO;
-
-    self.navigationController.interactivePopGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
-
-    [self.tableView registerClass:[DRShowPathsTableViewCell class] forCellReuseIdentifier:kCoursesCellIdentifier];
-    [self.tableView registerClass:[DRRunTableViewCell class] forCellReuseIdentifier:kRunCellIdentifier];
-
-    self.tableView.tableHeaderView = self.headerView;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark table view
