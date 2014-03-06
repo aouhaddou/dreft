@@ -30,7 +30,9 @@
 
 @end
 
-@interface DRNewPathViewController ()
+@interface DRNewPathViewController () {
+    BOOL _longPressPinDropped;
+}
 
 @property (nonatomic, strong) NSMutableArray *locations;
 @property (nonatomic, strong) CLPlacemark *placemark;
@@ -65,6 +67,13 @@
 
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     [self.mapView addGestureRecognizer:longPressGesture];
+
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mapViewTapped:)];
+    [self.mapView addGestureRecognizer:tapGesture];
+}
+
+-(void)mapViewTapped:(UITapGestureRecognizer *)tap {
+    [self.textField resignFirstResponder];
 }
 
 -(void)viewDidLayoutSubviews {
@@ -74,8 +83,8 @@
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -83,13 +92,27 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
-- (void)keyboardDidShow:(NSNotification*)notification {
+- (void)keyboardWillShow:(NSNotification*)notification {
     CGRect keyboardFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    double duration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    int curve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+
+    [UIView beginAnimations:@"foo" context:nil];
+    [UIView setAnimationDuration:duration];
+    [UIView setAnimationCurve:curve];
     self.mapView.height = self.view.height-self.mapView.top-keyboardFrame.size.height;
+    [UIView commitAnimations];
 }
 
-- (void)keyboardDidHide:(NSNotification*)notification {
+- (void)keyboardWillHide:(NSNotification*)notification {
+    double duration = [[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    int curve = [[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue];
+
+    [UIView beginAnimations:@"foo" context:nil];
+    [UIView setAnimationDuration:duration];
+    [UIView setAnimationCurve:curve];
     self.mapView.height = self.view.height-self.mapView.top;
+    [UIView commitAnimations];
 }
 
 -(void)leftBarButtonItemPressed:(id)sender {
@@ -153,18 +176,19 @@
 #pragma mark map view
 
 -(void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender {
-    if (sender.state == UIGestureRecognizerStateEnded)
-    {
+    if (sender.state == UIGestureRecognizerStateEnded) {
         [self.textField resignFirstResponder];
-    }
-    else
-    {
-        CGPoint point = [sender locationInView:self.mapView];
-        CLLocationCoordinate2D locCoord = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
-        // Then all you have to do is create the annotation and add it to the map
-        CLLocation *loc = [[CLLocation alloc] initWithLatitude:locCoord.latitude longitude:locCoord.longitude];
-        [self addLocationToPath:loc];
-        [self updateMapView];
+        _longPressPinDropped = NO;
+    } else {
+        if (_longPressPinDropped == NO) {
+            CGPoint point = [sender locationInView:self.mapView];
+            CLLocationCoordinate2D locCoord = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
+            // Then all you have to do is create the annotation and add it to the map
+            CLLocation *loc = [[CLLocation alloc] initWithLatitude:locCoord.latitude longitude:locCoord.longitude];
+            [self addLocationToPath:loc];
+            [self updateMapView];
+            _longPressPinDropped = YES;
+        }
     }
 }
 

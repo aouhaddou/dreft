@@ -89,6 +89,7 @@
 		83FF2BB118C8A6C70011E79F /* DRNewPathViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FF2BAF18C8A6C70011E79F /* DRNewPathViewController.xib */; };
 		83FF2BB418C8AAA00011E79F /* DRTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF2BB318C8AAA00011E79F /* DRTextField.m */; };
 		83FF2BB718C8AF000011E79F /* DRGPSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF2BB618C8AF000011E79F /* DRGPSParser.m */; };
+		83FF2BBA18C8ECD10011E79F /* DRChoosePathViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF2BB918C8ECD10011E79F /* DRChoosePathViewController.m */; };
 		97FFDB5FF92D437ABAD935A2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6182D03EDE384F918A26C950 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -222,6 +223,8 @@
 		83FF2BB318C8AAA00011E79F /* DRTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRTextField.m; sourceTree = "<group>"; };
 		83FF2BB518C8AF000011E79F /* DRGPSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRGPSParser.h; sourceTree = "<group>"; };
 		83FF2BB618C8AF000011E79F /* DRGPSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRGPSParser.m; sourceTree = "<group>"; };
+		83FF2BB818C8ECD00011E79F /* DRChoosePathViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRChoosePathViewController.h; sourceTree = "<group>"; };
+		83FF2BB918C8ECD10011E79F /* DRChoosePathViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRChoosePathViewController.m; sourceTree = "<group>"; };
 		8EDFAB2D72D24F72BBCBD699 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -323,6 +326,8 @@
 				8382942F18C7893C003F1FF6 /* DRPathsViewController.xib */,
 				8382943218C78A0B003F1FF6 /* DRPathTableViewCell.h */,
 				8382943318C78A0B003F1FF6 /* DRPathTableViewCell.m */,
+				83FF2BB818C8ECD00011E79F /* DRChoosePathViewController.h */,
+				83FF2BB918C8ECD10011E79F /* DRChoosePathViewController.m */,
 				83FF2BAD18C8A6C70011E79F /* DRNewPathViewController.h */,
 				83FF2BAE18C8A6C70011E79F /* DRNewPathViewController.m */,
 				83FF2BAF18C8A6C70011E79F /* DRNewPathViewController.xib */,
@@ -739,6 +744,7 @@
 				8384DE8D18C544D7002B551B /* UIView+Image.m in Sources */,
 				8384DE6E18C53DB9002B551B /* UIColor+Hex.m in Sources */,
 				8384DE7718C54306002B551B /* UIColor+Extensions.m in Sources */,
+				83FF2BBA18C8ECD10011E79F /* DRChoosePathViewController.m in Sources */,
 				8384DE9518C621C9002B551B /* BROverlayView.m in Sources */,
 				83DCECC818C7BE7F004D0B34 /* DRDistanceFormatter.m in Sources */,
 				83DCECCB18C7C1DD004D0B34 /* DRAcousticFeedbackViewController.m in Sources */,

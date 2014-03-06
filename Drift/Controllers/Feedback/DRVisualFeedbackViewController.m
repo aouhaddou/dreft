@@ -48,7 +48,7 @@ const BOOL debug = NO;
     path.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:path];
     path.marksEndOfPrimaryLine = YES;
-    path.secondaryLocations = self.processor.path;
+    path.secondaryLocations = self.processor.locations;
     path.primaryLineColor = [DRTheme base4];
     path.secondaryLineColor = [DRTheme transparentBase4];
     path.lineWidth = 4;
@@ -104,14 +104,14 @@ const BOOL debug = NO;
 #pragma mark map for debugging
 
 -(void)drawPathsOnMapViewWithLocation:(CLLocation *)location leg:(NSInteger)leg {
-    NSUInteger count = self.processor.path.count;
+    NSUInteger count = self.processor.locations.count;
     CLLocationCoordinate2D path[count];
     for (NSInteger i = 0; i<count; i++) {
-        path[i] = [self.processor.path[i] coordinate];
+        path[i] = [self.processor.locations[i] coordinate];
     }
     MKPolyline *pathLine = [MKPolyline polylineWithCoordinates:path count:count];
 
-    CLLocation *perpLocation = [location dr_perpendicularLocationWithLocation:self.processor.path[leg] location:self.processor.path[leg+1]];
+    CLLocation *perpLocation = [location dr_perpendicularLocationWithLocation:self.processor.locations[leg] location:self.processor.locations[leg+1]];
     CLLocationCoordinate2D perpCoords[2];
     perpCoords[0] = location.coordinate;
     perpCoords[1] = perpLocation.coordinate;

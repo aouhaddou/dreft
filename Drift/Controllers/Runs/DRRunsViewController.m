@@ -12,10 +12,7 @@
 #import "DRRunTableViewCell.h"
 #import "UIView+Image.h"
 #import "UIColor+Extensions.h"
-#import "DRVisualFeedbackViewController.h"
-#import "DRAcousticFeedbackViewController.h"
-#import "DRDataProcessor.h"
-#import "DRPathsViewController.h"
+#import "DRChoosePathViewController.h"
 
 static NSString *const kCoursesCellIdentifier = @"CoursesCell";
 static NSString *const kRunCellIdentifier = @"RunCell";
@@ -83,19 +80,8 @@ static CGFloat const headerHeight = 82.f;
 }
 
 -(void)startButtonTapped:(id)sender {
-    CLLocation *lappisleft = [[CLLocation alloc] initWithLatitude:59.369667 longitude:18.057811];
-    CLLocation *lappisright = [[CLLocation alloc] initWithLatitude:59.368551 longitude:18.064678];
-
-    CLLocation *applehq = [[CLLocation alloc] initWithLatitude:37.3303991 longitude:-122.0323301];
-    CLLocation *appleschool = [[CLLocation alloc] initWithLatitude:37.3287548 longitude:-122.0278099];
-    CLLocation *appletree = [[CLLocation alloc] initWithLatitude:37.332519 longitude:-122.026464];
-
-    DRDataProcessor *proc = [[DRDataProcessor alloc] initWithPath:@[lappisleft,lappisright]];
-    DRDataProcessor *proc2 = [[DRDataProcessor alloc] initWithPath:@[applehq,appleschool,appletree]];
-
-    DRVisualFeedbackViewController *visual = [[DRVisualFeedbackViewController alloc] initWithDataProcessor:proc2];
-
-    [self.navigationController pushViewController:visual animated:YES];
+    DRChoosePathViewController *choose = [[DRChoosePathViewController alloc] init];
+    [self.navigationController pushViewController:choose animated:YES];
 }
 
 - (void)viewDidLoad

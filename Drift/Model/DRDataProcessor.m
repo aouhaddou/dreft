@@ -37,21 +37,21 @@
 
 @implementation DRDataProcessor
 
--(id)initWithPath:(NSArray *)path {
+-(id)initWithLocations:(NSArray *)locations {
     self = [super init];
     if (self) {
         BOOL onlyLocations = YES;
-        NSInteger count = [self.path count];
+        NSInteger count = [self.locations count];
 
         for (NSInteger i = 0; i<count; i++) {
-            id obj = path[i];
+            id obj = locations[i];
             if (![obj isKindOfClass:CLLocation.class]) {
                 onlyLocations = NO;
             }
         }
 
         if (onlyLocations) {
-            _path = path;
+            _locations = locations;
         }
     }
     return self;
@@ -73,13 +73,13 @@
 }
 
 -(DRDriftResult *)minimumDriftForLocation:(CLLocation *)location {
-    NSInteger count = [self.path count];
+    NSInteger count = [self.locations count];
     if (count == 0) {
         // No path, no distance
         return nil;
     } else if (count == 1) {
         //Only a point, distance to point
-        CLLocation *point = self.path.firstObject;
+        CLLocation *point = self.locations.firstObject;
         CGFloat distance = [location distanceFromLocation:point];
         DRDriftResult *result = [DRDriftResult new];
         result.drift = distance;
@@ -92,8 +92,8 @@
         CGFloat leg = -1;
 
         for (NSInteger i = 0; i<count-1; i++) {
-            CLLocation *point1 = self.path[i];
-            CLLocation *point2 = self.path[i+1];
+            CLLocation *point1 = self.locations[i];
+            CLLocation *point2 = self.locations[i+1];
 
             CLLocationDistance drift = [location dr_perpendicularDistanceWithLocation:point1 location:point2];
             if (drift<minDrift) {

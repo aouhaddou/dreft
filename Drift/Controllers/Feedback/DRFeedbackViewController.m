@@ -25,8 +25,8 @@
 {
     self = [super initWithNibName:@"DRFeedbackViewController" bundle:nil];
     if (self) {
-//        _processor = processor;
-//        _processor.delegate = self;
+        _processor = processor;
+        _processor.delegate = self;
     }
     return self;
 }

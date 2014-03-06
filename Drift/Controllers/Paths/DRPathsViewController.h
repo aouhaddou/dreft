@@ -13,5 +13,6 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet DRNavigationBar *navigationBar;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @end

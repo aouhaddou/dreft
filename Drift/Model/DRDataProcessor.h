@@ -28,9 +28,9 @@ typedef NS_ENUM(NSInteger, DRDriftDirection) {
 @interface DRDataProcessor : NSObject <DRLocationManagerDelegate>
 
 @property (nonatomic, assign) id<DRFeedbackModule>delegate;
-@property (nonatomic, strong, readonly) NSArray *path;
+@property (nonatomic, strong, readonly) NSArray *locations;
 
--(id)initWithPath:(NSArray *)path;
+-(id)initWithLocations:(NSArray *)locations;
 -(void)start;
 -(void)stop;
 

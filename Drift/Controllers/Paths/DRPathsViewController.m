@@ -20,7 +20,6 @@ static NSString *const kPathCellIdentifier = @"kPathCell";
 
 @interface DRPathsViewController ()
 
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) DRDistanceFormatter *distanceFormatter;
 
 @end
@@ -52,10 +51,6 @@ static NSString *const kPathCellIdentifier = @"kPathCell";
     self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[BRAddIcon imageWithColor:[DRTheme base4]] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemPressed:)];
 
     [self.tableView registerClass:[DRPathTableViewCell class] forCellReuseIdentifier:kPathCellIdentifier];
-}
-
--(void)setTitle:(NSString *)title {
-    self.navigationBar.topItem.title = [title uppercaseString];
 }
 
 -(void)leftBarButtonItemPressed:(id)sender {
@@ -93,6 +88,10 @@ static NSString *const kPathCellIdentifier = @"kPathCell";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return [DRPathTableViewCell height];
+}
+
+-(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
 }
 
 @end
