@@ -85,6 +85,10 @@
 		83DCECC818C7BE7F004D0B34 /* DRDistanceFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DCECC718C7BE7F004D0B34 /* DRDistanceFormatter.m */; };
 		83DCECCB18C7C1DD004D0B34 /* DRAcousticFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DCECCA18C7C1DD004D0B34 /* DRAcousticFeedbackViewController.m */; };
 		83DCECCE18C7CD6F004D0B34 /* DRVariableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DCECCD18C7CD6F004D0B34 /* DRVariableManager.m */; };
+		83FF2BB018C8A6C70011E79F /* DRNewPathViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF2BAE18C8A6C70011E79F /* DRNewPathViewController.m */; };
+		83FF2BB118C8A6C70011E79F /* DRNewPathViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FF2BAF18C8A6C70011E79F /* DRNewPathViewController.xib */; };
+		83FF2BB418C8AAA00011E79F /* DRTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF2BB318C8AAA00011E79F /* DRTextField.m */; };
+		83FF2BB718C8AF000011E79F /* DRGPSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF2BB618C8AF000011E79F /* DRGPSParser.m */; };
 		97FFDB5FF92D437ABAD935A2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6182D03EDE384F918A26C950 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -211,6 +215,13 @@
 		83DCECCA18C7C1DD004D0B34 /* DRAcousticFeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRAcousticFeedbackViewController.m; sourceTree = "<group>"; };
 		83DCECCC18C7CD6F004D0B34 /* DRVariableManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRVariableManager.h; sourceTree = "<group>"; };
 		83DCECCD18C7CD6F004D0B34 /* DRVariableManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRVariableManager.m; sourceTree = "<group>"; };
+		83FF2BAD18C8A6C70011E79F /* DRNewPathViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRNewPathViewController.h; sourceTree = "<group>"; };
+		83FF2BAE18C8A6C70011E79F /* DRNewPathViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRNewPathViewController.m; sourceTree = "<group>"; };
+		83FF2BAF18C8A6C70011E79F /* DRNewPathViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DRNewPathViewController.xib; sourceTree = "<group>"; };
+		83FF2BB218C8AAA00011E79F /* DRTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRTextField.h; sourceTree = "<group>"; };
+		83FF2BB318C8AAA00011E79F /* DRTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRTextField.m; sourceTree = "<group>"; };
+		83FF2BB518C8AF000011E79F /* DRGPSParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRGPSParser.h; sourceTree = "<group>"; };
+		83FF2BB618C8AF000011E79F /* DRGPSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRGPSParser.m; sourceTree = "<group>"; };
 		8EDFAB2D72D24F72BBCBD699 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -312,6 +323,9 @@
 				8382942F18C7893C003F1FF6 /* DRPathsViewController.xib */,
 				8382943218C78A0B003F1FF6 /* DRPathTableViewCell.h */,
 				8382943318C78A0B003F1FF6 /* DRPathTableViewCell.m */,
+				83FF2BAD18C8A6C70011E79F /* DRNewPathViewController.h */,
+				83FF2BAE18C8A6C70011E79F /* DRNewPathViewController.m */,
+				83FF2BAF18C8A6C70011E79F /* DRNewPathViewController.xib */,
 			);
 			path = Paths;
 			sourceTree = "<group>";
@@ -412,6 +426,10 @@
 				8382941E18C77A24003F1FF6 /* NSString+UniqueIdentifier.m */,
 				83DCECC618C7BE7F004D0B34 /* DRDistanceFormatter.h */,
 				83DCECC718C7BE7F004D0B34 /* DRDistanceFormatter.m */,
+				83FF2BB218C8AAA00011E79F /* DRTextField.h */,
+				83FF2BB318C8AAA00011E79F /* DRTextField.m */,
+				83FF2BB518C8AF000011E79F /* DRGPSParser.h */,
+				83FF2BB618C8AF000011E79F /* DRGPSParser.m */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -583,6 +601,7 @@
 				8382941318C7729D003F1FF6 /* OpenSans-Bold.ttf in Resources */,
 				8384DEA218C62910002B551B /* OpenSans-Semibold.ttf in Resources */,
 				8384DEAB18C6305A002B551B /* DRFeedbackViewController.xib in Resources */,
+				83FF2BB118C8A6C70011E79F /* DRNewPathViewController.xib in Resources */,
 				83B988B518B256F2009AA6E7 /* InfoPlist.strings in Resources */,
 				8382941918C77653003F1FF6 /* Play@2x.png in Resources */,
 				8382942A18C78908003F1FF6 /* DRRunsViewController.xib in Resources */,
@@ -695,6 +714,7 @@
 				8384DE9C18C624E2002B551B /* CALayer+KeyframeAnimations.m in Sources */,
 				8382940B18C769B6003F1FF6 /* DRTableViewCell.m in Sources */,
 				838D12CF18BCD41200675187 /* NSArray+DRExtensions.m in Sources */,
+				83FF2BB718C8AF000011E79F /* DRGPSParser.m in Sources */,
 				83B988B718B256F2009AA6E7 /* main.m in Sources */,
 				8392239B18BE5371003929A0 /* DRDataProcessor.m in Sources */,
 				8376E60818B7A464005CFB78 /* _DRRun.m in Sources */,
@@ -709,7 +729,9 @@
 				8384DE8618C544B0002B551B /* BRBackArrow.m in Sources */,
 				8384DE8918C544B0002B551B /* BRDisclosureIcon.m in Sources */,
 				8392239818BE51E6003929A0 /* DRLocationManager.m in Sources */,
+				83FF2BB418C8AAA00011E79F /* DRTextField.m in Sources */,
 				8384DE9F18C62514002B551B /* UIImage+ImageEffects.m in Sources */,
+				83FF2BB018C8A6C70011E79F /* DRNewPathViewController.m in Sources */,
 				8384DEB118C63399002B551B /* NSDate+Utilities.m in Sources */,
 				8384DE8A18C544B0002B551B /* BRDrawing.m in Sources */,
 				838D12CA18BCD2AB00675187 /* CLLocation+DRExtensions.m in Sources */,

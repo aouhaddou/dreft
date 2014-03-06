@@ -22,6 +22,8 @@
 {
     self = [super initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.showDisclosureIcon = NO;
+
         self.textLabel.font = [DRTheme semiboldFontWithSize:18.f];
         self.textLabel.textColor = [DRTheme base1];
         self.textLabel.backgroundColor = self.contentView.backgroundColor;
@@ -68,7 +70,7 @@
     CGFloat topMargin = 15;
 
     CGFloat pathWidth = 80;
-    self.pathView.frame = CGRectMake(self.contentView.width-kSideMargin-pathWidth-14, kSideMargin, pathWidth, [DRPathTableViewCell height]-2*kSideMargin);
+    self.pathView.frame = CGRectMake(self.contentView.width-kSideMargin-pathWidth, kSideMargin, pathWidth, [DRPathTableViewCell height]-2*kSideMargin);
 
     self.textLabel.x = kSideMargin;
     self.textLabel.y = topMargin;

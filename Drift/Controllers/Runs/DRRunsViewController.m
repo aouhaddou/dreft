@@ -93,7 +93,7 @@ static CGFloat const headerHeight = 82.f;
     DRDataProcessor *proc = [[DRDataProcessor alloc] initWithPath:@[lappisleft,lappisright]];
     DRDataProcessor *proc2 = [[DRDataProcessor alloc] initWithPath:@[applehq,appleschool,appletree]];
 
-    DRAcousticFeedbackViewController *visual = [[DRAcousticFeedbackViewController alloc] initWithDataProcessor:proc];
+    DRVisualFeedbackViewController *visual = [[DRVisualFeedbackViewController alloc] initWithDataProcessor:proc2];
 
     [self.navigationController pushViewController:visual animated:YES];
 }
@@ -103,6 +103,8 @@ static CGFloat const headerHeight = 82.f;
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.automaticallyAdjustsScrollViewInsets = NO;
+
+    self.navigationController.interactivePopGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
 
     [self.tableView registerClass:[DRShowPathsTableViewCell class] forCellReuseIdentifier:kCoursesCellIdentifier];
     [self.tableView registerClass:[DRRunTableViewCell class] forCellReuseIdentifier:kRunCellIdentifier];

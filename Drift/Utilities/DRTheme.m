@@ -20,8 +20,8 @@
     navigationBar.barTintColor = [DRTheme backgroundColor];
     navigationBar.tintColor = [DRTheme base4];
 
-//    UIBarButtonItem *barButton = [UIBarButtonItem appearance];
-//    [barButton setBackgroundVerticalPositionAdjustment:1 forBarMetrics:UIBarMetricsDefault];
+    UIBarButtonItem *barButton = [UIBarButtonItem appearance];
+    [barButton setBackgroundVerticalPositionAdjustment:1 forBarMetrics:UIBarMetricsDefault];
 
     UITableView *tableView = [UITableView appearance];
     tableView.backgroundColor = [DRTheme base4];

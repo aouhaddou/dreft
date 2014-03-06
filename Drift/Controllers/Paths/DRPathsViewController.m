@@ -11,6 +11,7 @@
 #import "DRPathTableViewCell.h"
 #import "BRBackArrow.h"
 #import "BRAddIcon.h"
+#import "DRNewPathViewController.h"
 
 @import CoreLocation;
 
@@ -51,7 +52,8 @@ static NSString *const kPathCellIdentifier = @"kPathCell";
 }
 
 -(void)rightBarButtonItemPressed:(id)sender {
-    //
+    DRNewPathViewController *new = [[DRNewPathViewController alloc] init];
+    [self.navigationController pushViewController:new animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
