@@ -12,6 +12,7 @@
 #import "BRBackArrow.h"
 #import "BRAddIcon.h"
 #import "DRNewPathViewController.h"
+#import "DRDistanceFormatter.h"
 
 @import CoreLocation;
 
@@ -20,6 +21,8 @@ static NSString *const kPathCellIdentifier = @"kPathCell";
 @interface DRPathsViewController ()
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) DRDistanceFormatter *distanceFormatter;
+
 @end
 
 @implementation DRPathsViewController
@@ -29,6 +32,10 @@ static NSString *const kPathCellIdentifier = @"kPathCell";
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.fetchedResultsController = [DRPath MR_fetchAllSortedBy:@"created" ascending:NO withPredicate:nil groupBy:nil delegate:nil];
+
+        self.distanceFormatter = [[DRDistanceFormatter alloc] init];
+        self.distanceFormatter.maximumFractionDigits = 0;
+        self.distanceFormatter.abbreviate = YES;
     }
     return self;
 }
@@ -69,16 +76,14 @@ static NSString *const kPathCellIdentifier = @"kPathCell";
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.fetchedResultsController.fetchedObjects count]+3;
+    return [self.fetchedResultsController.fetchedObjects count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     DRPathTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPathCellIdentifier forIndexPath:indexPath];
-//    cell.path = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    CLLocation *applehq = [[CLLocation alloc] initWithLatitude:37.3303991 longitude:-122.0323301];
-    CLLocation *appleschool = [[CLLocation alloc] initWithLatitude:37.3287548 longitude:-122.0278099];
-    CLLocation *appletree = [[CLLocation alloc] initWithLatitude:37.332519 longitude:-122.026464];
-    cell.path = @[applehq,appleschool,appletree];
+    DRPath *path = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [cell setPath:path];
+    cell.lengthLabel.text = [self.distanceFormatter stringFromDistance:path.distanceValue];
     return cell;
 }
 

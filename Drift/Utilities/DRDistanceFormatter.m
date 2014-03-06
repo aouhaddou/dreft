@@ -40,14 +40,26 @@
 }
 
 -(NSString *)stringFromDistance:(CLLocationDistance)distance {
-    NSString *number = [self.numberFormatter stringFromNumber:@(distance)];
+    CGFloat transformed = distance;
+    NSString *abbrUnit = @"m";
+    NSString *singleUnit = @"meter";
+    NSString *unit = @"meters";
+
+    if (distance > 5999) {
+        transformed = distance/1000.f;
+        abbrUnit = @"km";
+        singleUnit = @"kilometer";
+        unit = @"kilometers";
+    }
+    
+    NSString *number = [self.numberFormatter stringFromNumber:@(transformed)];
     if (self.abbreviate) {
-        return [NSString stringWithFormat:@"%@ m",number];
+        return [NSString stringWithFormat:@"%@ %@",number,abbrUnit];
     } else {
         if (distance == 1) {
-            return [NSString stringWithFormat:@"%@ meter",number];
+            return [NSString stringWithFormat:@"%@ %@",number,singleUnit];
         } else {
-            return [NSString stringWithFormat:@"%@ meters",number];
+            return [NSString stringWithFormat:@"%@ %@",number,unit];
         }
     }
 }

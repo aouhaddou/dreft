@@ -10,6 +10,7 @@
 #import "BRBackArrow.h"
 #import "BRCheckmarkIcon.h"
 #import "DRGPSParser.h"
+#import "DRModel.h"
 
 @interface DRPathCheckpointAnnotation : NSObject <MKAnnotation>
 @end
@@ -32,6 +33,7 @@
 @interface DRNewPathViewController ()
 
 @property (nonatomic, strong) NSMutableArray *locations;
+@property (nonatomic, strong) CLPlacemark *placemark;
 
 @end
 
@@ -94,13 +96,27 @@
 }
 
 -(void)rightBarButtonItemPressed:(id)sender {
-    //
+    if ([self.locations count] > 1) {
+        NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
+        DRPath *path = [DRPath MR_createInContext:context];
+        path.locations = self.locations;
+        path.placemark = self.placemark;
+        [context MR_saveToPersistentStoreAndWait];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)reverseGeocodeLocation:(CLLocation *)location {
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray *placemarks, NSError *error) {
+        self.placemark = [placemarks firstObject];
+    }];
 }
 
 #pragma mark text field delegate
@@ -122,6 +138,9 @@
     if (location != nil && CLLocationCoordinate2DIsValid(location.coordinate)) {
         if (self.locations == nil) {
             self.locations = [NSMutableArray array];
+        }
+        if ([self.locations count] == 0) {
+            [self reverseGeocodeLocation:location];
         }
         [self.locations addObject:location];
     }

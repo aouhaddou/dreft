@@ -11,8 +11,8 @@
 
 @interface DRPathTableViewCell : DRTableViewCell
 
-//@property (nonatomic, strong) DRPath *path;
+@property (nonatomic, strong) UILabel *lengthLabel;
 
--(void)setPath:(NSArray *)path;
+-(void)setPath:(DRPath *)path;
 
 @end

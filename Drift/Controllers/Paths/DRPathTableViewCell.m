@@ -8,11 +8,11 @@
 
 #import "DRPathTableViewCell.h"
 #import "DRPathView.h"
+@import CoreLocation;
 
 @interface DRPathTableViewCell()
 
 @property (nonatomic, strong) DRPathView *pathView;
-@property (nonatomic, strong) UILabel *lengthLabel;
 
 @end
 
@@ -56,12 +56,33 @@
     return 120.f;
 }
 
--(void)setPath:(NSArray *)path {
-//    _path = path;
-    self.textLabel.text = @"Path";
-    self.detailTextLabel.text = @"Path";
-    self.lengthLabel.text = @"Path";
-    self.pathView.primaryLocations = path;
+-(void)setPath:(DRPath *)path {
+    CLPlacemark *placemark = path.placemark;
+    //    DLog(@"Street: %@",self.placemark.thoroughfare);
+    //    DLog(@"Bezirk: %@",self.placemark.subLocality);
+    //    DLog(@"City: %@",self.placemark.locality);
+    //    DLog(@"State: %@",self.placemark.administrativeArea);
+    //    DLog(@"Country: %@",self.placemark.country);
+
+    if (placemark.thoroughfare != nil && placemark.locality != nil) {
+        self.textLabel.text = placemark.thoroughfare;
+        self.detailTextLabel.text = placemark.locality;
+        self.detailTextLabel.textColor = [DRTheme base2];
+    } else if (placemark.subLocality != nil && placemark.locality != nil) {
+        self.textLabel.text = placemark.subLocality;
+        self.detailTextLabel.text = placemark.locality;
+        self.detailTextLabel.textColor = [DRTheme base2];
+    } else if (placemark.locality != nil && placemark.country != nil) {
+        self.textLabel.text = placemark.administrativeArea;
+        self.detailTextLabel.text = placemark.country;
+        self.detailTextLabel.textColor = [DRTheme base2];
+    } else {
+        CLLocation *loc = [path.locations firstObject];
+        self.textLabel.text = [NSString stringWithFormat:@"Lat: %.6f°",loc.coordinate.latitude];
+        self.detailTextLabel.text = [NSString stringWithFormat:@"Lon: %.6f°",loc.coordinate.longitude];
+        self.detailTextLabel.textColor = self.textLabel.textColor;
+    }
+    self.pathView.primaryLocations = path.locations;
 }
 
 -(void)layoutSubviews {
