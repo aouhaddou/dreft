@@ -28,7 +28,6 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change
                        context:(void *)context {
     if ([keyPath isEqualToString:@"drifts"]) {
-        //        NSArray *oldLocations = [change objectForKey:NSKeyValueChangeOldKey];
         NSArray *newDrifts = [change objectForKey:NSKeyValueChangeNewKey];
         [self handleDriftsChange:newDrifts];
     }

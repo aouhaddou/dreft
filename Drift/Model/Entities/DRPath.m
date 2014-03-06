@@ -27,7 +27,6 @@
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change
                        context:(void *)context {
     if ([keyPath isEqualToString:@"locations"]) {
-//        NSArray *oldLocations = [change objectForKey:NSKeyValueChangeOldKey];
         NSArray *newLocations = [change objectForKey:NSKeyValueChangeNewKey];
         [self handleLocationsChange:newLocations];
     }

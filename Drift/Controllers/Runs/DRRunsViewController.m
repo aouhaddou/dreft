@@ -33,7 +33,7 @@ static CGFloat const headerHeight = 82.f;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.fetchedResultsController = [DRRun MR_fetchAllSortedBy:@"created" ascending:NO withPredicate:nil groupBy:nil delegate:nil];
+        self.fetchedResultsController = [DRRun MR_fetchAllSortedBy:@"created" ascending:NO withPredicate:nil groupBy:nil delegate:self];
     }
     return self;
 }
@@ -119,21 +119,31 @@ static CGFloat const headerHeight = 82.f;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *identifier;
     if (indexPath.section == 0) {
-        DRShowPathsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kCoursesCellIdentifier forIndexPath:indexPath];
+        identifier = kCoursesCellIdentifier;
+    } else {
+        identifier = kRunCellIdentifier;
+    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    [self configureCell:cell atIndexPath:indexPath];
+    return cell;
+}
+
+-(void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    if ([cell isKindOfClass:[DRShowPathsTableViewCell class]]) {
+        DRShowPathsTableViewCell *pathCell = (DRShowPathsTableViewCell *)cell;
         NSInteger count = [DRPath MR_countOfEntities];
         if (count == 0) {
-            cell.textLabel.text = [NSLocalizedString(@"Add a course", nil) uppercaseString];
+            pathCell.textLabel.text = [NSLocalizedString(@"Add a course", nil) uppercaseString];
         } else if (count == 1) {
-            cell.textLabel.text = [[NSString stringWithFormat:NSLocalizedString(@"View %li course", nil),count] uppercaseString];
+            pathCell.textLabel.text = [[NSString stringWithFormat:NSLocalizedString(@"View %li course", nil),count] uppercaseString];
         } else {
-            cell.textLabel.text = [[NSString stringWithFormat:NSLocalizedString(@"View %li courses", nil),count] uppercaseString];
+            pathCell.textLabel.text = [[NSString stringWithFormat:NSLocalizedString(@"View %li courses", nil),count] uppercaseString];
         }
-        return cell;
-    } else {
-        DRRunTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kRunCellIdentifier forIndexPath:indexPath];
-        cell.textLabel.text = [NSString stringWithFormat:@"4 km"];
-        return cell;
+    } else if ([cell isKindOfClass:[DRRunTableViewCell class]]) {
+        DRRunTableViewCell *runCell = (DRRunTableViewCell *)cell;
+        runCell.textLabel.text = [NSString stringWithFormat:@"4 km"];
     }
 }
 
@@ -202,6 +212,62 @@ static CGFloat const headerHeight = 82.f;
         [self.navigationController pushViewController:paths animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark fetched results controller
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller is about to start sending change notifications, so prepare the table view for updates.
+    [self.tableView beginUpdates];
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+
+    UITableView *tableView = self.tableView;
+
+    switch(type) {
+
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:[NSArray
+                                               arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id )sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+
+    switch(type) {
+
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    // The fetch controller has sent all current change notifications, so tell the table view to process all updates.
+    [self.tableView endUpdates];
 }
 
 @end

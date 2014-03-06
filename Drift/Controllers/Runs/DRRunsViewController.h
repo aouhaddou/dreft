@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DRRunsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface DRRunsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

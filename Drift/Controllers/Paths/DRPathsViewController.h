@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "DRNavigationBar.h"
 
-@interface DRPathsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface DRPathsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet DRNavigationBar *navigationBar;

@@ -90,6 +90,8 @@
 		83FF2BB418C8AAA00011E79F /* DRTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF2BB318C8AAA00011E79F /* DRTextField.m */; };
 		83FF2BB718C8AF000011E79F /* DRGPSParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF2BB618C8AF000011E79F /* DRGPSParser.m */; };
 		83FF2BBA18C8ECD10011E79F /* DRChoosePathViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF2BB918C8ECD10011E79F /* DRChoosePathViewController.m */; };
+		83FF2BBE18C8FA850011E79F /* DRRunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83FF2BBC18C8FA850011E79F /* DRRunViewController.m */; };
+		83FF2BBF18C8FA850011E79F /* DRRunViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83FF2BBD18C8FA850011E79F /* DRRunViewController.xib */; };
 		97FFDB5FF92D437ABAD935A2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6182D03EDE384F918A26C950 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -225,6 +227,9 @@
 		83FF2BB618C8AF000011E79F /* DRGPSParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRGPSParser.m; sourceTree = "<group>"; };
 		83FF2BB818C8ECD00011E79F /* DRChoosePathViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRChoosePathViewController.h; sourceTree = "<group>"; };
 		83FF2BB918C8ECD10011E79F /* DRChoosePathViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRChoosePathViewController.m; sourceTree = "<group>"; };
+		83FF2BBB18C8FA850011E79F /* DRRunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRRunViewController.h; sourceTree = "<group>"; };
+		83FF2BBC18C8FA850011E79F /* DRRunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRRunViewController.m; sourceTree = "<group>"; };
+		83FF2BBD18C8FA850011E79F /* DRRunViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DRRunViewController.xib; sourceTree = "<group>"; };
 		8EDFAB2D72D24F72BBCBD699 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -314,6 +319,9 @@
 				8382942518C78908003F1FF6 /* DRRunsViewController.xib */,
 				8382942618C78908003F1FF6 /* DRRunTableViewCell.h */,
 				8382942718C78908003F1FF6 /* DRRunTableViewCell.m */,
+				83FF2BBB18C8FA850011E79F /* DRRunViewController.h */,
+				83FF2BBC18C8FA850011E79F /* DRRunViewController.m */,
+				83FF2BBD18C8FA850011E79F /* DRRunViewController.xib */,
 			);
 			path = Runs;
 			sourceTree = "<group>";
@@ -609,6 +617,7 @@
 				83FF2BB118C8A6C70011E79F /* DRNewPathViewController.xib in Resources */,
 				83B988B518B256F2009AA6E7 /* InfoPlist.strings in Resources */,
 				8382941918C77653003F1FF6 /* Play@2x.png in Resources */,
+				83FF2BBF18C8FA850011E79F /* DRRunViewController.xib in Resources */,
 				8382942A18C78908003F1FF6 /* DRRunsViewController.xib in Resources */,
 				83B988C018B256F2009AA6E7 /* Images.xcassets in Resources */,
 				8382943118C7893C003F1FF6 /* DRPathsViewController.xib in Resources */,
@@ -716,6 +725,7 @@
 				8384DEB718C63B85002B551B /* DRPathView.m in Sources */,
 				8376E60618B7A464005CFB78 /* DRRun.m in Sources */,
 				83B988BB18B256F2009AA6E7 /* DRAppDelegate.m in Sources */,
+				83FF2BBE18C8FA850011E79F /* DRRunViewController.m in Sources */,
 				8384DE9C18C624E2002B551B /* CALayer+KeyframeAnimations.m in Sources */,
 				8382940B18C769B6003F1FF6 /* DRTableViewCell.m in Sources */,
 				838D12CF18BCD41200675187 /* NSArray+DRExtensions.m in Sources */,
