@@ -132,7 +132,7 @@
 -(void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateEnded)
     {
-        //
+        [self.textField resignFirstResponder];
     }
     else
     {
