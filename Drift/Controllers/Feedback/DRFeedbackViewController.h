@@ -17,6 +17,7 @@
 
 @property (strong, nonatomic) IBOutlet DRNavigationBar *navigationBar;
 @property (strong, nonatomic) BRButton *bottomButton;
+@property (strong, nonatomic) NSString *pathID;
 
 -(void)start;
 -(void)cancelRun;

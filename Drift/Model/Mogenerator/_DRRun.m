@@ -7,8 +7,8 @@ const struct DRRunAttributes DRRunAttributes = {
 	.averageDrift = @"averageDrift",
 	.created = @"created",
 	.distance = @"distance",
+	.drifts = @"drifts",
 	.endDate = @"endDate",
-	.locations = @"locations",
 	.startDate = @"startDate",
 	.uniqueID = @"uniqueID",
 };
@@ -122,14 +122,14 @@ const struct DRRunFetchedProperties DRRunFetchedProperties = {
 
 
 
+@dynamic drifts;
+
+
+
+
+
+
 @dynamic endDate;
-
-
-
-
-
-
-@dynamic locations;
 
 
 

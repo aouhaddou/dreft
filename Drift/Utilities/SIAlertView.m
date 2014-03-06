@@ -79,7 +79,6 @@
     [self setup];
     [super layoutSubviews];
     [self validateLayout];
-    NSLog(@"%@",NSStringFromCGRect(self.frame));
     [super showWithCompletion:completion];
 }
 

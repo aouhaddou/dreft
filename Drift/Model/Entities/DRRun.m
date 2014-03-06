@@ -1,4 +1,5 @@
 #import "DRRun.h"
+#import "DRDataProcessor.h"
 @import CoreLocation;
 
 @interface DRRun ()
@@ -12,47 +13,52 @@
 
 - (void)awakeFromInsert {
     [super awakeFromInsert];
-    [self observeLocations];
+    [self observeDrifts];
 }
 
 - (void)awakeFromFetch {
     [super awakeFromFetch];
-    [self observeLocations];
+    [self observeDrifts];
 }
 
-- (void)observeLocations {
-    [self addObserver:self forKeyPath:@"locations" options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew) context:NULL];
+- (void)observeDrifts {
+    [self addObserver:self forKeyPath:@"drifts" options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew) context:NULL];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change
                        context:(void *)context {
-    if ([keyPath isEqualToString:@"locations"]) {
+    if ([keyPath isEqualToString:@"drifts"]) {
         //        NSArray *oldLocations = [change objectForKey:NSKeyValueChangeOldKey];
-        NSArray *newLocations = [change objectForKey:NSKeyValueChangeNewKey];
-        [self handleLocationsChange:newLocations];
+        NSArray *newDrifts = [change objectForKey:NSKeyValueChangeNewKey];
+        [self handleDriftsChange:newDrifts];
     }
 }
 
 - (void)willTurnIntoFault {
     [super willTurnIntoFault];
-    [self removeObserver:self forKeyPath:@"locations"];
+    [self removeObserver:self forKeyPath:@"drifts"];
 }
 
 #pragma mark Photo
 
-- (void)handleLocationsChange:(NSArray *)newLocations {
+- (void)handleDriftsChange:(NSArray *)newDrifts {
     CGFloat distance = 0;
-    NSInteger count = [newLocations count];
+    CGFloat averageDrift = 0;
+    NSInteger count = [newDrifts count];
     if (count > 1) {
+        DRDriftResult *first = newDrifts[0];
+        CGFloat driftTotal = first.drift;
         for (NSInteger i = 1; i<count; i++) {
-            CLLocation *loc1 = newLocations[i-1];
-            CLLocation *loc2 = newLocations[i];
-            CGFloat leg = [loc1 distanceFromLocation:loc2];
+            DRDriftResult *res1 = newDrifts[i-1];
+            DRDriftResult *res2 = newDrifts[i];
+            CGFloat leg = [res1.location distanceFromLocation:res2.location];
             distance += fabs(leg);
+            driftTotal += res2.drift;
         }
+        averageDrift = driftTotal/count;
     }
     self.distanceValue = distance;
-    //Average Drift
+    self.averageDriftValue = averageDrift;
 }
 
 @end

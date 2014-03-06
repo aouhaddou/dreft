@@ -42,6 +42,7 @@
     DRPath *path = [self.fetchedResultsController objectAtIndexPath:indexPath];
     DRDataProcessor *proc = [[DRDataProcessor alloc] initWithLocations:path.locations];
     DRVisualFeedbackViewController *vis = [[DRVisualFeedbackViewController alloc] initWithDataProcessor:proc];
+    vis.pathID = path.uniqueID;
     [self.navigationController pushViewController:vis animated:YES];
 }
 

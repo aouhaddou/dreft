@@ -63,7 +63,7 @@
     self.navigationBar.topItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[BRCheckmarkIcon imageWithColor:[DRTheme base4]] style:UIBarButtonItemStylePlain target:self action:@selector(rightBarButtonItemPressed:)];
     self.navigationBar.topItem.rightBarButtonItem.enabled = NO;
 
-    self.textField.placeholder = [NSLocalizedString(@"Enter Coordinate", nil) uppercaseString];
+    self.textField.placeholder = [NSLocalizedString(@"Enter Coordinates", nil) uppercaseString];
 
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     [self.mapView addGestureRecognizer:longPressGesture];

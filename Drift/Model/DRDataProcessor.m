@@ -33,6 +33,27 @@
     _direction = direction;
 }
 
+- (id)initWithCoder:(NSCoder *)decoder {
+    self = [super init];
+    if (!self) {
+        return nil;
+    }
+
+    self.drift = [decoder decodeDoubleForKey:@"drift"];
+    self.location = [decoder decodeObjectForKey:@"location"];
+    self.leg = [decoder decodeIntegerForKey:@"leg"];
+    self.direction = [decoder decodeIntegerForKey:@"direction"];
+
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeDouble:self.drift forKey:@"drift"];
+    [encoder encodeObject:self.location forKey:@"location"];
+    [encoder encodeInteger:self.leg forKey:@"leg"];
+    [encoder encodeInteger:self.direction forKey:@"direction"];
+}
+
 @end
 
 @implementation DRDataProcessor

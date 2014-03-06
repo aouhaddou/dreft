@@ -8,8 +8,8 @@ extern const struct DRRunAttributes {
 	__unsafe_unretained NSString *averageDrift;
 	__unsafe_unretained NSString *created;
 	__unsafe_unretained NSString *distance;
+	__unsafe_unretained NSString *drifts;
 	__unsafe_unretained NSString *endDate;
-	__unsafe_unretained NSString *locations;
 	__unsafe_unretained NSString *startDate;
 	__unsafe_unretained NSString *uniqueID;
 } DRRunAttributes;
@@ -26,8 +26,8 @@ extern const struct DRRunFetchedProperties {
 
 
 
-
 @class NSObject;
+
 
 
 
@@ -82,21 +82,21 @@ extern const struct DRRunFetchedProperties {
 
 
 
+@property (nonatomic, strong) id drifts;
+
+
+
+//- (BOOL)validateDrifts:(id*)value_ error:(NSError**)error_;
+
+
+
+
+
 @property (nonatomic, strong) NSDate* endDate;
 
 
 
 //- (BOOL)validateEndDate:(id*)value_ error:(NSError**)error_;
-
-
-
-
-
-@property (nonatomic, strong) id locations;
-
-
-
-//- (BOOL)validateLocations:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -163,14 +163,14 @@ extern const struct DRRunFetchedProperties {
 
 
 
+- (id)primitiveDrifts;
+- (void)setPrimitiveDrifts:(id)value;
+
+
+
+
 - (NSDate*)primitiveEndDate;
 - (void)setPrimitiveEndDate:(NSDate*)value;
-
-
-
-
-- (id)primitiveLocations;
-- (void)setPrimitiveLocations:(id)value;
 
 
 

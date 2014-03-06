@@ -27,11 +27,11 @@
 
 + (id)objectWithID:(NSString *)objectID inContext:(NSManagedObjectContext *)context {
     if (objectID == nil || [objectID isEqualToString:@""] || context == nil) {
-        DLog(@"Invalid attributes for objectID fetch");
+        DLog(@"Invalid attributes for uniqueID fetch");
         return nil;
     }
 
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"objectID LIKE %@", objectID];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"uniqueID LIKE %@", objectID];
     return [self MR_findFirstWithPredicate:pred inContext:context];
 }
 
@@ -41,11 +41,11 @@
 
 + (NSArray *)objectsWithIDs:(NSSet *)objectIDs inContext:(NSManagedObjectContext *)context {
     if (objectIDs == nil || [objectIDs count] == 0 || context == nil) {
-        DLog(@"Invalid attributes for objectIDs fetch");
+        DLog(@"Invalid attributes for uniqueID fetch");
         return nil;
     }
 
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"objectID IN %@", objectIDs];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"uniqueID IN %@", objectIDs];
     return [self MR_findAllWithPredicate:pred inContext:context];
 }
 

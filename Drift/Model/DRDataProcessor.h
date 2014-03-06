@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, DRDriftDirection) {
     DRDriftDirectionRight
 };
 
-@interface DRDriftResult : NSObject
+@interface DRDriftResult : NSObject <NSCoding>
 
 @property (nonatomic, assign, readonly) CLLocationDistance drift;
 @property (nonatomic, strong, readonly) CLLocation *location;

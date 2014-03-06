@@ -10,11 +10,14 @@
 #import "SIAlertView.h"
 #import "DRGPSStrengthView.h"
 #import "BRCancelIcon.h"
+#import "DRModel.h"
 
 @interface DRFeedbackViewController ()
 
 @property (nonatomic, strong) DRRun *run;
 @property (nonatomic, strong) DRGPSStrengthView *gpsStrength;
+@property (nonatomic, strong) NSMutableArray *driftHistory;
+@property (nonatomic, strong) NSDate *startDate;
 
 @end
 
@@ -64,6 +67,7 @@
 
 -(void)start {
     [_processor start];
+    self.startDate = [NSDate date];
 }
 
 -(void)stopButtonPressed:(id)sender {
@@ -77,7 +81,25 @@
 }
 
 -(void)stopRun {
+    NSDate *end = [NSDate date];
     [_processor stop];
+    if ([self.driftHistory count] > 1 && [self.pathID length] > 0) {
+        NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
+        DRPath *path = [DRPath objectWithID:self.pathID inContext:context];
+        if (path) {
+            DRRun *run = [DRRun MR_createInContext:context];
+            run.path = path;
+            run.startDate = self.startDate;
+            run.endDate = end;
+            run.drifts = self.driftHistory;
+            [context MR_saveToPersistentStoreAndWait];
+            //Show result controller
+        } else {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    } else {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 -(void)leftBarButtonItemPressed:(id)sender {
@@ -103,6 +125,10 @@
 
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDriftResult *)result {
     [self.gpsStrength updateSignalStrengthWithLocation:result.location];
+    if (self.driftHistory == nil) {
+        self.driftHistory = [[NSMutableArray alloc] init];
+    }
+    [self.driftHistory addObject:result];
 }
 
 -(void)dataProcessor:(DRDataProcessor *)processor didFailWithError:(NSError *)error {
