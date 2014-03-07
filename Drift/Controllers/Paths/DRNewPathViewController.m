@@ -64,6 +64,7 @@
     self.navigationBar.topItem.rightBarButtonItem.enabled = NO;
 
     self.textField.placeholder = [NSLocalizedString(@"Enter Coordinates", nil) uppercaseString];
+    self.textField.inputAccessoryView = self.keyboardToolBar;
 
     UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPressGesture:)];
     [self.mapView addGestureRecognizer:longPressGesture];
@@ -101,6 +102,7 @@
     [UIView setAnimationDuration:duration];
     [UIView setAnimationCurve:curve];
     self.mapView.height = self.view.height-self.mapView.top-keyboardFrame.size.height;
+    self.toolBar.alpha = 0;
     [UIView commitAnimations];
 }
 
@@ -111,7 +113,8 @@
     [UIView beginAnimations:@"foo" context:nil];
     [UIView setAnimationDuration:duration];
     [UIView setAnimationCurve:curve];
-    self.mapView.height = self.view.height-self.mapView.top;
+    self.mapView.height = self.toolBar.top-self.mapView.top;
+    self.toolBar.alpha = 1;
     [UIView commitAnimations];
 }
 
@@ -143,19 +146,26 @@
     }];
 }
 
-#pragma mark text field delegate
-
--(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-//    NSString *candidate = [[textField text] stringByReplacingCharactersInRange:range withString:string];
-    return [DRGPSParser validateCharacter:string];
+-(IBAction)undoLastPoint:(id)sender {
+    if ([self.locations count] > 0) {
+        CLLocation *loc = [self.locations lastObject];
+        [self removeLocationFromPath:loc];
+        [self updateMapView];
+    }
 }
 
--(BOOL)textFieldShouldReturn:(UITextField *)textField {
-    CLLocation *loc = [DRGPSParser locationFromString:textField.text];
-    [self addLocationToPath:loc];
-    [self updateMapView];
-    [self zoomToFitMapAnnotations:self.mapView];
-    return YES;
+-(IBAction)closePath:(id)sender {
+    if ([self.locations count] > 1) {
+        CLLocation *first = [self.locations firstObject];
+        CLLocation *last = [self.locations lastObject];
+        CGFloat latDelta = fabs(first.coordinate.latitude-last.coordinate.latitude);
+        CGFloat lonDelta = fabs(first.coordinate.longitude-last.coordinate.longitude);
+        CGFloat delta = 0.000001;
+        if (latDelta>delta && lonDelta>delta) {
+            [self addLocationToPath:[[CLLocation alloc] initWithLatitude:first.coordinate.latitude longitude:first.coordinate.longitude]];
+            [self updateMapView];
+        }
+    }
 }
 
 -(void)addLocationToPath:(CLLocation *)location {
@@ -171,6 +181,28 @@
             self.navigationBar.topItem.rightBarButtonItem.enabled = YES;
         }
     }
+}
+
+-(void)removeLocationFromPath:(CLLocation *)loc {
+    [self.locations removeObject:loc];
+    if ([self.locations count] == 0) {
+        self.placemark = nil;
+    }
+}
+
+#pragma mark text field delegate
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+//    NSString *candidate = [[textField text] stringByReplacingCharactersInRange:range withString:string];
+    return [DRGPSParser validateCharacter:string];
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    CLLocation *loc = [DRGPSParser locationFromString:textField.text];
+    [self addLocationToPath:loc];
+    [self updateMapView];
+    [self zoomToFitMapAnnotations:self.mapView];
+    return YES;
 }
 
 #pragma mark map view

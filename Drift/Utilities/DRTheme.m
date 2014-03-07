@@ -8,6 +8,8 @@
 
 #import "DRTheme.h"
 #import "DRNavigationBar.h"
+#import "DRToolbar.h"
+
 #import "UIColor+Hex.h"
 
 @implementation DRTheme
@@ -21,7 +23,14 @@
     navigationBar.tintColor = [DRTheme base4];
 
     UIBarButtonItem *barButton = [UIBarButtonItem appearance];
+    NSDictionary *textAttributes2 = @{NSForegroundColorAttributeName:[DRTheme base4],
+                                     NSFontAttributeName:[DRTheme semiboldFontWithSize:16.0]};
     [barButton setBackgroundVerticalPositionAdjustment:1 forBarMetrics:UIBarMetricsDefault];
+    [barButton setTitleTextAttributes:textAttributes2 forState:UIControlStateNormal];
+
+    DRToolbar *toolBar = [DRToolbar appearance];
+    toolBar.barTintColor = [DRTheme backgroundColor];
+    toolBar.tintColor = [DRTheme base4];
 
     UITableView *tableView = [UITableView appearance];
     tableView.backgroundColor = [DRTheme base4];

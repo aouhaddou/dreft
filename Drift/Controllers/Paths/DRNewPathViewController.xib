@@ -6,9 +6,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DRNewPathViewController">
             <connections>
+                <outlet property="keyboardToolBar" destination="C2Z-g0-mzT" id="ENa-4y-hRi"/>
                 <outlet property="mapView" destination="EGS-Ov-Gzc" id="rfc-Yc-LED"/>
                 <outlet property="navigationBar" destination="D8Q-1W-bUh" id="RcS-Mz-qcb"/>
                 <outlet property="textField" destination="zga-yU-oTL" id="JtQ-Lm-pky"/>
+                <outlet property="toolBar" destination="AYZ-DX-nzG" id="4vz-Pg-Gmu"/>
                 <outlet property="view" destination="1" id="3"/>
             </connections>
         </placeholder>
@@ -40,10 +42,48 @@
                         <outlet property="delegate" destination="-1" id="woG-u7-KYH"/>
                     </connections>
                 </mapView>
+                <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="AYZ-DX-nzG" customClass="DRToolbar">
+                    <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <items>
+                        <barButtonItem width="2" style="plain" systemItem="fixedSpace" id="ub8-U0-nfR"/>
+                        <barButtonItem title="Undo" id="zfh-Hg-0WR">
+                            <connections>
+                                <action selector="undoLastPoint:" destination="-1" id="a9S-31-Cxd"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="TsA-sn-622"/>
+                        <barButtonItem title="Close Path" id="JqP-Me-rQy">
+                            <connections>
+                                <action selector="closePath:" destination="-1" id="5OV-xZ-uhk"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem width="2" style="plain" systemItem="fixedSpace" id="ytR-c8-QKM"/>
+                    </items>
+                </toolbar>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
+        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="C2Z-g0-mzT" customClass="DRToolbar">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+            <items>
+                <barButtonItem width="2" style="plain" systemItem="fixedSpace" id="JH9-e0-aZL"/>
+                <barButtonItem title="Undo" id="C0y-gM-2IC">
+                    <connections>
+                        <action selector="undoLastPoint:" destination="-1" id="myK-Ki-rle"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem style="plain" systemItem="flexibleSpace" id="bPX-Oe-l5E"/>
+                <barButtonItem title="Close Path" id="6AJ-Uz-GHz">
+                    <connections>
+                        <action selector="closePath:" destination="-1" id="O3l-jY-T7g"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem width="2" style="plain" systemItem="fixedSpace" id="TD5-2G-npA"/>
+            </items>
+        </toolbar>
     </objects>
 </document>

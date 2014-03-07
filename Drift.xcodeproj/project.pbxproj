@@ -72,6 +72,7 @@
 		83B2779B18CA0D3D009AA3B4 /* NSNumber+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B2779A18CA0D3D009AA3B4 /* NSNumber+Extensions.m */; };
 		83B2779E18CA0F43009AA3B4 /* DRCountdownCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B2779D18CA0F43009AA3B4 /* DRCountdownCircle.m */; };
 		83B277A118CA2024009AA3B4 /* DRSpeaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B277A018CA2024009AA3B4 /* DRSpeaker.m */; };
+		83B277A418CA270F009AA3B4 /* DRToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B277A318CA270F009AA3B4 /* DRToolbar.m */; };
 		83B988A918B256F2009AA6E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988A818B256F2009AA6E7 /* Foundation.framework */; };
 		83B988AB18B256F2009AA6E7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988AA18B256F2009AA6E7 /* CoreGraphics.framework */; };
 		83B988AD18B256F2009AA6E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988AC18B256F2009AA6E7 /* UIKit.framework */; };
@@ -207,6 +208,8 @@
 		83B2779D18CA0F43009AA3B4 /* DRCountdownCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRCountdownCircle.m; sourceTree = "<group>"; };
 		83B2779F18CA2024009AA3B4 /* DRSpeaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRSpeaker.h; sourceTree = "<group>"; };
 		83B277A018CA2024009AA3B4 /* DRSpeaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRSpeaker.m; sourceTree = "<group>"; };
+		83B277A218CA270F009AA3B4 /* DRToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRToolbar.h; sourceTree = "<group>"; };
+		83B277A318CA270F009AA3B4 /* DRToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRToolbar.m; sourceTree = "<group>"; };
 		83B988A518B256F2009AA6E7 /* Drift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83B988A818B256F2009AA6E7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83B988AA18B256F2009AA6E7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -439,6 +442,8 @@
 				8384DE7618C54306002B551B /* UIColor+Extensions.m */,
 				8384DE7218C542A2002B551B /* DRNavigationBar.h */,
 				8384DE7318C542A2002B551B /* DRNavigationBar.m */,
+				83B277A218CA270F009AA3B4 /* DRToolbar.h */,
+				83B277A318CA270F009AA3B4 /* DRToolbar.m */,
 				8384DE8B18C544D7002B551B /* UIView+Image.h */,
 				8384DE8C18C544D7002B551B /* UIView+Image.m */,
 				8384DE8E18C621C9002B551B /* BRButton.h */,
@@ -752,6 +757,7 @@
 				8382940B18C769B6003F1FF6 /* DRTableViewCell.m in Sources */,
 				838D12CF18BCD41200675187 /* NSArray+DRExtensions.m in Sources */,
 				83FF2BB718C8AF000011E79F /* DRGPSParser.m in Sources */,
+				83B277A418CA270F009AA3B4 /* DRToolbar.m in Sources */,
 				83B988B718B256F2009AA6E7 /* main.m in Sources */,
 				8392239B18BE5371003929A0 /* DRDataProcessor.m in Sources */,
 				8376E60818B7A464005CFB78 /* _DRRun.m in Sources */,

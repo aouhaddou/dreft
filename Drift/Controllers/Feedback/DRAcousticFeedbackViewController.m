@@ -41,8 +41,8 @@
 }
 
 -(void)speakString:(NSString *)string {
-    DLog(@"SPEAK: %@",string);
-    return;
+//    DLog(@"SPEAK: %@",string);
+//    return;
     if (self.synthesizer == nil) {
         self.synthesizer = [[AVSpeechSynthesizer alloc] init];
         self.synthesizer.delegate = self;
