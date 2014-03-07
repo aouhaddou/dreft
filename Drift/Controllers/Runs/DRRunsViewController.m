@@ -14,6 +14,7 @@
 #import "UIColor+Extensions.h"
 #import "DRChoosePathViewController.h"
 #import "DRDistanceFormatter.h"
+#import "DRRunViewController.h"
 
 static NSString *const kCoursesCellIdentifier = @"CoursesCell";
 static NSString *const kRunCellIdentifier = @"RunCell";
@@ -242,6 +243,11 @@ static CGFloat const headerHeight = 82.f;
     if (indexPath.section == 0) {
         DRPathsViewController *paths = [[DRPathsViewController alloc] init];
         [self.navigationController pushViewController:paths animated:YES];
+    } else {
+        DRRun *run = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
+        DRRunViewController *runVC = [[DRRunViewController alloc] init];
+        [runVC setRun:run];
+        [self.navigationController pushViewController:runVC animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

@@ -11,6 +11,7 @@
 #import "DRGPSStrengthView.h"
 #import "BRCancelIcon.h"
 #import "DRModel.h"
+#import "DRRunViewController.h"
 
 @interface DRFeedbackViewController ()
 
@@ -92,15 +93,10 @@
             run.startDate = self.startDate;
             run.endDate = end;
             run.drifts = self.driftHistory;
-            [context MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
-                DLog(@"%@",success ? @"YES" : @"NO");
-                DLog(@"%@",[error userInfo]);
-                DLog(@"%f",run.averageDriftValue);
-                DLog(@"%f",run.distanceValue);
-                DLog(@"%lu",[DRRun MR_countOfEntities]);
-            }];
-
-            //Show result controller
+            [context MR_saveToPersistentStoreAndWait];
+            DRRunViewController *runVC = [[DRRunViewController alloc] init];
+            [runVC setRun:run];
+            [self.navigationController pushViewController:runVC animated:YES];
         } else {
             [self.navigationController popToRootViewControllerAnimated:YES];
         }
