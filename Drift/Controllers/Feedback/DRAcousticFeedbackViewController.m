@@ -8,7 +8,8 @@
 
 #import "DRAcousticFeedbackViewController.h"
 #import "DRDistanceFormatter.h"
-@import AVFoundation;
+#import "DRCountdownCircle.h"
+#import "DRSpeaker.h"
 
 @interface DRAcousticFeedbackViewController ()
 
@@ -16,6 +17,8 @@
 @property (nonatomic, strong) NSTimer *feedbackTimer;
 @property (nonatomic, strong) AVSpeechSynthesizer *synthesizer;
 @property (nonatomic, strong) NSString *lastFeedbackString;
+@property (nonatomic, strong) DRCountdownCircle *circle;
+@property (nonatomic, strong) BRDrawing *speaker;
 
 @end
 
@@ -25,17 +28,38 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    CGFloat width = 130;
+    self.circle = [[DRCountdownCircle alloc] initWithFrame:CGRectMake((self.view.width-width)/2, self.navigationBar.bottom + (self.bottomButton.top - self.navigationBar.bottom - 20 - width)/2, width, width)];
+    self.circle.backgroundColor = self.view.backgroundColor;
+    self.circle.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
+    [self.view addSubview:self.circle];
+
+    self.speaker = [DRSpeaker viewWithColor:[DRTheme transparentBase4]];
+    self.speaker.centerX = self.circle.centerX-3;
+    self.speaker.centerY = self.circle.centerY;
+    [self.view addSubview:self.speaker];
 }
 
 -(void)speakString:(NSString *)string {
+    DLog(@"SPEAK: %@",string);
+    return;
     if (self.synthesizer == nil) {
         self.synthesizer = [[AVSpeechSynthesizer alloc] init];
+        self.synthesizer.delegate = self;
         [self configureAudioSession];
     }
     AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:string];
     utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
     utterance.rate = 0.13f;
     [self.synthesizer speakUtterance:utterance];
+}
+
+-(void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didStartSpeechUtterance:(AVSpeechUtterance *)utterance {
+    self.speaker.color = [DRTheme base4];
+}
+
+-(void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utterance {
+    self.speaker.color = [DRTheme transparentBase4];
 }
 
 - (void)configureAudioSession{
@@ -54,6 +78,7 @@
 -(void)start {
     [super start];
     [self speakString:NSLocalizedString(@"Started Run", nil)];
+    [self.circle start];
     self.feedbackTimer = [NSTimer scheduledTimerWithTimeInterval:[[DRVariableManager sharedManager] baseRateForAcousticFeedback] target:self selector:@selector(feedbackTimerFired) userInfo:nil repeats:YES];
 }
 
@@ -68,6 +93,7 @@
 }
 
 -(void)feedbackTimerFired {
+    [self.circle start];
     if (self.lastFeedbackString) {
         [self speakString:self.lastFeedbackString];
     }

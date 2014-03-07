@@ -7,7 +7,8 @@
 //
 
 #import "DRFeedbackViewController.h"
+@import AVFoundation;
 
-@interface DRAcousticFeedbackViewController : DRFeedbackViewController
+@interface DRAcousticFeedbackViewController : DRFeedbackViewController <AVSpeechSynthesizerDelegate>
 
 @end

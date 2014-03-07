@@ -41,9 +41,9 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     DRPath *path = [self.fetchedResultsController objectAtIndexPath:indexPath];
     DRDataProcessor *proc = [[DRDataProcessor alloc] initWithLocations:path.locations];
-    DRVisualFeedbackViewController *vis = [[DRVisualFeedbackViewController alloc] initWithDataProcessor:proc];
-    vis.pathID = path.uniqueID;
-    [self.navigationController pushViewController:vis animated:YES];
+    DRAcousticFeedbackViewController *feed = [[DRAcousticFeedbackViewController alloc] initWithDataProcessor:proc];
+    feed.pathID = path.uniqueID;
+    [self.navigationController pushViewController:feed animated:YES];
 }
 
 @end
