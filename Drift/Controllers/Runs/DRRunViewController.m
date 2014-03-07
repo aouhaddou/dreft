@@ -7,6 +7,7 @@
 //
 
 #import "DRRunViewController.h"
+#import "DRModel.h"
 
 @interface DRRunViewController ()
 
@@ -26,6 +27,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.view.backgroundColor = [DRTheme backgroundColor];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -34,5 +38,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//-()
 
 @end

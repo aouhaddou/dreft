@@ -130,7 +130,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDriftResult *)result {
+-(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDrift *)result {
     [self.gpsStrength updateSignalStrengthWithLocation:result.location];
     if (self.driftHistory == nil) {
         self.driftHistory = [[NSMutableArray alloc] init];

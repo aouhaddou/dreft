@@ -10,21 +10,6 @@
 #import "DRLocationManager.h"
 #import "DRFeedbackModule.h"
 
-typedef NS_ENUM(NSInteger, DRDriftDirection) {
-    DRDriftDirectionUnknown,
-    DRDriftDirectionLeft,
-    DRDriftDirectionRight
-};
-
-@interface DRDriftResult : NSObject <NSCoding>
-
-@property (nonatomic, assign, readonly) CLLocationDistance drift;
-@property (nonatomic, strong, readonly) CLLocation *location;
-@property (nonatomic, assign, readonly) NSInteger leg;
-@property (nonatomic, assign, readonly) DRDriftDirection direction;
-
-@end
-
 @interface DRDataProcessor : NSObject <DRLocationManagerDelegate>
 
 @property (nonatomic, assign) id<DRFeedbackModule>delegate;

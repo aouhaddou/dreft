@@ -1,5 +1,5 @@
 #import "DRRun.h"
-#import "DRDataProcessor.h"
+#import "DRDrift.h"
 @import CoreLocation;
 
 @interface DRRun ()
@@ -45,14 +45,14 @@
     CGFloat averageDrift = 0;
     NSInteger count = [newDrifts count];
     if (count > 1) {
-        DRDriftResult *first = newDrifts[0];
-        CGFloat driftTotal = first.drift;
+        DRDrift *first = newDrifts[0];
+        CGFloat driftTotal = first.distance;
         for (NSInteger i = 1; i<count; i++) {
-            DRDriftResult *res1 = newDrifts[i-1];
-            DRDriftResult *res2 = newDrifts[i];
+            DRDrift *res1 = newDrifts[i-1];
+            DRDrift *res2 = newDrifts[i];
             CGFloat leg = [res1.location distanceFromLocation:res2.location];
             distance += fabs(leg);
-            driftTotal += res2.drift;
+            driftTotal += res2.distance;
         }
         averageDrift = driftTotal/count;
     }

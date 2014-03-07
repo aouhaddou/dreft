@@ -9,14 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @class DRDataProcessor;
-@class DRDriftResult;
+@class DRDrift;
 @protocol DRFeedbackModule <NSObject>
 
 @property (nonatomic, strong, readonly) DRDataProcessor *processor;
 
 -(id)initWithDataProcessor:(DRDataProcessor *)processor;
 
--(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDriftResult *)result;
+-(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDrift *)result;
 
 @optional
 -(void)dataProcessor:(DRDataProcessor *)processor didFailWithError:(NSError *)error;

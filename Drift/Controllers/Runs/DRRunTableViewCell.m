@@ -8,7 +8,6 @@
 
 #import "DRRunTableViewCell.h"
 #import "DRPathView.h"
-#import "DRDataProcessor.h"
 
 @interface DRRunTableViewCell()
 
@@ -62,7 +61,7 @@
 
 -(void)setRun:(DRRun *)run {
     NSMutableArray *primary = [NSMutableArray array];
-    for (DRDriftResult *drift in run.drifts) {
+    for (DRDrift *drift in run.drifts) {
         if (drift.location) {
             [primary addObject:drift.location];
         }

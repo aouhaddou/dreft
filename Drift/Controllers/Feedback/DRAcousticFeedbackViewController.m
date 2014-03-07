@@ -83,9 +83,9 @@
     return _distanceFormatterSound;
 }
 
--(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDriftResult *)result {
+-(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDrift *)result {
     [super dataProcessor:processor didCalculateDrift:result];
-    NSString *stringDistance = [self.distanceFormatterSound stringFromDistance:floor(result.drift)];
+    NSString *stringDistance = [self.distanceFormatterSound stringFromDistance:floor(result.distance)];
 
     self.lastFeedbackString = [NSString stringWithFormat:NSLocalizedString(@"You are off by %@", nil),stringDistance];
 }

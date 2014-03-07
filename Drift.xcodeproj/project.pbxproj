@@ -68,6 +68,7 @@
 		838D12CF18BCD41200675187 /* NSArray+DRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838D12CE18BCD41200675187 /* NSArray+DRExtensions.m */; };
 		8392239818BE51E6003929A0 /* DRLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392239718BE51E6003929A0 /* DRLocationManager.m */; };
 		8392239B18BE5371003929A0 /* DRDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392239A18BE5371003929A0 /* DRDataProcessor.m */; };
+		83B2779818C9FEF7009AA3B4 /* DRDrift.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B2779718C9FEF7009AA3B4 /* DRDrift.m */; };
 		83B988A918B256F2009AA6E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988A818B256F2009AA6E7 /* Foundation.framework */; };
 		83B988AB18B256F2009AA6E7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988AA18B256F2009AA6E7 /* CoreGraphics.framework */; };
 		83B988AD18B256F2009AA6E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988AC18B256F2009AA6E7 /* UIKit.framework */; };
@@ -195,6 +196,8 @@
 		8392239918BE5371003929A0 /* DRDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRDataProcessor.h; sourceTree = "<group>"; };
 		8392239A18BE5371003929A0 /* DRDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRDataProcessor.m; sourceTree = "<group>"; };
 		8392239C18BE5466003929A0 /* DRMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRMacros.h; sourceTree = "<group>"; };
+		83B2779618C9FEF7009AA3B4 /* DRDrift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRDrift.h; sourceTree = "<group>"; };
+		83B2779718C9FEF7009AA3B4 /* DRDrift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRDrift.m; sourceTree = "<group>"; };
 		83B988A518B256F2009AA6E7 /* Drift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83B988A818B256F2009AA6E7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83B988AA18B256F2009AA6E7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -265,11 +268,13 @@
 		8376E5F218B7A335005CFB78 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8376E60918B7A489005CFB78 /* DRModel.h */,
+				83B2779618C9FEF7009AA3B4 /* DRDrift.h */,
+				83B2779718C9FEF7009AA3B4 /* DRDrift.m */,
 				8392239918BE5371003929A0 /* DRDataProcessor.h */,
 				8392239A18BE5371003929A0 /* DRDataProcessor.m */,
 				8392239618BE51E6003929A0 /* DRLocationManager.h */,
 				8392239718BE51E6003929A0 /* DRLocationManager.m */,
-				8376E60918B7A489005CFB78 /* DRModel.h */,
 				8376E5F318B7A335005CFB78 /* Drift.xcdatamodeld */,
 				8382941A18C779D2003F1FF6 /* SSManagedObject.h */,
 				8382941B18C779D2003F1FF6 /* SSManagedObject.m */,
@@ -745,6 +750,7 @@
 				8384DE8918C544B0002B551B /* BRDisclosureIcon.m in Sources */,
 				8392239818BE51E6003929A0 /* DRLocationManager.m in Sources */,
 				83FF2BB418C8AAA00011E79F /* DRTextField.m in Sources */,
+				83B2779818C9FEF7009AA3B4 /* DRDrift.m in Sources */,
 				8384DE9F18C62514002B551B /* UIImage+ImageEffects.m in Sources */,
 				83FF2BB018C8A6C70011E79F /* DRNewPathViewController.m in Sources */,
 				8384DEB118C63399002B551B /* NSDate+Utilities.m in Sources */,

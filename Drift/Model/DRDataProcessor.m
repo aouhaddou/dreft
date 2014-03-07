@@ -8,51 +8,14 @@
 
 #import "DRDataProcessor.h"
 #import "CLLocation+DRExtensions.h"
+#import "DRDrift.h"
 
-@interface DRDriftResult(Setters)
+@interface DRDrift (Setters)
 
--(void)setDrift:(CGFloat)drift;
+-(void)setDistance:(CGFloat)drift;
 -(void)setLocation:(CLLocation *)location;
 -(void)setLeg:(NSInteger)leg;
 -(void)setDirection:(DRDriftDirection)direction;
-
-@end
-
-@implementation DRDriftResult
-
--(void)setDrift:(CGFloat)drift {
-    _drift = drift;
-}
--(void)setLocation:(CLLocation *)location {
-    _location = location;
-}
--(void)setLeg:(NSInteger)leg {
-    _leg = leg;
-}
--(void)setDirection:(DRDriftDirection)direction {
-    _direction = direction;
-}
-
-- (id)initWithCoder:(NSCoder *)decoder {
-    self = [super init];
-    if (!self) {
-        return nil;
-    }
-
-    self.drift = [decoder decodeDoubleForKey:@"drift"];
-    self.location = [decoder decodeObjectForKey:@"location"];
-    self.leg = [decoder decodeIntegerForKey:@"leg"];
-    self.direction = [decoder decodeIntegerForKey:@"direction"];
-
-    return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeDouble:self.drift forKey:@"drift"];
-    [encoder encodeObject:self.location forKey:@"location"];
-    [encoder encodeInteger:self.leg forKey:@"leg"];
-    [encoder encodeInteger:self.direction forKey:@"direction"];
-}
 
 @end
 
@@ -88,12 +51,12 @@
 
 -(void)locationManager:(DRLocationManager *)locationManager didReceiveLocation:(CLLocation *)location {
     if ([self.delegate respondsToSelector:@selector(dataProcessor:didCalculateDrift:)]) {
-        DRDriftResult *drift = [self minimumDriftForLocation:location];
+        DRDrift *drift = [self minimumDriftForLocation:location];
         [self.delegate dataProcessor:self didCalculateDrift:drift];
     }
 }
 
--(DRDriftResult *)minimumDriftForLocation:(CLLocation *)location {
+-(DRDrift *)minimumDriftForLocation:(CLLocation *)location {
     NSInteger count = [self.locations count];
     if (count == 0) {
         // No path, no distance
@@ -102,8 +65,8 @@
         //Only a point, distance to point
         CLLocation *point = self.locations.firstObject;
         CGFloat distance = [location distanceFromLocation:point];
-        DRDriftResult *result = [DRDriftResult new];
-        result.drift = distance;
+        DRDrift *result = [DRDrift new];
+        result.distance = distance;
         result.location = location;
         result.leg = -1;
         return result;
@@ -122,8 +85,8 @@
                 leg = i;
             }
         }
-        DRDriftResult *result = [DRDriftResult new];
-        result.drift = minDrift;
+        DRDrift *result = [DRDrift new];
+        result.distance = minDrift;
         result.location = location;
         result.leg = leg;
 

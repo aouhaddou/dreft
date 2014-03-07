@@ -74,9 +74,9 @@ const BOOL debug = NO;
     return _distanceFormatter;
 }
 
--(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDriftResult *)result {
+-(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDrift *)result {
     [super dataProcessor:processor didCalculateDrift:result];
-    self.driftLabel.text = [self.distanceFormatter stringFromDistance:result.drift];
+    self.driftLabel.text = [self.distanceFormatter stringFromDistance:result.distance];
     [self addLocationToHistory:result.location];
     self.pathView.primaryLocations = self.locationHistory;
 
