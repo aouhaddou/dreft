@@ -108,8 +108,11 @@
 {
     [super viewDidLayoutSubviews];
 
-    CGFloat topmargin = 20;
-    CGFloat bottommargin = 20;
+    self.pathView.height = valueForScreen(120, 140);
+    self.pathView.y = self.view.height - kSideMargin - self.pathView.height;
+
+    CGFloat topmargin = valueForScreen(10, 20);
+    CGFloat bottommargin = valueForScreen(10, 20);
     CGFloat captionDistance = 56;
 
     self.driftLabel.y = self.navigationBar.bottom + topmargin;

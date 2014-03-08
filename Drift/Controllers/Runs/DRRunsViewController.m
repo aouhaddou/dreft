@@ -79,13 +79,13 @@ static CGFloat const headerHeight = 82.f;
     button.selected = !button.selected;
     if (button.selected) {
         CGFloat trans = self.view.height-self.tableView.tableHeaderView.height-20;
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.4 animations:^{
             self.tableView.transform = CGAffineTransformMakeTranslation(0, trans);
             self.settingsButton.transform = CGAffineTransformMakeRotation(M_PI-0.0001);
             self.headerView.transform = CGAffineTransformMakeTranslation(0, trans);
         }];
     } else {
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.4 animations:^{
             self.tableView.transform = CGAffineTransformIdentity;
             self.settingsButton.transform = CGAffineTransformIdentity;
             self.headerView.transform = CGAffineTransformIdentity;

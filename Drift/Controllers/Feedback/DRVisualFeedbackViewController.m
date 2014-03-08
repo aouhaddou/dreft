@@ -31,7 +31,7 @@ const BOOL debug = NO;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    UILabel *driftLabel = [[UILabel alloc] initWithFrame:CGRectMake(kSideMargin, 120.f, self.view.width-2*kSideMargin, 100)];
+    UILabel *driftLabel = [[UILabel alloc] initWithFrame:CGRectMake(kSideMargin, valueForScreen(100, 120), self.view.width-2*kSideMargin, 100)];
     driftLabel.textAlignment = NSTextAlignmentCenter;
     driftLabel.textColor = [DRTheme base4];
     driftLabel.backgroundColor = self.view.backgroundColor;
@@ -43,7 +43,7 @@ const BOOL debug = NO;
     [self.view addSubview:driftLabel];
     self.driftLabel = driftLabel;
 
-    DRPathView *path = [[DRPathView alloc] initWithFrame:CGRectMake(kSideMargin, driftLabel.bottom+20, self.view.width-2*kSideMargin, 200.f)];
+    DRPathView *path = [[DRPathView alloc] initWithFrame:CGRectMake(kSideMargin, driftLabel.bottom+20, self.view.width-2*kSideMargin, valueForScreen(150, 200))];
     path.backgroundColor = self.view.backgroundColor;
     path.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:path];

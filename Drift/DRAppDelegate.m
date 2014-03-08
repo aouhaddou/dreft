@@ -31,10 +31,15 @@
 
     [self.window makeKeyAndVisible];
 
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Courses" ofType:@"xml"];
-    NSData *myData = [NSData dataWithContentsOfFile:filePath];
-    [DROCADXMLParser parseXMLData:myData];
-    
+//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Courses" ofType:@"xml"];
+//    NSData *myData = [NSData dataWithContentsOfFile:filePath];
+//    [DROCADXMLParser parseXMLData:myData];
+
+    return YES;
+}
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    [DROCADXMLParser parseXMLData:[NSData dataWithContentsOfURL:url]];
     return YES;
 }
 

@@ -26,6 +26,10 @@
 @implementation DROCADXMLParser
 
 +(void)parseXMLData:(NSData *)data {
+    if (data == nil) {
+        return;
+    }
+    
     NSError *error;
     NSDictionary *dict = [TBXML dictionaryWithXMLData:data error:&error];
 
@@ -34,9 +38,16 @@
     } else {
 //        DLog(@"%@",dict.description);
         //Extract all control points
+        NSDictionary *coursedata = [dict objectForKey:@"CourseData"];
+
+        if (coursedata == nil) {
+            //NOT THE RIGHT ONE
+            return;
+        }
+
         NSMutableDictionary *controlPoints = [NSMutableDictionary dictionary];
 
-        NSArray *controlArray = [[dict objectForKey:@"CourseData"] objectForKey:@"Control"];
+        NSArray *controlArray = [coursedata objectForKey:@"Control"];
         for (NSDictionary *controlDict in controlArray) {
             NSDictionary *posDict = [controlDict objectForKey:@"MapPosition"];
             NSString *code = [controlDict objectForKey:@"ControlCode"];
@@ -44,7 +55,7 @@
             [controlPoints setObject:posDict forKey:code];
         }
 
-        NSArray *startControlArray = [[dict objectForKey:@"CourseData"] objectForKey:@"StartPoint"];
+        NSArray *startControlArray = [coursedata objectForKey:@"StartPoint"];
         for (NSDictionary *controlDict in startControlArray) {
             NSDictionary *posDict = [controlDict objectForKey:@"MapPosition"];
             NSString *code = [controlDict objectForKey:@"StartPointCode"];
@@ -53,7 +64,8 @@
         }
 
         //Extract courses
-        NSArray *coursesArray = [[dict objectForKey:@"CourseData"] objectForKey:@"Course"];
+        NSInteger count = 0;
+        NSArray *coursesArray = [coursedata objectForKey:@"Course"];
         for (NSDictionary *courseDict in coursesArray) {
             NSMutableArray *coursePoints = [NSMutableArray array];
             DRXMLCoursePoint *p1 = [DRXMLCoursePoint new];
@@ -83,6 +95,7 @@
                 DRPath *path = [DRPath MR_createInContext:context];
                 path.locations = locations;
                 [context MR_saveToPersistentStoreAndWait];
+                count++;
             }
         }
     }
