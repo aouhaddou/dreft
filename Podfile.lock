@@ -6,6 +6,8 @@ PODS:
     - MagicalRecord/Core
   - MagicalRecord/Core (2.2)
   - TBXML (1.5)
+  - TBXML+NSDictionary (0.0.1):
+    - TBXML (~> 1.5.0)
 
 DEPENDENCIES:
   - Expecta
@@ -13,6 +15,7 @@ DEPENDENCIES:
   - FrameAccessor
   - MagicalRecord
   - TBXML
+  - TBXML+NSDictionary
 
 SPEC CHECKSUMS:
   Expecta: 5c147dedfea5fbcf773995f7e65020abcc936ce5
@@ -20,5 +23,6 @@ SPEC CHECKSUMS:
   FrameAccessor: 1c383c4dc298925749fb2a6b9c05cd45be0d8857
   MagicalRecord: 95d49d74ef752cd52f6ad87bcb474817fc3978cf
   TBXML: 0511ac325d83e59d3aefa4bc8cd6cbeff07a8d9e
+  TBXML+NSDictionary: 9bec5f9179a9f42dae1a9ba560f26c7ba732d8ac
 
 COCOAPODS: 0.29.0

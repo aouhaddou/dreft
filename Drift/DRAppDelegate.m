@@ -9,6 +9,7 @@
 #import "DRAppDelegate.h"
 #import "DRRunsViewController.h"
 #import "CoreData+MagicalRecord.h"
+#import "DROCADXMLParser.h"
 
 @import CoreLocation;
 
@@ -29,6 +30,10 @@
     self.window.rootViewController = nav;
 
     [self.window makeKeyAndVisible];
+
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Courses" ofType:@"xml"];
+    NSData *myData = [NSData dataWithContentsOfFile:filePath];
+    [DROCADXMLParser parseXMLData:myData];
     
     return YES;
 }

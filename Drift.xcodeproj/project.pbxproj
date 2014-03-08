@@ -89,6 +89,8 @@
 		83B988CA18B256F2009AA6E7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988AE18B256F2009AA6E7 /* CoreData.framework */; };
 		83B988D218B256F2009AA6E7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 83B988D018B256F2009AA6E7 /* InfoPlist.strings */; };
 		83B988D418B256F2009AA6E7 /* DriftTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B988D318B256F2009AA6E7 /* DriftTests.m */; };
+		83CFD2AC18CB76DC009FB444 /* Courses.xml in Resources */ = {isa = PBXBuildFile; fileRef = 83CFD2AB18CB76DC009FB444 /* Courses.xml */; };
+		83CFD2AF18CB7761009FB444 /* DROCADXMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 83CFD2AE18CB7761009FB444 /* DROCADXMLParser.m */; };
 		83DCECC818C7BE7F004D0B34 /* DRDistanceFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DCECC718C7BE7F004D0B34 /* DRDistanceFormatter.m */; };
 		83DCECCB18C7C1DD004D0B34 /* DRAcousticFeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DCECCA18C7C1DD004D0B34 /* DRAcousticFeedbackViewController.m */; };
 		83DCECCE18C7CD6F004D0B34 /* DRVariableManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DCECCD18C7CD6F004D0B34 /* DRVariableManager.m */; };
@@ -233,6 +235,9 @@
 		83B988CF18B256F2009AA6E7 /* DriftTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DriftTests-Info.plist"; sourceTree = "<group>"; };
 		83B988D118B256F2009AA6E7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		83B988D318B256F2009AA6E7 /* DriftTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DriftTests.m; sourceTree = "<group>"; };
+		83CFD2AB18CB76DC009FB444 /* Courses.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = Courses.xml; sourceTree = "<group>"; };
+		83CFD2AD18CB7761009FB444 /* DROCADXMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DROCADXMLParser.h; sourceTree = "<group>"; };
+		83CFD2AE18CB7761009FB444 /* DROCADXMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DROCADXMLParser.m; sourceTree = "<group>"; };
 		83DCECC618C7BE7F004D0B34 /* DRDistanceFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRDistanceFormatter.h; sourceTree = "<group>"; };
 		83DCECC718C7BE7F004D0B34 /* DRDistanceFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRDistanceFormatter.m; sourceTree = "<group>"; };
 		83DCECC918C7C1DD004D0B34 /* DRAcousticFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRAcousticFeedbackViewController.h; sourceTree = "<group>"; };
@@ -287,6 +292,8 @@
 			isa = PBXGroup;
 			children = (
 				8376E60918B7A489005CFB78 /* DRModel.h */,
+				83CFD2AD18CB7761009FB444 /* DROCADXMLParser.h */,
+				83CFD2AE18CB7761009FB444 /* DROCADXMLParser.m */,
 				83B2779618C9FEF7009AA3B4 /* DRDrift.h */,
 				83B2779718C9FEF7009AA3B4 /* DRDrift.m */,
 				8392239918BE5371003929A0 /* DRDataProcessor.h */,
@@ -538,6 +545,7 @@
 		83B988B118B256F2009AA6E7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				83CFD2AB18CB76DC009FB444 /* Courses.xml */,
 				83B988B218B256F2009AA6E7 /* Drift-Info.plist */,
 				83B988B318B256F2009AA6E7 /* InfoPlist.strings */,
 				83B988B618B256F2009AA6E7 /* main.m */,
@@ -647,6 +655,7 @@
 			files = (
 				8384DEA418C6298B002B551B /* OpenSans-Regular.ttf in Resources */,
 				8382941318C7729D003F1FF6 /* OpenSans-Bold.ttf in Resources */,
+				83CFD2AC18CB76DC009FB444 /* Courses.xml in Resources */,
 				8384DEA218C62910002B551B /* OpenSans-Semibold.ttf in Resources */,
 				8384DEAB18C6305A002B551B /* DRFeedbackViewController.xib in Resources */,
 				83FF2BB118C8A6C70011E79F /* DRNewPathViewController.xib in Resources */,
@@ -773,6 +782,7 @@
 				8376E60818B7A464005CFB78 /* _DRRun.m in Sources */,
 				83B2779E18CA0F43009AA3B4 /* DRCountdownCircle.m in Sources */,
 				8384DEAA18C6305A002B551B /* DRFeedbackViewController.m in Sources */,
+				83CFD2AF18CB7761009FB444 /* DROCADXMLParser.m in Sources */,
 				8382943018C7893C003F1FF6 /* DRPathsViewController.m in Sources */,
 				8376E60518B7A464005CFB78 /* DRPath.m in Sources */,
 				83B277A718CB4EBE009AA3B4 /* BRSettingsIcon.m in Sources */,
@@ -941,6 +951,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Drift/Drift-Prefix.pch";
 				INFOPLIST_FILE = "Drift/Drift-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lz",
+					"-framework",
+					CoreData,
+					"-framework",
+					CoreText,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -955,6 +973,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Drift/Drift-Prefix.pch";
 				INFOPLIST_FILE = "Drift/Drift-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lz",
+					"-framework",
+					CoreData,
+					"-framework",
+					CoreText,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
