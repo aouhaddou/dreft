@@ -73,6 +73,7 @@
 		83B2779E18CA0F43009AA3B4 /* DRCountdownCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B2779D18CA0F43009AA3B4 /* DRCountdownCircle.m */; };
 		83B277A118CA2024009AA3B4 /* DRSpeaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B277A018CA2024009AA3B4 /* DRSpeaker.m */; };
 		83B277A418CA270F009AA3B4 /* DRToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B277A318CA270F009AA3B4 /* DRToolbar.m */; };
+		83B277A718CB4EBE009AA3B4 /* BRSettingsIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B277A618CB4EBE009AA3B4 /* BRSettingsIcon.m */; };
 		83B988A918B256F2009AA6E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988A818B256F2009AA6E7 /* Foundation.framework */; };
 		83B988AB18B256F2009AA6E7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988AA18B256F2009AA6E7 /* CoreGraphics.framework */; };
 		83B988AD18B256F2009AA6E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988AC18B256F2009AA6E7 /* UIKit.framework */; };
@@ -210,6 +211,8 @@
 		83B277A018CA2024009AA3B4 /* DRSpeaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRSpeaker.m; sourceTree = "<group>"; };
 		83B277A218CA270F009AA3B4 /* DRToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRToolbar.h; sourceTree = "<group>"; };
 		83B277A318CA270F009AA3B4 /* DRToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRToolbar.m; sourceTree = "<group>"; };
+		83B277A518CB4EBE009AA3B4 /* BRSettingsIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettingsIcon.h; sourceTree = "<group>"; };
+		83B277A618CB4EBE009AA3B4 /* BRSettingsIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSettingsIcon.m; sourceTree = "<group>"; };
 		83B988A518B256F2009AA6E7 /* Drift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83B988A818B256F2009AA6E7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83B988AA18B256F2009AA6E7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -375,6 +378,8 @@
 				8384DE8018C544B0002B551B /* BRCheckmarkIcon.m */,
 				8384DE8118C544B0002B551B /* BRDisclosureIcon.h */,
 				8384DE8218C544B0002B551B /* BRDisclosureIcon.m */,
+				83B277A518CB4EBE009AA3B4 /* BRSettingsIcon.h */,
+				83B277A618CB4EBE009AA3B4 /* BRSettingsIcon.m */,
 				8384DE8318C544B0002B551B /* BRDrawing.h */,
 				8384DE8418C544B0002B551B /* BRDrawing.m */,
 			);
@@ -765,6 +770,7 @@
 				8384DEAA18C6305A002B551B /* DRFeedbackViewController.m in Sources */,
 				8382943018C7893C003F1FF6 /* DRPathsViewController.m in Sources */,
 				8376E60518B7A464005CFB78 /* DRPath.m in Sources */,
+				83B277A718CB4EBE009AA3B4 /* BRSettingsIcon.m in Sources */,
 				8384DE7418C542A2002B551B /* DRNavigationBar.m in Sources */,
 				8382942B18C78908003F1FF6 /* DRRunTableViewCell.m in Sources */,
 				8384DEAE18C631D9002B551B /* DRGPSStrengthView.m in Sources */,

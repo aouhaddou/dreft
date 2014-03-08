@@ -15,6 +15,7 @@
 #import "DRChoosePathViewController.h"
 #import "DRDistanceFormatter.h"
 #import "DRRunViewController.h"
+#import "BRSettingsIcon.h"
 
 static NSString *const kCoursesCellIdentifier = @"CoursesCell";
 static NSString *const kRunCellIdentifier = @"RunCell";
@@ -26,6 +27,7 @@ static CGFloat const headerHeight = 82.f;
 @property (nonatomic ,strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic ,strong) UIView *headerView;
 @property (nonatomic ,strong) UIButton *startButton;
+@property (nonatomic ,strong) UIButton *settingsButton;
 @property (nonatomic, strong) DRDistanceFormatter *distanceFormatter;
 
 @end
@@ -73,6 +75,24 @@ static CGFloat const headerHeight = 82.f;
     }
 }
 
+-(void)settingsButtonTapped:(UIButton *)button {
+    button.selected = !button.selected;
+    if (button.selected) {
+        self.tableView.tableHeaderView.backgroundColor = [UIColor clearColor];
+        self.tableView.backgroundColor = [UIColor clearColor];
+        [UIView animateWithDuration:0.5 animations:^{
+            self.tableView.transform = CGAffineTransformMakeTranslation(0, self.view.height-self.tableView.y);
+        }];
+    } else {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.tableView.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+            self.tableView.tableHeaderView.backgroundColor = [DRTheme backgroundColor];
+            self.tableView.backgroundColor = [DRTheme base4];
+        }];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -86,7 +106,12 @@ static CGFloat const headerHeight = 82.f;
         header.backgroundColor = [DRTheme backgroundColor];
 
         self.startButton.center = header.center;
-        self.startButton.y += 3;
+        self.settingsButton.center = header.center;
+
+        self.startButton.y -= 15;
+        self.settingsButton.y += 75;
+
+        [header addSubview:self.settingsButton];
         [header addSubview:self.startButton];
 
         _headerView = header;
@@ -118,6 +143,27 @@ static CGFloat const headerHeight = 82.f;
         _startButton = button;
     }
     return _startButton;
+}
+
+-(UIButton *)settingsButton {
+    if (_settingsButton == nil) {
+        CGFloat width = 44.f;
+        UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.backgroundColor = [DRTheme backgroundColor];
+        button.frame = CGRectMake(0, 0, width, width);
+        button.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
+
+
+        [button setImage:[BRSettingsIcon imageWithColor:[DRTheme transparentBase4]] forState:UIControlStateNormal];
+        [button setImage:[BRSettingsIcon imageWithColor:[DRTheme transparentBase4]] forState:UIControlStateHighlighted|UIControlStateSelected];
+        [button setImage:[BRSettingsIcon imageWithColor:[DRTheme base4]] forState:UIControlStateHighlighted];
+        [button setImage:[BRSettingsIcon imageWithColor:[DRTheme base4]] forState:UIControlStateSelected];
+
+        [button addTarget:self action:@selector(settingsButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+
+        _settingsButton = button;
+    }
+    return _settingsButton;
 }
 
 -(void)startButtonTapped:(id)sender {
