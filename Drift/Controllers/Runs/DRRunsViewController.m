@@ -9,13 +9,13 @@
 #import "DRRunsViewController.h"
 #import "DRModel.h"
 #import "DRShowPathsTableViewCell.h"
-#import "DRRunTableViewCell.h"
 #import "UIView+Image.h"
 #import "UIColor+Extensions.h"
 #import "DRChoosePathViewController.h"
 #import "DRDistanceFormatter.h"
 #import "DRRunViewController.h"
 #import "BRSettingsIcon.h"
+#import "SIAlertView.h"
 
 static NSString *const kCoursesCellIdentifier = @"CoursesCell";
 static NSString *const kRunCellIdentifier = @"RunCell";
@@ -173,6 +173,27 @@ static CGFloat const headerHeight = 82.f;
     [self.navigationController pushViewController:choose animated:YES];
 }
 
+#pragma mark draggable delegate
+
+-(void)tableViewCellDidSelectDeleteButton:(DRDraggableTableViewCell *)cell {
+    SIAlertView *alert = [[SIAlertView alloc] initWithTitle:nil andMessage:NSLocalizedString(@"Do you want to permamently delete this run?", nil)];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil) type:SIAlertViewButtonTypeCancel handler:nil];
+    [alert addButtonWithTitle:NSLocalizedString(@"Delete", nil) type:SIAlertViewButtonTypeDestructive handler:^(SIAlertView *alertView) {
+        double delayInSeconds = 0.31;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            DRRunTableViewCell *runCell = (DRRunTableViewCell *)cell;
+            NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
+            DRRun *run = [DRRun objectWithID:runCell.runID inContext:context];
+            if (run) {
+                [context deleteObject:run];
+                [context MR_saveToPersistentStoreAndWait];
+            }
+        });
+    }];
+    [alert show];
+}
+
 #pragma mark table view
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -212,6 +233,7 @@ static CGFloat const headerHeight = 82.f;
         }
     } else if ([cell isKindOfClass:[DRRunTableViewCell class]]) {
         DRRunTableViewCell *runCell = (DRRunTableViewCell *)cell;
+        runCell.delegate = self;
         DRRun *run = [self.fetchedResultsController objectAtIndexPath:[NSIndexPath indexPathForRow:indexPath.row inSection:0]];
         runCell.textLabel.text = [self.distanceFormatter stringFromDistance:run.averageDriftValue];
         runCell.detailTextLabel.text = [self.distanceFormatter stringFromDistance:run.distanceValue];

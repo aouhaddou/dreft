@@ -8,11 +8,11 @@
 
 #import "DRPathsViewController.h"
 #import "DRModel.h"
-#import "DRPathTableViewCell.h"
 #import "BRBackArrow.h"
 #import "BRAddIcon.h"
 #import "DRNewPathViewController.h"
 #import "DRDistanceFormatter.h"
+#import "SIAlertView.h"
 
 @import CoreLocation;
 
@@ -87,6 +87,7 @@ static NSString *const kPathCellIdentifier = @"kPathCell";
 -(void)configureCell:(DRPathTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     DRPath *path = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [cell setPath:path];
+    cell.delegate = self;
     cell.lengthLabel.text = [self.distanceFormatter stringFromDistance:path.distanceValue];
 }
 
@@ -96,6 +97,27 @@ static NSString *const kPathCellIdentifier = @"kPathCell";
 
 -(BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     return NO;
+}
+
+#pragma mark draggable delegate
+
+-(void)tableViewCellDidSelectDeleteButton:(DRDraggableTableViewCell *)cell {
+    SIAlertView *alert = [[SIAlertView alloc] initWithTitle:nil andMessage:NSLocalizedString(@"Do you want to permamently delete this course?", nil)];
+    [alert addButtonWithTitle:NSLocalizedString(@"Cancel", nil) type:SIAlertViewButtonTypeCancel handler:nil];
+    [alert addButtonWithTitle:NSLocalizedString(@"Delete", nil) type:SIAlertViewButtonTypeDestructive handler:^(SIAlertView *alertView) {
+        double delayInSeconds = 0.31;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            DRPathTableViewCell *pathCell = (DRPathTableViewCell *)cell;
+            NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
+            DRPath *run = [DRPath objectWithID:pathCell.pathID inContext:context];
+            if (run) {
+                [context deleteObject:run];
+                [context MR_saveToPersistentStoreAndWait];
+            }
+        });
+    }];
+    [alert show];
 }
 
 #pragma mark fetched results controller

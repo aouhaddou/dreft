@@ -6,10 +6,12 @@
 //  Copyright (c) 2014 Christoph Albert. All rights reserved.
 //
 
-#import "DRTableViewCell.h"
+#import "DRDraggableTableViewCell.h"
 #import "DRModel.h"
 
-@interface DRRunTableViewCell : DRTableViewCell
+@interface DRRunTableViewCell : DRDraggableTableViewCell
+
+@property (nonatomic, strong, readonly) NSString *runID;
 
 +(CGFloat)driftMargin;
 +(CGFloat)lengthMargin;

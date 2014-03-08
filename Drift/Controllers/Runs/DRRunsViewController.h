@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DRRunTableViewCell.h"
 
-@interface DRRunsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
+@interface DRRunsViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate, DRDraggableTableViewCellDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

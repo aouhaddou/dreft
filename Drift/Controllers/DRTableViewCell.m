@@ -12,8 +12,6 @@
 
 @interface DRTableViewCell()
 
-@property (nonatomic, strong) UIView *disclosure;
-
 @end
 
 @implementation DRTableViewCell
@@ -51,6 +49,7 @@
 
 -(void)layoutSubviews {
     [super layoutSubviews];
+
     [self.contentView bringSubviewToFront:self.disclosure];
     self.disclosure.y = ([[self class] height]-self.disclosure.height)/2;
     self.disclosure.x = self.contentView.width-self.disclosure.width-10;

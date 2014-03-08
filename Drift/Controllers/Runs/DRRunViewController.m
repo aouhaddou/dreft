@@ -136,7 +136,9 @@
         [primary addObject:drift.location];
     }
     self.pathView.primaryLocations = primary;
-    self.pathView.secondaryLocations = run.path.locations;
+    if (run.path) {
+        self.pathView.secondaryLocations = run.path.locations;
+    }
 
     self.driftLabel.text = [self.distanceFormatter stringFromDistance:run.averageDriftValue];
     self.distanceLabel.text = [self.distanceFormatter stringFromDistance:run.distanceValue];

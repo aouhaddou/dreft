@@ -74,6 +74,7 @@
 		83B277A118CA2024009AA3B4 /* DRSpeaker.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B277A018CA2024009AA3B4 /* DRSpeaker.m */; };
 		83B277A418CA270F009AA3B4 /* DRToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B277A318CA270F009AA3B4 /* DRToolbar.m */; };
 		83B277A718CB4EBE009AA3B4 /* BRSettingsIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B277A618CB4EBE009AA3B4 /* BRSettingsIcon.m */; };
+		83B277AA18CB5C8D009AA3B4 /* DRDraggableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B277A918CB5C8D009AA3B4 /* DRDraggableTableViewCell.m */; };
 		83B988A918B256F2009AA6E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988A818B256F2009AA6E7 /* Foundation.framework */; };
 		83B988AB18B256F2009AA6E7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988AA18B256F2009AA6E7 /* CoreGraphics.framework */; };
 		83B988AD18B256F2009AA6E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988AC18B256F2009AA6E7 /* UIKit.framework */; };
@@ -213,6 +214,8 @@
 		83B277A318CA270F009AA3B4 /* DRToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRToolbar.m; sourceTree = "<group>"; };
 		83B277A518CB4EBE009AA3B4 /* BRSettingsIcon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BRSettingsIcon.h; sourceTree = "<group>"; };
 		83B277A618CB4EBE009AA3B4 /* BRSettingsIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSettingsIcon.m; sourceTree = "<group>"; };
+		83B277A818CB5C8D009AA3B4 /* DRDraggableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRDraggableTableViewCell.h; sourceTree = "<group>"; };
+		83B277A918CB5C8D009AA3B4 /* DRDraggableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRDraggableTableViewCell.m; sourceTree = "<group>"; };
 		83B988A518B256F2009AA6E7 /* Drift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83B988A818B256F2009AA6E7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83B988AA18B256F2009AA6E7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -422,6 +425,8 @@
 			children = (
 				8382940918C769B6003F1FF6 /* DRTableViewCell.h */,
 				8382940A18C769B6003F1FF6 /* DRTableViewCell.m */,
+				83B277A818CB5C8D009AA3B4 /* DRDraggableTableViewCell.h */,
+				83B277A918CB5C8D009AA3B4 /* DRDraggableTableViewCell.m */,
 				8384DEA518C6305A002B551B /* Feedback */,
 				8382942018C78908003F1FF6 /* Runs */,
 				8382942C18C78925003F1FF6 /* Paths */,
@@ -776,6 +781,7 @@
 				8384DEAE18C631D9002B551B /* DRGPSStrengthView.m in Sources */,
 				83DCECCE18C7CD6F004D0B34 /* DRVariableManager.m in Sources */,
 				8382943418C78A0B003F1FF6 /* DRPathTableViewCell.m in Sources */,
+				83B277AA18CB5C8D009AA3B4 /* DRDraggableTableViewCell.m in Sources */,
 				8384DE8618C544B0002B551B /* BRBackArrow.m in Sources */,
 				8384DE8918C544B0002B551B /* BRDisclosureIcon.m in Sources */,
 				8392239818BE51E6003929A0 /* DRLocationManager.m in Sources */,

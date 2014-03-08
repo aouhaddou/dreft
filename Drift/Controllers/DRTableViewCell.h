@@ -11,6 +11,7 @@
 @interface DRTableViewCell : UITableViewCell
 
 @property (nonatomic, assign, getter = isShowingDisclosureIcon) BOOL showDisclosureIcon;
+@property (nonatomic, strong) UIView *disclosure;
 
 +(CGFloat)height;
 

@@ -6,12 +6,13 @@
 //  Copyright (c) 2014 Christoph Albert. All rights reserved.
 //
 
-#import "DRTableViewCell.h"
+#import "DRDraggableTableViewCell.h"
 #import "DRModel.h"
 
-@interface DRPathTableViewCell : DRTableViewCell
+@interface DRPathTableViewCell : DRDraggableTableViewCell
 
 @property (nonatomic, strong) UILabel *lengthLabel;
+@property (nonatomic, strong) NSString *pathID;
 
 -(void)setPath:(DRPath *)path;
 

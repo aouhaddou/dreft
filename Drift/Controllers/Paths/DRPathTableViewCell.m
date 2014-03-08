@@ -26,27 +26,27 @@
 
         self.textLabel.font = [DRTheme semiboldFontWithSize:18.f];
         self.textLabel.textColor = [DRTheme base1];
-        self.textLabel.backgroundColor = self.contentView.backgroundColor;
+        self.textLabel.backgroundColor = self.panContentView.backgroundColor;
 
         self.detailTextLabel.font = [DRTheme semiboldFontWithSize:18.f];
         self.detailTextLabel.textColor = [DRTheme base1];
-        self.detailTextLabel.backgroundColor = self.contentView.backgroundColor;
+        self.detailTextLabel.backgroundColor = self.panContentView.backgroundColor;
 
         UILabel *length = [[UILabel alloc] init];
         length.font = [DRTheme semiboldFontWithSize:18.f];
         length.textColor = [DRTheme base1];
-        length.backgroundColor = self.contentView.backgroundColor;
-        [self.contentView addSubview:length];
+        length.backgroundColor = self.panContentView.backgroundColor;
+        [self.panContentView addSubview:length];
         self.lengthLabel = length;
 
         DRPathView *path = [[DRPathView alloc] init];
-        path.backgroundColor = self.contentView.backgroundColor;
+        path.backgroundColor = self.panContentView.backgroundColor;
         path.marksEndOfPrimaryLine = NO;
         path.primaryLineColor = [DRTheme base2];
         path.lineWidth = 2;
         path.verticalAlignment = NSArrayRelativePointsVerticalAlignmentCenter;
         path.horizontalAlignment = NSArrayRelativePointsHorizontalAlignmentRight;
-        [self.contentView addSubview:path];
+        [self.panContentView addSubview:path];
         self.pathView = path;
     }
     return self;
@@ -83,6 +83,7 @@
         self.detailTextLabel.textColor = self.textLabel.textColor;
     }
     self.pathView.primaryLocations = path.locations;
+    self.pathID = path.uniqueID;
 }
 
 -(void)layoutSubviews {

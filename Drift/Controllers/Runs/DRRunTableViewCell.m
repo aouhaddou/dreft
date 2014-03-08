@@ -23,21 +23,21 @@
     if (self) {
         self.textLabel.font = [DRTheme boldFontWithSize:18.f];
         self.textLabel.textColor = [DRTheme base1];
-        self.textLabel.backgroundColor = self.contentView.backgroundColor;
+        self.textLabel.backgroundColor = self.panContentView.backgroundColor;
 
         self.detailTextLabel.font = [DRTheme boldFontWithSize:18.f];
         self.detailTextLabel.textColor = [DRTheme base1];
-        self.detailTextLabel.backgroundColor = self.contentView.backgroundColor;
+        self.detailTextLabel.backgroundColor = self.panContentView.backgroundColor;
 
         DRPathView *pathView = [[DRPathView alloc] init];
-        pathView.backgroundColor = self.contentView.backgroundColor;
+        pathView.backgroundColor = self.panContentView.backgroundColor;
         pathView.marksEndOfPrimaryLine = NO;
         pathView.primaryLineColor = [DRTheme base1];
         pathView.secondaryLineColor = [DRTheme base2];
         pathView.lineWidth = 2;
         pathView.horizontalAlignment = NSArrayRelativePointsHorizontalAlignmentLeft;
         pathView.verticalAlignment = NSArrayRelativePointsVerticalAlignmentCenter;
-        [self.contentView addSubview:pathView];
+        [self.panContentView addSubview:pathView];
         self.pathView = pathView;
     }
     return self;
@@ -67,7 +67,10 @@
         }
     }
     self.pathView.primaryLocations = primary;
-    self.pathView.secondaryLocations = run.path.locations;
+    if (run.path) {
+        self.pathView.secondaryLocations = run.path.locations;
+    }
+    _runID = run.uniqueID;
 }
 
 -(void)layoutSubviews {

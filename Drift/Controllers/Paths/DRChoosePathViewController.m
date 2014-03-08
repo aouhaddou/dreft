@@ -47,4 +47,8 @@
     [self.navigationController pushViewController:feed animated:YES];
 }
 
+-(void)configureCell:(DRPathTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    [super configureCell:cell atIndexPath:indexPath];
+    cell.draggable = NO;
+}
 @end
