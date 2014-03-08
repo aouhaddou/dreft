@@ -92,6 +92,14 @@
     }
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    if ([self.navigationController.viewControllers  count] > 2) {
+        //Pop from here to start view after recording a run
+        NSMutableArray *navigationArray = [[NSMutableArray alloc] initWithArray:@[[self.navigationController.viewControllers firstObject],[self.navigationController.viewControllers lastObject]]];
+        self.navigationController.viewControllers = navigationArray;
+    }
+}
+
 -(void)leftBarButtonItemPressed:(id)sender {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
