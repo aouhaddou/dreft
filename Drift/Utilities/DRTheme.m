@@ -35,7 +35,7 @@
     UITableView *tableView = [UITableView appearance];
     tableView.backgroundColor = [DRTheme base4];
     tableView.separatorColor = [DRTheme base2];
-    tableView.separatorInset = UIEdgeInsetsMake(0, kSideMargin, 0, 0);
+    tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 +(UIFont *)fontWithSize:(CGFloat)size {

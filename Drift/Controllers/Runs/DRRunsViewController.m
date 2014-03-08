@@ -78,19 +78,19 @@ static CGFloat const headerHeight = 82.f;
 -(void)settingsButtonTapped:(UIButton *)button {
     button.selected = !button.selected;
     if (button.selected) {
-        self.tableView.tableHeaderView.backgroundColor = [UIColor clearColor];
-        self.tableView.backgroundColor = [UIColor clearColor];
+        CGFloat trans = self.view.height-self.tableView.tableHeaderView.height-20;
         [UIView animateWithDuration:0.5 animations:^{
-            self.tableView.transform = CGAffineTransformMakeTranslation(0, self.view.height-self.tableView.y);
+            self.tableView.transform = CGAffineTransformMakeTranslation(0, trans);
             self.settingsButton.transform = CGAffineTransformMakeRotation(M_PI-0.0001);
+            self.headerView.transform = CGAffineTransformMakeTranslation(0, trans);
         }];
     } else {
         [UIView animateWithDuration:0.5 animations:^{
             self.tableView.transform = CGAffineTransformIdentity;
             self.settingsButton.transform = CGAffineTransformIdentity;
+            self.headerView.transform = CGAffineTransformIdentity;
         } completion:^(BOOL finished) {
-            self.tableView.tableHeaderView.backgroundColor = [DRTheme backgroundColor];
-            self.tableView.backgroundColor = [DRTheme base4];
+            //
         }];
     }
 }
@@ -111,7 +111,7 @@ static CGFloat const headerHeight = 82.f;
         self.settingsButton.center = header.center;
 
         self.startButton.y -= 15;
-        self.settingsButton.y += 75;
+        self.settingsButton.y += 76;
 
         [header addSubview:self.settingsButton];
         [header addSubview:self.startButton];
