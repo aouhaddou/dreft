@@ -142,11 +142,11 @@ const BOOL debug = NO;
 
 -(NSString *)qualitativeStringForDistance:(CLLocationDistance)distance {
     if (distance < [[DRVariableManager sharedManager] zone1Thresh]) {
-        return NSLocalizedString(@"on course", nil);
+        return NSLocalizedString(@"On Course", nil);
     } else if (distance < [[DRVariableManager sharedManager] zone2Thresh]) {
-        return NSLocalizedString(@"slightly off", nil);
+        return NSLocalizedString(@"Slightly Off", nil);
     } else {
-        return NSLocalizedString(@"way off", nil);
+        return NSLocalizedString(@"Way Off", nil);
     }
 }
 
