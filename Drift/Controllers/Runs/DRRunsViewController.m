@@ -71,7 +71,7 @@ static CGFloat const headerHeight = 82.f;
 
 -(void)configureSettingsView {
     self.settingsView.x = 0;
-    self.settingsView.y = -self.view.height-self.tableView.tableHeaderView.height;
+    self.settingsView.y = -(self.view.height-self.tableView.tableHeaderView.height);
     self.settingsView.backgroundColor = [DRTheme backgroundColor];
 
     self.zone1Label.font = [DRTheme semiboldFontWithSize:16.f];

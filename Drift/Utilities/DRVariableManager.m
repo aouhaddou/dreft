@@ -29,7 +29,7 @@
         self.GPSThreeBarThresh = 6;
 
         self.zone1Thresh = 15;
-        self.zone2Thresh = 30;
+        self.zone2Thresh = 40;
     }
     return self;
 }
