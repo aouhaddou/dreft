@@ -109,14 +109,30 @@
 
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDrift *)result {
     [super dataProcessor:processor didCalculateDrift:result];
-    NSString *stringDistance = [self.distanceFormatterSound stringFromDistance:floor(result.distance)];
-
-    self.lastFeedbackString = [NSString stringWithFormat:NSLocalizedString(@"You are off by %@", nil),stringDistance];
+    self.lastFeedbackString = self.feedbackType == DRFeedbackTypeQualitative ? [self qualitativeStringForDistance:result.distance] : [self quantitativeStringForDistance:result.distance];
 }
 
 -(void)dataProcessor:(DRDataProcessor *)processor didFailWithError:(NSError *)error {
     [super dataProcessor:processor didFailWithError:error];
     [self speakString:NSLocalizedString(@"Could not process location", nil)];
+}
+
+#pragma mark feedback string
+
+-(NSString *)quantitativeStringForDistance:(CLLocationDistance)distance {
+    NSString *stringDistance = [self.distanceFormatterSound stringFromDistance:floor(distance)];
+
+    return [NSString stringWithFormat:NSLocalizedString(@"You are off by %@", nil),stringDistance];
+}
+
+-(NSString *)qualitativeStringForDistance:(CLLocationDistance)distance {
+    if (distance < [[DRVariableManager sharedManager] zone1Thresh]) {
+        return NSLocalizedString(@"You are on course", nil);
+    } else if (distance < [[DRVariableManager sharedManager] zone2Thresh]) {
+        return NSLocalizedString(@"You are slightly off", nil);
+    } else {
+        return NSLocalizedString(@"You are way off", nil);
+    }
 }
 
 @end

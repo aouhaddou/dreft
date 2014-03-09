@@ -76,7 +76,7 @@ const BOOL debug = NO;
 
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDrift *)result {
     [super dataProcessor:processor didCalculateDrift:result];
-    self.driftLabel.text = [self.distanceFormatter stringFromDistance:result.distance];
+    self.driftLabel.text = self.feedbackType == DRFeedbackTypeQualitative ? [self qualitativeStringForDistance:result.distance] : [self quantitativeStringForDistance:result.distance];
     [self addLocationToHistory:result.location];
     self.pathView.primaryLocations = self.locationHistory;
 
@@ -133,5 +133,23 @@ const BOOL debug = NO;
 
     return polylineView;
 }
+
+#pragma mark feedback string
+
+-(NSString *)quantitativeStringForDistance:(CLLocationDistance)distance {
+    return [self.distanceFormatter stringFromDistance:distance];
+}
+
+-(NSString *)qualitativeStringForDistance:(CLLocationDistance)distance {
+    if (distance < [[DRVariableManager sharedManager] zone1Thresh]) {
+        return NSLocalizedString(@"on course", nil);
+    } else if (distance < [[DRVariableManager sharedManager] zone2Thresh]) {
+        return NSLocalizedString(@"slightly off", nil);
+    } else {
+        return NSLocalizedString(@"way off", nil);
+    }
+}
+
+
 
 @end
