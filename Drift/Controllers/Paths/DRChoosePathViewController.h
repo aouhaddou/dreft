@@ -7,10 +7,11 @@
 //
 
 #import "DRPathsViewController.h"
+#import "DRFeedbackViewController.h"
 
 @interface DRChoosePathViewController : DRPathsViewController
 
-@property (nonatomic, assign) NSInteger feedbackModule;
-@property (nonatomic, assign) NSInteger type;
+@property (nonatomic, assign) DRFeedbackModality feedbackModality;
+@property (nonatomic, assign) DRFeedbackType feedbackType;
 
 @end

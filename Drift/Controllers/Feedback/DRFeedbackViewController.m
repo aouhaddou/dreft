@@ -31,6 +31,7 @@
     if (self) {
         _processor = processor;
         _processor.delegate = self;
+        self.feedbackType = DRFeedbackTypeQuantitative;
     }
     return self;
 }

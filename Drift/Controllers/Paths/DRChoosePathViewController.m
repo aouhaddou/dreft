@@ -21,8 +21,8 @@
 -(id)init {
     self = [super initWithNibName:@"DRPathsViewController" bundle:nil];
     if (self) {
-        self.type = 0;
-        self.feedbackModule = 0;
+        self.feedbackType = DRFeedbackTypeQuantitative;
+        self.feedbackModality = DRFeedbackModalityVisual;
     }
     return self;
 }
@@ -43,11 +43,12 @@
     DRPath *path = [self.fetchedResultsController objectAtIndexPath:indexPath];
     DRDataProcessor *proc = [[DRDataProcessor alloc] initWithLocations:path.locations];
     DRFeedbackViewController *feedbackViewController;
-    if (self.feedbackModule == 0) {
+    if (self.feedbackModality == DRFeedbackModalityVisual) {
         feedbackViewController =  [[DRVisualFeedbackViewController alloc] initWithDataProcessor:proc];
     } else {
         feedbackViewController = [[DRAcousticFeedbackViewController alloc] initWithDataProcessor:proc];
     }
+    feedbackViewController.feedbackType = self.feedbackType;
     feedbackViewController.pathID = path.uniqueID;
     [self.navigationController pushViewController:feedbackViewController animated:YES];
 }

@@ -16,6 +16,7 @@
 #import "DRRunViewController.h"
 #import "BRSettingsIcon.h"
 #import "SIAlertView.h"
+#import "DRFeedbackViewController.h"
 
 static NSString *const kCoursesCellIdentifier = @"CoursesCell";
 static NSString *const kRunCellIdentifier = @"RunCell";
@@ -88,11 +89,11 @@ static CGFloat const headerHeight = 82.f;
     self.zone2Slider.value = [[DRVariableManager sharedManager] zone2Thresh];
     [self updateSliderLabels];
 
-    [self.feedbackControl setTitle:NSLocalizedString(@"Visual", nil) forSegmentAtIndex:0];
-    [self.feedbackControl setTitle:NSLocalizedString(@"Audio", nil) forSegmentAtIndex:1];
+    [self.feedbackControl setTitle:NSLocalizedString(@"Visual", nil) forSegmentAtIndex:DRFeedbackModalityVisual];
+    [self.feedbackControl setTitle:NSLocalizedString(@"Audio", nil) forSegmentAtIndex:DRFeedbackModalityAudio];
 
-    [self.typeControl setTitle:NSLocalizedString(@"Meters", nil) forSegmentAtIndex:0];
-    [self.typeControl setTitle:NSLocalizedString(@"Zones", nil) forSegmentAtIndex:1];
+    [self.typeControl setTitle:NSLocalizedString(@"Meters", nil) forSegmentAtIndex:DRFeedbackTypeQuantitative];
+    [self.typeControl setTitle:NSLocalizedString(@"Zones", nil) forSegmentAtIndex:DRFeedbackTypeQualitative];
 }
 
 -(IBAction)sliderChangedValue:(UISlider *)slider {
@@ -218,7 +219,9 @@ static CGFloat const headerHeight = 82.f;
 
 -(void)startButtonTapped:(id)sender {
     DRChoosePathViewController *choose = [[DRChoosePathViewController alloc] init];
-    choose.feedbackModule = self.feedbackControl.selectedSegmentIndex;
+    choose.feedbackModality = self.feedbackControl.selectedSegmentIndex;
+    choose.feedbackType = self.typeControl.selectedSegmentIndex;
+
     [self.navigationController pushViewController:choose animated:YES];
 }
 
