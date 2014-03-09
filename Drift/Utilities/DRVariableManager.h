@@ -16,6 +16,9 @@
 @property (nonatomic, assign) CGFloat GPSTwoBarThresh;
 @property (nonatomic, assign) CGFloat GPSThreeBarThresh;
 
+@property (nonatomic, assign) CGFloat zone1Thresh;
+@property (nonatomic, assign) CGFloat zone2Thresh;
+
 + (instancetype)sharedManager;
 
 @end

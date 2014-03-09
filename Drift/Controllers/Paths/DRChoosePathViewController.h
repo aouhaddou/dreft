@@ -10,4 +10,7 @@
 
 @interface DRChoosePathViewController : DRPathsViewController
 
+@property (nonatomic, assign) NSInteger feedbackModule;
+@property (nonatomic, assign) NSInteger type;
+
 @end

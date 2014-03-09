@@ -27,6 +27,9 @@
         self.GPSOneBarThresh = 50;
         self.GPSTwoBarThresh = 15;
         self.GPSThreeBarThresh = 6;
+
+        self.zone1Thresh = 15;
+        self.zone2Thresh = 30;
     }
     return self;
 }

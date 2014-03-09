@@ -36,6 +36,15 @@
     tableView.backgroundColor = [DRTheme base4];
     tableView.separatorColor = [DRTheme base2];
     tableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+
+    UISegmentedControl *seg = [UISegmentedControl appearance];
+    seg.tintColor = [DRTheme base4];
+    [seg setTitleTextAttributes:@{NSFontAttributeName:[DRTheme semiboldFontWithSize:14.0]} forState:UIControlStateNormal];
+
+    UISlider *slider = [UISlider appearance];
+    slider.maximumTrackTintColor = [DRTheme transparentBase4];
+    slider.tintColor = [DRTheme base4];
+    slider.minimumTrackTintColor = [DRTheme base4];
 }
 
 +(UIFont *)fontWithSize:(CGFloat)size {

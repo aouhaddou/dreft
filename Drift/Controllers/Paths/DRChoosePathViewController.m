@@ -21,7 +21,8 @@
 -(id)init {
     self = [super initWithNibName:@"DRPathsViewController" bundle:nil];
     if (self) {
-        //
+        self.type = 0;
+        self.feedbackModule = 0;
     }
     return self;
 }
@@ -41,10 +42,14 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     DRPath *path = [self.fetchedResultsController objectAtIndexPath:indexPath];
     DRDataProcessor *proc = [[DRDataProcessor alloc] initWithLocations:path.locations];
-//    DRAcousticFeedbackViewController *feed = [[DRAcousticFeedbackViewController alloc] initWithDataProcessor:proc];
-    DRVisualFeedbackViewController *feed = [[DRVisualFeedbackViewController alloc] initWithDataProcessor:proc];
-    feed.pathID = path.uniqueID;
-    [self.navigationController pushViewController:feed animated:YES];
+    DRFeedbackViewController *feedbackViewController;
+    if (self.feedbackModule == 0) {
+        feedbackViewController =  [[DRVisualFeedbackViewController alloc] initWithDataProcessor:proc];
+    } else {
+        feedbackViewController = [[DRAcousticFeedbackViewController alloc] initWithDataProcessor:proc];
+    }
+    feedbackViewController.pathID = path.uniqueID;
+    [self.navigationController pushViewController:feedbackViewController animated:YES];
 }
 
 -(void)configureCell:(DRPathTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {

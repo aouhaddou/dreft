@@ -63,6 +63,52 @@ static CGFloat const headerHeight = 82.f;
     UIView *placeholder = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.headerView.width, self.headerView.height-20)];
     placeholder.backgroundColor = self.headerView.backgroundColor;
     self.tableView.tableHeaderView = placeholder;
+
+    [self configureSettingsView];
+    [self.view addSubview:self.settingsView];
+}
+
+-(void)configureSettingsView {
+    self.settingsView.x = 0;
+    self.settingsView.y = -self.view.height-self.tableView.tableHeaderView.height;
+    self.settingsView.backgroundColor = [DRTheme backgroundColor];
+
+    self.zone1Label.font = [DRTheme semiboldFontWithSize:16.f];
+    self.zone1Label.textColor = [DRTheme base4];
+
+    self.zone2Label.font = [DRTheme semiboldFontWithSize:16.f];
+    self.zone2Label.textColor = [DRTheme base4];
+
+    self.zone1Slider.minimumValue = 0;
+    self.zone1Slider.maximumValue = 30;
+    self.zone1Slider.value = [[DRVariableManager sharedManager] zone1Thresh];
+
+    self.zone2Slider.minimumValue = self.zone1Slider.value+2;
+    self.zone2Slider.maximumValue = 100;
+    self.zone2Slider.value = [[DRVariableManager sharedManager] zone2Thresh];
+    [self updateSliderLabels];
+
+    [self.feedbackControl setTitle:NSLocalizedString(@"Visual", nil) forSegmentAtIndex:0];
+    [self.feedbackControl setTitle:NSLocalizedString(@"Audio", nil) forSegmentAtIndex:1];
+
+    [self.typeControl setTitle:NSLocalizedString(@"Meters", nil) forSegmentAtIndex:0];
+    [self.typeControl setTitle:NSLocalizedString(@"Zones", nil) forSegmentAtIndex:1];
+}
+
+-(IBAction)sliderChangedValue:(UISlider *)slider {
+    CGFloat val = round(slider.value);
+    if (slider == self.zone1Slider) {
+        [DRVariableManager sharedManager].zone1Thresh = val;
+        self.zone2Slider.minimumValue = val+1;
+    } else if (slider == self.zone2Slider) {
+        [DRVariableManager sharedManager].zone2Thresh = val;
+    }
+    [self updateSliderLabels];
+}
+
+-(void)updateSliderLabels {
+    self.zone1Label.text = [NSString stringWithFormat:NSLocalizedString(@"Zone 1 Threshold: %.0f m", nil),round(self.zone1Slider.value)];
+    self.zone2Label.text = [NSString stringWithFormat:NSLocalizedString(@"Zone 2 Threshold: %.0f m", nil),round(self.zone2Slider.value)];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -77,18 +123,20 @@ static CGFloat const headerHeight = 82.f;
 
 -(void)settingsButtonTapped:(UIButton *)button {
     button.selected = !button.selected;
+    CGFloat trans = self.view.height-self.tableView.tableHeaderView.height-20;
     if (button.selected) {
-        CGFloat trans = self.view.height-self.tableView.tableHeaderView.height-20;
         [UIView animateWithDuration:0.4 animations:^{
             self.tableView.transform = CGAffineTransformMakeTranslation(0, trans);
             self.settingsButton.transform = CGAffineTransformMakeRotation(M_PI-0.0001);
             self.headerView.transform = CGAffineTransformMakeTranslation(0, trans);
+            self.settingsView.y = 20;
         }];
     } else {
         [UIView animateWithDuration:0.4 animations:^{
             self.tableView.transform = CGAffineTransformIdentity;
             self.settingsButton.transform = CGAffineTransformIdentity;
             self.headerView.transform = CGAffineTransformIdentity;
+            self.settingsView.y = -trans+20;
         } completion:^(BOOL finished) {
             //
         }];
@@ -170,6 +218,7 @@ static CGFloat const headerHeight = 82.f;
 
 -(void)startButtonTapped:(id)sender {
     DRChoosePathViewController *choose = [[DRChoosePathViewController alloc] init];
+    choose.feedbackModule = self.feedbackControl.selectedSegmentIndex;
     [self.navigationController pushViewController:choose animated:YES];
 }
 
