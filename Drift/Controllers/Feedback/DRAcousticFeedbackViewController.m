@@ -129,9 +129,9 @@
     if (distance < [[DRVariableManager sharedManager] zone1Thresh]) {
         return NSLocalizedString(@"You are on course", nil);
     } else if (distance < [[DRVariableManager sharedManager] zone2Thresh]) {
-        return NSLocalizedString(@"You are slightly off", nil);
+        return NSLocalizedString(@"You are drifting a little", nil);
     } else {
-        return NSLocalizedString(@"You are way off", nil);
+        return NSLocalizedString(@"You are pretty far off", nil);
     }
 }
 

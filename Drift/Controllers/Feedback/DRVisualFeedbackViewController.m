@@ -144,7 +144,7 @@ const BOOL debug = NO;
     if (distance < [[DRVariableManager sharedManager] zone1Thresh]) {
         return NSLocalizedString(@"On Course", nil);
     } else if (distance < [[DRVariableManager sharedManager] zone2Thresh]) {
-        return NSLocalizedString(@"Slightly Off", nil);
+        return NSLocalizedString(@"Drifting", nil);
     } else {
         return NSLocalizedString(@"Way Off", nil);
     }
