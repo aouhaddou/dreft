@@ -125,18 +125,19 @@ static CGFloat const headerHeight = 82.f;
 -(void)settingsButtonTapped:(UIButton *)button {
     button.selected = !button.selected;
     CGFloat trans = self.view.height-self.tableView.tableHeaderView.height-20;
+    [self.view bringSubviewToFront:self.headerView];
     if (button.selected) {
         [UIView animateWithDuration:0.4 animations:^{
-            self.tableView.transform = CGAffineTransformMakeTranslation(0, trans);
+            self.tableView.y = 20+trans;
             self.settingsButton.transform = CGAffineTransformMakeRotation(M_PI-0.0001);
-            self.headerView.transform = CGAffineTransformMakeTranslation(0, trans);
+            self.headerView.y = trans;
             self.settingsView.y = 20;
         }];
     } else {
         [UIView animateWithDuration:0.4 animations:^{
-            self.tableView.transform = CGAffineTransformIdentity;
+            self.tableView.y = 20;
             self.settingsButton.transform = CGAffineTransformIdentity;
-            self.headerView.transform = CGAffineTransformIdentity;
+            self.headerView.y = 0;
             self.settingsView.y = -trans+20;
         } completion:^(BOOL finished) {
             //
