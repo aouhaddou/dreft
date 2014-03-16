@@ -22,6 +22,7 @@
 
 /* Begin PBXBuildFile section */
 		2CD64F62050C4DB5BE0CC1CA /* libPods-DriftTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A338CB7525492CA914F2AF /* libPods-DriftTests.a */; };
+		83225B8F18D60A3400871913 /* DRCheckpointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83225B8E18D60A3400871913 /* DRCheckpointAnnotation.m */; };
 		8376E5F518B7A335005CFB78 /* Drift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8376E5F318B7A335005CFB78 /* Drift.xcdatamodeld */; };
 		8376E60518B7A464005CFB78 /* DRPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 8376E5FD18B7A464005CFB78 /* DRPath.m */; };
 		8376E60618B7A464005CFB78 /* DRRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 8376E5FF18B7A464005CFB78 /* DRRun.m */; };
@@ -118,6 +119,8 @@
 		216CFFB8B4AC4BA499CC087A /* Pods-DriftTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DriftTests.xcconfig"; path = "Pods/Pods-DriftTests.xcconfig"; sourceTree = "<group>"; };
 		42A338CB7525492CA914F2AF /* libPods-DriftTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DriftTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6182D03EDE384F918A26C950 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		83225B8D18D60A3400871913 /* DRCheckpointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRCheckpointAnnotation.h; sourceTree = "<group>"; };
+		83225B8E18D60A3400871913 /* DRCheckpointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRCheckpointAnnotation.m; sourceTree = "<group>"; };
 		8376E5F418B7A335005CFB78 /* Drift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Drift.xcdatamodel; sourceTree = "<group>"; };
 		8376E5FC18B7A464005CFB78 /* DRPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRPath.h; sourceTree = "<group>"; };
 		8376E5FD18B7A464005CFB78 /* DRPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRPath.m; sourceTree = "<group>"; };
@@ -392,6 +395,8 @@
 				83B277A618CB4EBE009AA3B4 /* BRSettingsIcon.m */,
 				8384DE8318C544B0002B551B /* BRDrawing.h */,
 				8384DE8418C544B0002B551B /* BRDrawing.m */,
+				83225B8D18D60A3400871913 /* DRCheckpointAnnotation.h */,
+				83225B8E18D60A3400871913 /* DRCheckpointAnnotation.m */,
 			);
 			path = Icons;
 			sourceTree = "<group>";
@@ -805,6 +810,7 @@
 				8376E60718B7A464005CFB78 /* _DRPath.m in Sources */,
 				8384DE8D18C544D7002B551B /* UIView+Image.m in Sources */,
 				8384DE6E18C53DB9002B551B /* UIColor+Hex.m in Sources */,
+				83225B8F18D60A3400871913 /* DRCheckpointAnnotation.m in Sources */,
 				8384DE7718C54306002B551B /* UIColor+Extensions.m in Sources */,
 				83FF2BBA18C8ECD10011E79F /* DRChoosePathViewController.m in Sources */,
 				8384DE9518C621C9002B551B /* BROverlayView.m in Sources */,

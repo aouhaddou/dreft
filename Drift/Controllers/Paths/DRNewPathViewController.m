@@ -11,6 +11,7 @@
 #import "BRCheckmarkIcon.h"
 #import "DRGPSParser.h"
 #import "DRModel.h"
+#import "DRCheckpointAnnotation.h"
 
 @interface DRPathCheckpointAnnotation : NSObject <MKAnnotation>
 @end
@@ -212,6 +213,8 @@
 #pragma mark map view
 
 -(void)handleLongPressGesture:(UILongPressGestureRecognizer *)sender {
+    _shouldZoomToUserLocation = NO;
+
     if (sender.state == UIGestureRecognizerStateEnded) {
         [self.textField resignFirstResponder];
         _longPressPinDropped = NO;
@@ -289,9 +292,15 @@
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     if (annotation != mapView.userLocation) {
-        MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"mapViewPin"];
-        pin.enabled = NO;
-        return pin;
+        static NSString *defaultPinID = @"com.christophalbert.checkpointAnnotation";
+        MKAnnotationView *pinView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+        if (pinView == nil )
+            pinView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:defaultPinID];
+
+        pinView.canShowCallout = NO;
+        pinView.enabled = NO;
+        pinView.image = [DRCheckpointAnnotation imageWithColor:[DRTheme confirmColor]];
+        return pinView;
     } else {
         return nil;
     }
@@ -302,6 +311,31 @@
     MKAnnotationView *userLocation = [mapView viewForAnnotation:mapView.userLocation];
     userLocation.enabled = NO;
     userLocation.hidden = YES;
+
+    CLLocation *lastLoc = [self.locations lastObject];
+    if (lastLoc) {
+        for (MKAnnotationView *view in views) {
+            if (view == userLocation) {
+                continue;
+            }
+
+            MKMapPoint point =  MKMapPointForCoordinate(view.annotation.coordinate);
+            if (!MKMapRectContainsPoint(self.mapView.visibleMapRect, point)) {
+                continue;
+            }
+
+            if (view.annotation.coordinate.latitude == lastLoc.coordinate.latitude && view.annotation.coordinate.longitude == lastLoc.coordinate.longitude) {
+                //Animate
+                CGFloat scale = 4;
+                view.transform = CGAffineTransformMakeScale(scale, scale);
+                view.alpha = 0;
+                [UIView animateWithDuration:0.4 animations:^{
+                    view.transform = CGAffineTransformIdentity;
+                    view.alpha = 1;
+                }];
+            }
+        }
+    }
 }
 
 - (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation      {
