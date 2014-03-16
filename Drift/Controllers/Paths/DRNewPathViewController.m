@@ -32,6 +32,7 @@
 
 @interface DRNewPathViewController () {
     BOOL _longPressPinDropped;
+    BOOL _shouldZoomToUserLocation;
 }
 
 @property (nonatomic, strong) NSMutableArray *locations;
@@ -71,9 +72,12 @@
 
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mapViewTapped:)];
     [self.mapView addGestureRecognizer:tapGesture];
+
+    _shouldZoomToUserLocation = YES;
 }
 
 -(void)mapViewTapped:(UITapGestureRecognizer *)tap {
+    _shouldZoomToUserLocation = NO;
     [self.textField resignFirstResponder];
 }
 
@@ -244,8 +248,11 @@
 
 -(void)zoomToFitMapAnnotations:(MKMapView*)mapView
 {
-    if([mapView.annotations count] == 0)
+    _shouldZoomToUserLocation = NO;
+
+    if([mapView.annotations count] == 0) {
         return;
+    }
 
     CLLocationCoordinate2D topLeftCoord;
     topLeftCoord.latitude = -90;
@@ -255,8 +262,7 @@
     bottomRightCoord.latitude = 90;
     bottomRightCoord.longitude = -180;
 
-    for(DRPathCheckpointAnnotation *annotation in mapView.annotations)
-    {
+    for(DRPathCheckpointAnnotation *annotation in mapView.annotations) {
         topLeftCoord.longitude = fmin(topLeftCoord.longitude, annotation.coordinate.longitude);
         topLeftCoord.latitude = fmax(topLeftCoord.latitude, annotation.coordinate.latitude);
 
@@ -267,19 +273,47 @@
     MKCoordinateRegion region;
     region.center.latitude = topLeftCoord.latitude - (topLeftCoord.latitude - bottomRightCoord.latitude) * 0.5;
     region.center.longitude = topLeftCoord.longitude + (bottomRightCoord.longitude - topLeftCoord.longitude) * 0.5;
-    region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * 1.1; // Add a little extra space on the sides
-    region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * 1.1; // Add a little extra space on the sides
-
+    region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * 1.1;
+    region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * 1.1;
     region = [mapView regionThatFits:region];
     [mapView setRegion:region animated:YES];
 }
 
-- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay {
+-(MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay {
     MKPolylineView *polylineView = [[MKPolylineView alloc] initWithPolyline:overlay];
     polylineView.strokeColor = [DRTheme confirmColor];
     polylineView.lineWidth = 4.0;
 
     return polylineView;
+}
+
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    if (annotation != mapView.userLocation) {
+        MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"mapViewPin"];
+        pin.enabled = NO;
+        return pin;
+    } else {
+        return nil;
+    }
+}
+
+-(void)mapView:(MKMapView *)mapView didAddAnnotationViews:(NSArray *)views
+{
+    MKAnnotationView *userLocation = [mapView viewForAnnotation:mapView.userLocation];
+    userLocation.enabled = NO;
+    userLocation.hidden = YES;
+}
+
+- (void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation      {
+    if (_shouldZoomToUserLocation) {
+        MKCoordinateRegion region;
+        region.center.latitude = userLocation.location.coordinate.latitude;
+        region.center.longitude = userLocation.location.coordinate.longitude;
+        region.span.latitudeDelta = 0.05;
+        region.span.longitudeDelta = 0.05;
+        region = [mapView regionThatFits:region];
+        [mapView setRegion:region animated:NO];
+    }
 }
 
 @end
