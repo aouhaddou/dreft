@@ -17,16 +17,19 @@
 
 - (void)drawRect:(CGRect)rect
 {
+    //// Color Declarations
+    UIColor* color = self.color;
+
     //// Oval Drawing
     UIBezierPath* ovalPath = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(2, 2, 46, 46)];
-    [self.color setStroke];
-    ovalPath.lineWidth = 4;
+    [color setStroke];
+    ovalPath.lineWidth = 3;
     [ovalPath stroke];
 
 
     //// Oval 2 Drawing
     UIBezierPath* oval2Path = [UIBezierPath bezierPathWithOvalInRect: CGRectMake(20, 20, 10, 10)];
-    [self.color setFill];
+    [color setFill];
     [oval2Path fill];
 }
 
