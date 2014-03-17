@@ -12,7 +12,8 @@
 typedef NS_ENUM(NSInteger, DRDriftDirection) {
     DRDriftDirectionUnknown,
     DRDriftDirectionLeft,
-    DRDriftDirectionRight
+    DRDriftDirectionRight,
+    DRDriftDirectionNoDrift
 };
 
 @interface DRDrift : NSObject <NSCoding>

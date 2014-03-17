@@ -76,7 +76,7 @@ const BOOL debug = NO;
 
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDrift *)result {
     [super dataProcessor:processor didCalculateDrift:result];
-    self.driftLabel.text = self.feedbackType == DRFeedbackTypeQualitative ? [self qualitativeStringForDistance:result.distance] : [self quantitativeStringForDistance:result.distance];
+    self.driftLabel.text = self.feedbackType == DRFeedbackTypeQualitative ? [self qualitativeStringForDrift:result] : [self quantitativeStringForDrift:result];
     [self addLocationToHistory:result.location];
     self.pathView.primaryLocations = self.locationHistory;
 
@@ -136,14 +136,21 @@ const BOOL debug = NO;
 
 #pragma mark feedback string
 
--(NSString *)quantitativeStringForDistance:(CLLocationDistance)distance {
-    return [self.distanceFormatter stringFromDistance:distance];
+-(NSString *)quantitativeStringForDrift:(DRDrift *)drift {
+    NSString *distance = [self.distanceFormatter stringFromDistance:drift.distance];
+    if (drift.direction == DRDriftDirectionRight) {
+        return [NSString stringWithFormat:NSLocalizedString(@"%@ right", nil),distance];
+    } else if (drift.direction == DRDriftDirectionLeft) {
+        return [NSString stringWithFormat:NSLocalizedString(@"%@ left", nil),distance];
+    } else {
+        return distance;
+    }
 }
 
--(NSString *)qualitativeStringForDistance:(CLLocationDistance)distance {
-    if (distance < [[DRVariableManager sharedManager] zone1Thresh]) {
+-(NSString *)qualitativeStringForDrift:(DRDrift *)drift {
+    if (drift.distance < [[DRVariableManager sharedManager] zone1Thresh]) {
         return NSLocalizedString(@"On Course", nil);
-    } else if (distance < [[DRVariableManager sharedManager] zone2Thresh]) {
+    } else if (drift.distance < [[DRVariableManager sharedManager] zone2Thresh]) {
         return NSLocalizedString(@"Drifting", nil);
     } else {
         return NSLocalizedString(@"Way Off", nil);

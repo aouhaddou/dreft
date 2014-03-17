@@ -115,7 +115,7 @@
 
 -(CGPoint)pointInViewForRelativePoint:(CGPoint)point {
     CGFloat margin = self.marksEndOfPrimaryLine ? 16.f : 5.f;
-    return CGPointMake(margin+point.x*(self.width-2*margin), margin+point.y*(self.height-2*margin));
+    return CGPointMake(margin+point.x*(self.width-2*margin), margin+(1-point.y)*(self.height-2*margin));
 }
 
 @end

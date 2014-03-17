@@ -23,7 +23,7 @@ float degreesToRadians(float angle) {
     CGFloat height = 1.f;
 
     CGFloat x = (self.coordinate.longitude+180.f)*(width/360.f);
-    CGFloat y = (height/2.f)-(width*log(tan((M_PI/4.f)+(self.coordinate.latitude*M_PI/360.f)))/(2.f*M_PI));
+    CGFloat y = (height/2.f)+(width*log(tan((M_PI/4.f)+(self.coordinate.latitude*M_PI/360.f)))/(2.f*M_PI));
 
     return CGPointMake(x, y);
 }
@@ -33,7 +33,7 @@ float degreesToRadians(float angle) {
     CGFloat height = 1.f;
 
     CGFloat lon = x/(width/360.f)-180.f;
-    CGFloat lat = (atan(exp((2.f*M_PI)*(-y+(height/2.f))/width))-(M_PI/4.f))*360.f/M_PI;
+    CGFloat lat = (atan(exp((2.f*M_PI)*(y-(height/2.f))/width))-(M_PI/4.f))*360.f/M_PI;
 
     return [[CLLocation alloc] initWithLatitude:lat longitude:lon];
 }

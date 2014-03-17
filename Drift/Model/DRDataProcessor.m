@@ -69,11 +69,12 @@
         result.distance = distance;
         result.location = location;
         result.leg = -1;
+        result.direction = DRDriftDirectionUnknown;
         return result;
     } else {
         //Check all path legs and return shortest distance
         CLLocationDistance minDrift = DBL_MAX;
-        CGFloat leg = -1;
+        NSInteger leg = -1;
 
         for (NSInteger i = 0; i<count-1; i++) {
             CLLocation *point1 = self.locations[i];
@@ -90,15 +91,32 @@
         result.location = location;
         result.leg = leg;
 
-        //Calculate left right by rotating
-        //Mercator projection of points
-        //Find checkpoint that is moved to: Keep history of drifts
-        //OR course of location, better because no history
-        //Rotate so that checkpoint leg is pointing north
-        //http://en.wikipedia.org/wiki/Rotation_matrix
-        //see if location.x is <(left) or >(right) than checkpoint.x
-        
+        //Calculate direction
+        CLLocation *l1 = self.locations[leg];
+        CLLocation *l2 = self.locations[leg+1];
+        result.direction = [self directionForFirstPoint:l1 secondPoint:l2 currentPosition:location];
+
         return result;
+    }
+}
+
+-(DRDriftDirection)directionForFirstPoint:(CLLocation *)first secondPoint:(CLLocation *)second currentPosition:(CLLocation *)position {
+    if (!CLLocationCoordinate2DIsValid(first.coordinate) || !CLLocationCoordinate2DIsValid(second.coordinate) || !CLLocationCoordinate2DIsValid(position.coordinate)) {
+        return DRDriftDirectionUnknown;
+    }
+
+    CGPoint a = [first dr_relativeMercatorCoordinate];
+    CGPoint b = [second dr_relativeMercatorCoordinate];
+    CGPoint c = [position dr_relativeMercatorCoordinate];
+
+    CGFloat cross = ((b.x - a.x)*(c.y - a.y) - (b.y - a.y)*(c.x - a.x));
+
+    if (cross == 0) {
+        return DRDriftDirectionNoDrift;
+    } else if (cross > 0) {
+        return DRDriftDirectionLeft;
+    } else {
+        return DRDriftDirectionRight;
     }
 }
 
