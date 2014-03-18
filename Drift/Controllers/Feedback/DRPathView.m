@@ -64,11 +64,11 @@
     if (self.marksEndOfPrimaryLine && [self.primaryLocations count] > 0) {
         CGPoint point = [[primary lastObject] CGPointValue];
         CGPoint viewPoint = [self pointInViewForRelativePoint:point];
-        CGFloat bigRadius = 24;
-        CGFloat smallRadius = 12;
+        CGFloat bigRadius = 6*self.lineWidth;
+        CGFloat smallRadius = 1*self.lineWidth;
 
         UIBezierPath *bigCircle = [self bezierPathForCircleWithRadius:bigRadius atPoint:viewPoint];
-        bigCircle.lineWidth = 3;
+        bigCircle.lineWidth = self.lineWidth;
         [self.primaryLineColor setStroke];
         [bigCircle stroke];
 
@@ -114,7 +114,7 @@
 }
 
 -(CGPoint)pointInViewForRelativePoint:(CGPoint)point {
-    CGFloat margin = self.marksEndOfPrimaryLine ? 16.f : 5.f;
+    CGFloat margin = self.marksEndOfPrimaryLine ? 4*self.lineWidth : 2*self.lineWidth;
     return CGPointMake(margin+point.x*(self.width-2*margin), margin+(1-point.y)*(self.height-2*margin));
 }
 

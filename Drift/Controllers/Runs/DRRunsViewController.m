@@ -83,10 +83,18 @@ static CGFloat const headerHeight = 82.f;
     self.zone1Slider.minimumValue = 0;
     self.zone1Slider.maximumValue = 30;
     self.zone1Slider.value = [[DRVariableManager sharedManager] zone1Thresh];
+    self.zone1Slider.maximumTrackTintColor = [DRTheme transparentBase4];
+    self.zone1Slider.tintColor = [DRTheme base4];
+    self.zone1Slider.minimumTrackTintColor = [DRTheme base4];
+
 
     self.zone2Slider.minimumValue = self.zone1Slider.value+2;
     self.zone2Slider.maximumValue = 100;
     self.zone2Slider.value = [[DRVariableManager sharedManager] zone2Thresh];
+    self.zone2Slider.maximumTrackTintColor = [DRTheme transparentBase4];
+    self.zone2Slider.tintColor = [DRTheme base4];
+    self.zone2Slider.minimumTrackTintColor = [DRTheme base4];
+
     [self updateSliderLabels];
 
     [self.feedbackControl setTitle:NSLocalizedString(@"Visual", nil) forSegmentAtIndex:DRFeedbackModalityVisual];

@@ -6,12 +6,12 @@
 //  Copyright (c) 2014 Christoph Albert. All rights reserved.
 //
 
-#import "DRAcousticFeedbackViewController.h"
+#import "DRAudioFeedbackViewController.h"
 #import "DRDistanceFormatter.h"
 #import "DRCountdownCircle.h"
 #import "DRSpeaker.h"
 
-@interface DRAcousticFeedbackViewController ()
+@interface DRAudioFeedbackViewController ()
 
 @property (nonatomic, strong) DRDistanceFormatter *distanceFormatterSound;
 @property (nonatomic, strong) NSTimer *feedbackTimer;
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation DRAcousticFeedbackViewController
+@implementation DRAudioFeedbackViewController
 
 - (void)viewDidLoad
 {
@@ -41,6 +41,8 @@
 }
 
 -(void)speakString:(NSString *)string {
+    DLog(@"%@",string);
+    return;
     if (self.synthesizer == nil) {
         self.synthesizer = [[AVSpeechSynthesizer alloc] init];
         self.synthesizer.delegate = self;
@@ -75,7 +77,7 @@
 
 -(void)start {
     [super start];
-    [self speakString:NSLocalizedString(@"Started Run", nil)];
+    [self speakString:NSLocalizedString(@"Started run.", nil)];
     [self.circle start];
     self.feedbackTimer = [NSTimer scheduledTimerWithTimeInterval:[[DRVariableManager sharedManager] baseRateForAcousticFeedback] target:self selector:@selector(feedbackTimerFired) userInfo:nil repeats:YES];
 }
@@ -94,6 +96,8 @@
     [self.circle start];
     if (self.lastFeedbackString) {
         [self speakString:self.lastFeedbackString];
+    } else {
+        [self speakString:NSLocalizedString(@"No location information.", nil)];
     }
 }
 
@@ -109,29 +113,40 @@
 
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDrift *)result {
     [super dataProcessor:processor didCalculateDrift:result];
-    self.lastFeedbackString = self.feedbackType == DRFeedbackTypeQualitative ? [self qualitativeStringForDistance:result.distance] : [self quantitativeStringForDistance:result.distance];
+    self.lastFeedbackString = self.feedbackType == DRFeedbackTypeQualitative ? [self qualitativeStringForDrift:result] : [self quantitativeStringForDrift:result];
 }
 
 -(void)dataProcessor:(DRDataProcessor *)processor didFailWithError:(NSError *)error {
     [super dataProcessor:processor didFailWithError:error];
-    [self speakString:NSLocalizedString(@"Could not process location", nil)];
+    [self speakString:NSLocalizedString(@"No location information.", nil)];
 }
 
 #pragma mark feedback string
 
--(NSString *)quantitativeStringForDistance:(CLLocationDistance)distance {
-    NSString *stringDistance = [self.distanceFormatterSound stringFromDistance:floor(distance)];
-
-    return [NSString stringWithFormat:NSLocalizedString(@"You are off by %@", nil),stringDistance];
+-(NSString *)quantitativeStringForDrift:(DRDrift *)drift {
+    NSString *stringDistance = [self.distanceFormatterSound stringFromDistance:floor(drift.distance)];
+    if (drift.direction == DRDriftDirectionRight || drift.direction == DRDriftDirectionLeft) {
+        NSString *direction = drift.direction == DRDriftDirectionLeft ? NSLocalizedString(@"left", nil) : NSLocalizedString(@"right", nil);
+        return [NSString stringWithFormat:NSLocalizedString(@"You are off %@ to the %@.", nil),stringDistance, direction];
+    } else {
+        return [NSString stringWithFormat:NSLocalizedString(@"You are off by %@.", nil),stringDistance];
+    }
 }
 
--(NSString *)qualitativeStringForDistance:(CLLocationDistance)distance {
-    if (distance < [[DRVariableManager sharedManager] zone1Thresh]) {
-        return NSLocalizedString(@"You are on course", nil);
-    } else if (distance < [[DRVariableManager sharedManager] zone2Thresh]) {
-        return NSLocalizedString(@"You are drifting a little", nil);
+-(NSString *)qualitativeStringForDrift:(DRDrift *)drift {
+    NSString *zoneString;
+    if (drift.distance < [[DRVariableManager sharedManager] zone1Thresh]) {
+        zoneString = NSLocalizedString(@"zone 1", nil);
+    } else if (drift.distance < [[DRVariableManager sharedManager] zone2Thresh]) {
+        zoneString = NSLocalizedString(@"zone 2", nil);
     } else {
-        return NSLocalizedString(@"You are pretty far off", nil);
+        zoneString = NSLocalizedString(@"zone 3", nil);
+    }
+    if (drift.direction == DRDriftDirectionRight || drift.direction == DRDriftDirectionLeft) {
+        NSString *direction = drift.direction == DRDriftDirectionLeft ? NSLocalizedString(@"left", nil) : NSLocalizedString(@"right", nil);
+        return [NSString stringWithFormat:NSLocalizedString(@"You are in %@, drifting to the %@.", nil),zoneString, direction];
+    } else {
+        return [NSString stringWithFormat:NSLocalizedString(@"You are in %@.", nil),zoneString];
     }
 }
 

@@ -18,6 +18,7 @@ const BOOL debug = NO;
 @interface DRVisualFeedbackViewController ()
 
 @property (nonatomic, strong) UILabel *driftLabel;
+@property (nonatomic, strong) UILabel *directionLabel;
 @property (nonatomic, strong) NSMutableArray *locationHistory;
 @property (nonatomic, strong) DRPathView *pathView;
 @property (nonatomic, strong) MKMapView *map;
@@ -31,19 +32,31 @@ const BOOL debug = NO;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    UILabel *driftLabel = [[UILabel alloc] initWithFrame:CGRectMake(kSideMargin, valueForScreen(100, 120), self.view.width-2*kSideMargin, 100)];
+    UILabel *driftLabel = [[UILabel alloc] initWithFrame:CGRectMake(kSideMargin, self.navigationBar.bottom+kSideMargin, self.view.width-2*kSideMargin, 66)];
     driftLabel.textAlignment = NSTextAlignmentCenter;
     driftLabel.textColor = [DRTheme base4];
     driftLabel.backgroundColor = self.view.backgroundColor;
     driftLabel.adjustsFontSizeToFitWidth = YES;
     driftLabel.minimumScaleFactor = 0.25;
-    driftLabel.font = [DRTheme semiboldFontWithSize:64.f];
+    driftLabel.font = [DRTheme semiboldFontWithSize:56.f];
     driftLabel.text = NSLocalizedString(@"–", nil);
     driftLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:driftLabel];
     self.driftLabel = driftLabel;
 
-    DRPathView *path = [[DRPathView alloc] initWithFrame:CGRectMake(kSideMargin, driftLabel.bottom+20, self.view.width-2*kSideMargin, valueForScreen(150, 200))];
+    UILabel *directionLabel = [[UILabel alloc] initWithFrame:CGRectMake(kSideMargin, self.driftLabel.bottom, self.view.width-2*kSideMargin, 44)];
+    directionLabel.textAlignment = NSTextAlignmentCenter;
+    directionLabel.textColor = [DRTheme base4];
+    directionLabel.backgroundColor = self.view.backgroundColor;
+    directionLabel.adjustsFontSizeToFitWidth = YES;
+    directionLabel.minimumScaleFactor = 0.25;
+    directionLabel.font = [DRTheme semiboldFontWithSize:36.f];
+    directionLabel.text = nil;
+    directionLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:directionLabel];
+    self.directionLabel = directionLabel;
+
+    DRPathView *path = [[DRPathView alloc] initWithFrame:CGRectMake(kSideMargin, directionLabel.bottom+20, self.view.width-2*kSideMargin, self.view.height - directionLabel.bottom- self.bottomButton.height - 3*kSideMargin)];
     path.backgroundColor = self.view.backgroundColor;
     path.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:path];
@@ -51,7 +64,7 @@ const BOOL debug = NO;
     path.secondaryLocations = self.processor.locations;
     path.primaryLineColor = [DRTheme base4];
     path.secondaryLineColor = [DRTheme transparentBase4];
-    path.lineWidth = 4;
+    path.lineWidth = 6;
     path.verticalAlignment = NSArrayRelativePointsVerticalAlignmentCenter;
     path.horizontalAlignment = NSArrayRelativePointsHorizontalAlignmentCenter;
     self.pathView = path;
@@ -77,6 +90,15 @@ const BOOL debug = NO;
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDrift *)result {
     [super dataProcessor:processor didCalculateDrift:result];
     self.driftLabel.text = self.feedbackType == DRFeedbackTypeQualitative ? [self qualitativeStringForDrift:result] : [self quantitativeStringForDrift:result];
+
+    if (result.direction == DRDriftDirectionRight) {
+        self.directionLabel.text = [NSLocalizedString(@"right", nil) uppercaseString];
+    } else if (result.direction == DRDriftDirectionLeft) {
+        self.directionLabel.text = [NSLocalizedString(@"left", nil) uppercaseString];
+    } else {
+        self.directionLabel.text = nil;
+    }
+
     [self addLocationToHistory:result.location];
     self.pathView.primaryLocations = self.locationHistory;
 
@@ -138,22 +160,16 @@ const BOOL debug = NO;
 
 -(NSString *)quantitativeStringForDrift:(DRDrift *)drift {
     NSString *distance = [self.distanceFormatter stringFromDistance:drift.distance];
-    if (drift.direction == DRDriftDirectionRight) {
-        return [NSString stringWithFormat:NSLocalizedString(@"%@ right", nil),distance];
-    } else if (drift.direction == DRDriftDirectionLeft) {
-        return [NSString stringWithFormat:NSLocalizedString(@"%@ left", nil),distance];
-    } else {
-        return distance;
-    }
+    return distance;
 }
 
 -(NSString *)qualitativeStringForDrift:(DRDrift *)drift {
     if (drift.distance < [[DRVariableManager sharedManager] zone1Thresh]) {
-        return NSLocalizedString(@"On Course", nil);
+        return NSLocalizedString(@"Zone 1", nil);
     } else if (drift.distance < [[DRVariableManager sharedManager] zone2Thresh]) {
-        return NSLocalizedString(@"Drifting", nil);
+        return NSLocalizedString(@"Zone 2", nil);
     } else {
-        return NSLocalizedString(@"Way Off", nil);
+        return NSLocalizedString(@"Zone 3", nil);
     }
 }
 
