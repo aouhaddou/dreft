@@ -45,35 +45,35 @@ float degreesToRadians(float angle) {
 
 -(CLLocation *)dr_perpendicularLocationWithLocation:(CLLocation *)firstLocation location:(CLLocation *)secondLocation {
     //Project points into 2 dimensional plance using mercator projection
-    CGPoint P = [self dr_relativeMercatorCoordinate];
+    CGPoint T = [self dr_relativeMercatorCoordinate];
 
     CGPoint T1 = [firstLocation dr_relativeMercatorCoordinate];
     CGPoint T2 = [secondLocation dr_relativeMercatorCoordinate];
 
     //Calculate Perpendicular Point
-    CGPoint R;
+    CGPoint P;
 
     //Check for special cases
     if (T1.x == T2.x) {
         //aT infinite because line is vertical
         //Perpendicular is horizontal
-        R = CGPointMake(T1.x, P.y);
+        P = CGPointMake(T1.x, T.y);
     } else if (T1.y == T2.y) {
         //aT 0 because line is horizontal
         //Perpendicular is vertical
-        R = CGPointMake(P.x, T1.y);
+        P = CGPointMake(T.x, T1.y);
     } else {
         //Linear Equation for T1, T2
         CGFloat aT = (T1.y-T2.y)/(T1.x-T2.x);
         CGFloat nT = T1.y-aT*T1.x;
 
         CGFloat aP = -1.f/aT;
-        CGFloat nP = P.y-aP*P.x;
+        CGFloat nP = T.y-aP*T.x;
 
         CGFloat rX = (nP-nT)/(aT-aP);
         CGFloat rY = aP*rX+nP;
 
-        R = CGPointMake(rX, rY);
+        P = CGPointMake(rX, rY);
     }
 
     //Check if R is on line segment
@@ -81,18 +81,18 @@ float degreesToRadians(float angle) {
     BOOL xInRange = NO;
 
     if (T1.y <= T2.y) {
-        yInRange = T1.y <= R.y && R.y <= T2.y;
+        yInRange = T1.y <= P.y && P.y <= T2.y;
     } else {
-        yInRange = T2.y <= R.y && R.y <= T1.y;
+        yInRange = T2.y <= P.y && P.y <= T1.y;
     }
     if (T1.x <= T2.x) {
-        xInRange = T1.x <= R.x && R.x <= T2.x;
+        xInRange = T1.x <= P.x && P.x <= T2.x;
     } else {
-        xInRange = T2.x <= R.x && R.x <= T1.x;
+        xInRange = T2.x <= P.x && P.x <= T1.x;
     }
 
     if (yInRange && xInRange) {
-        return [CLLocation dr_locationFromRelativeMercatorCoordinateWithX:R.x y:R.y];
+        return [CLLocation dr_locationFromRelativeMercatorCoordinateWithX:P.x y:P.y];
     } else {
         //Find nearest corner
         CGFloat d1 = [self distanceFromLocation:firstLocation];
