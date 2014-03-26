@@ -20,7 +20,8 @@ typedef NS_ENUM(NSInteger, DRFeedbackType) {
 
 typedef NS_ENUM(NSInteger, DRFeedbackModality) {
     DRFeedbackModalityVisual = 0,
-    DRFeedbackModalityAudio = 1
+    DRFeedbackModalityAudio = 1,
+    DRFeedbackModalityMusic = 2
 };
 
 @interface DRFeedbackViewController : UIViewController <DRFeedbackModule>
