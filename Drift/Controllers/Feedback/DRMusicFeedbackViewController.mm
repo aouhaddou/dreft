@@ -35,40 +35,43 @@
 {
     [super viewDidLoad];
 
-    self.volume = 1;
+    self.volume = 0;
     self.pan = 0.5;
 
     __weak DRMusicFeedbackViewController * wself = self;
 
     self.audioManager = [Novocaine audioManager];
 
-    NSURL *inputFileURL = [[NSBundle mainBundle] URLForResource:@"01 Love Me Do" withExtension:@"mp3"];
+    NSURL *inputFileURL = [[NSBundle mainBundle] URLForResource:@"Sonar" withExtension:@"wav"];
 
     self.fileReader = [[AudioFileReader alloc]
                        initWithAudioFileURL:inputFileURL
                        samplingRate:self.audioManager.samplingRate
                        numChannels:self.audioManager.numOutputChannels];
 
-    [self.fileReader play];
-    self.fileReader.currentTime = 0.2;
-
     //http://mymbs.mbs.net/~pfisher/FOV2-0010016C/FOV2-0010016E/FOV2-001001A3/tutorials/ezine4/beginners/graph1.gif
 
     [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
     {
-        [wself.fileReader retrieveFreshAudio:data numFrames:numFrames numChannels:numChannels];
-        for (NSInteger i=0; i < numFrames; ++i)
-        {
-            for (NSInteger iChannel = 0; iChannel < numChannels; ++iChannel)
+        if (wself.volume > 0) {
+            if (wself.fileReader.currentTime > 2) {
+                wself.fileReader.currentTime = 0;
+            }
+            [wself.fileReader play];
+            [wself.fileReader retrieveFreshAudio:data numFrames:numFrames numChannels:numChannels];
+            for (NSInteger i=0; i < numFrames; ++i)
             {
-                NSInteger frameIndex = i*numChannels + iChannel;
-                if (iChannel == 0) {
-                    //Left
-                    CGFloat newMult = wself.volume*cos(wself.pan*M_PI/2);
-                    data[frameIndex] = data[frameIndex] * newMult;
-                } else {
-                    CGFloat newMult = wself.volume*sin(wself.pan*M_PI/2);
-                    data[frameIndex] = data[frameIndex] * newMult;
+                for (NSInteger iChannel = 0; iChannel < numChannels; ++iChannel)
+                {
+                    NSInteger frameIndex = i*numChannels + iChannel;
+                    if (iChannel == 0) {
+                        //Left
+                        CGFloat newMult = wself.volume*cos(wself.pan*M_PI/2);
+                        data[frameIndex] = data[frameIndex] * newMult;
+                    } else {
+                        CGFloat newMult = wself.volume*sin(wself.pan*M_PI/2);
+                        data[frameIndex] = data[frameIndex] * newMult;
+                    }
                 }
             }
         }
@@ -108,7 +111,7 @@
 }
 
 -(void)dataProcessor:(DRDataProcessor *)processor didFailWithError:(NSError *)error {
-    //
+    self.volume = 0;
 }
 
 @end
