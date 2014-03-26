@@ -63,10 +63,11 @@
             {
                 NSInteger frameIndex = i*numChannels + iChannel;
                 if (iChannel == 0) {
-                    CGFloat newMult = wself.volume*(1-wself.pan);
+                    //Left
+                    CGFloat newMult = wself.volume*cos(wself.pan*M_PI/2);
                     data[frameIndex] = data[frameIndex] * newMult;
                 } else {
-                    CGFloat newMult = wself.volume*wself.pan;
+                    CGFloat newMult = wself.volume*sin(wself.pan*M_PI/2);
                     data[frameIndex] = data[frameIndex] * newMult;
                 }
             }
