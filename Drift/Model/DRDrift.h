@@ -16,11 +16,15 @@ typedef NS_ENUM(NSInteger, DRDriftDirection) {
     DRDriftDirectionNoDrift
 };
 
+extern CLLocationDirection const DRDriftNoAngle;
+extern NSInteger const DRDriftLegUnknown;
+
 @interface DRDrift : NSObject <NSCoding>
 
 @property (nonatomic, assign, readonly) CLLocationDistance distance;
 @property (nonatomic, strong, readonly) CLLocation *location;
 @property (nonatomic, assign, readonly) NSInteger leg;
 @property (nonatomic, assign, readonly) DRDriftDirection direction;
+@property (nonatomic, assign, readonly) CLLocationDirection angle;
 
 @end

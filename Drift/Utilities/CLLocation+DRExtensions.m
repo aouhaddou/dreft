@@ -38,11 +38,6 @@ float degreesToRadians(float angle) {
     return [[CLLocation alloc] initWithLatitude:lat longitude:lon];
 }
 
--(CGFloat)dr_perpendicularDistanceWithLocation:(CLLocation *)firstLocation location:(CLLocation *)secondLocation {
-    CLLocation *perp = [self dr_perpendicularLocationWithLocation:firstLocation location:secondLocation];
-    return [self distanceFromLocation:perp];
-}
-
 -(CLLocation *)dr_perpendicularLocationWithLocation:(CLLocation *)firstLocation location:(CLLocation *)secondLocation {
     //Project points into 2 dimensional plance using mercator projection
     CGPoint T = [self dr_relativeMercatorCoordinate];

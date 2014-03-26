@@ -16,6 +16,7 @@
 -(void)setLocation:(CLLocation *)location;
 -(void)setLeg:(NSInteger)leg;
 -(void)setDirection:(DRDriftDirection)direction;
+-(void)setAngle:(CGFloat)angle;
 
 @end
 
@@ -75,26 +76,32 @@
         //Check all path legs and return shortest distance
         CLLocationDistance minDrift = DBL_MAX;
         NSInteger leg = -1;
+        CLLocation *p1;
+        CLLocation *p2;
 
         for (NSInteger i = 0; i<count-1; i++) {
             CLLocation *point1 = self.locations[i];
             CLLocation *point2 = self.locations[i+1];
-
-            CLLocationDistance drift = [location dr_perpendicularDistanceWithLocation:point1 location:point2];
+            CLLocation *perp = [location dr_perpendicularLocationWithLocation:point1 location:point2];
+            CLLocationDistance drift = [location distanceFromLocation:perp];
             if (drift<minDrift) {
                 minDrift = drift;
                 leg = i;
+                p1 = point1;
+                p2 = point2;
             }
         }
+
         DRDrift *result = [DRDrift new];
         result.distance = minDrift;
         result.location = location;
         result.leg = leg;
 
         //Calculate direction
-        CLLocation *l1 = self.locations[leg];
-        CLLocation *l2 = self.locations[leg+1];
-        result.direction = [self directionForFirstPoint:l1 secondPoint:l2 currentPosition:location];
+        result.direction = [self directionForFirstPoint:p1 secondPoint:p2 currentPosition:location];
+
+        //Calculate angle
+        result.angle = [self angleForFirstPoint:p1 secondPoint:p2 currentPosition:location driftDirection:result.direction];
 
         return result;
     }
@@ -118,6 +125,41 @@
     } else {
         return DRDriftDirectionRight;
     }
+}
+
+-(CLLocationDirection)angleForFirstPoint:(CLLocation *)first secondPoint:(CLLocation *)second currentPosition:(CLLocation *)position driftDirection:(DRDriftDirection)direction {
+    if (!CLLocationCoordinate2DIsValid(first.coordinate) || !CLLocationCoordinate2DIsValid(second.coordinate) || !CLLocationCoordinate2DIsValid(position.coordinate) || position.course < 0 || !(direction == DRDriftDirectionRight || direction == DRDriftDirectionLeft)) {
+        return DRDriftNoAngle;
+    }
+
+    CLLocationDirection heading = [self headingForFirstPoint:first secondPoint:second];
+    CLLocationDirection angle = heading - position.course;
+
+    if (angle > 180) {
+        angle -= 360;
+    } else if (angle < -180) {
+        angle += 360;
+    }
+    if (direction == DRDriftDirectionRight) {
+        angle *= -1;
+    }
+    return angle;
+}
+
+-(CLLocationDirection)headingForFirstPoint:(CLLocation *)first secondPoint:(CLLocation *)second {
+    CLLocationCoordinate2D coord1 = first.coordinate;
+    CLLocationCoordinate2D coord2 = second.coordinate;
+
+    CLLocationDegrees deltaLong = coord2.longitude - coord1.longitude;
+    CLLocationDegrees yComponent = sin(deltaLong) * cos(coord2.latitude);
+    CLLocationDegrees xComponent = (cos(coord1.latitude) * sin(coord2.latitude)) - (sin(coord1.latitude) * cos(coord2.latitude) * cos(deltaLong));
+
+    CLLocationDegrees radians = atan2(yComponent, xComponent);
+    CLLocationDegrees degrees = radians*180/M_PI + 360;
+
+    CLLocationDirection heading = fmod(degrees, 360);
+
+    return heading;
 }
 
 -(void)locationManager:(DRLocationManager *)manager didFailWithError:(NSError *)error {
