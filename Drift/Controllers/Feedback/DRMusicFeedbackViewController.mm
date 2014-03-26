@@ -49,21 +49,20 @@
 
     NSURL *inputFileURL = [[NSBundle mainBundle] URLForResource:@"Sonar" withExtension:@"wav"];
 
-    self.fileReader = [[AudioFileReader alloc]
-                       initWithAudioFileURL:inputFileURL
-                       samplingRate:self.audioManager.samplingRate
-                       numChannels:self.audioManager.numOutputChannels];
-
-    //http://mymbs.mbs.net/~pfisher/FOV2-0010016C/FOV2-0010016E/FOV2-001001A3/tutorials/ezine4/beginners/graph1.gif
-
     [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
     {
         if (wself.volume > 0) {
-            if (wself.fileReader.currentTime > 0.5) {
-                wself.fileReader.currentTime = 0;
+            if (![wself.fileReader playing]) {
+                wself.fileReader = nil;
+                wself.fileReader = [[AudioFileReader alloc]
+                                   initWithAudioFileURL:inputFileURL
+                                   samplingRate:wself.audioManager.samplingRate
+                                   numChannels:wself.audioManager.numOutputChannels];
+                [wself.fileReader play];
             }
-            [wself.fileReader play];
+
             [wself.fileReader retrieveFreshAudio:data numFrames:numFrames numChannels:numChannels];
+            
             for (NSInteger i=0; i < numFrames; ++i)
             {
                 for (NSInteger iChannel = 0; iChannel < numChannels; ++iChannel)
@@ -113,41 +112,37 @@
     CGFloat panPos = 0.5; // 0 = left, 0.5 middle, 1 = right
 
     //Pan with distance
-//    if ((result.direction == DRDriftDirectionLeft || result.direction == DRDriftDirectionRight)) {
-//
-//        // relative pan amount from 0 to 1
-//        CGFloat rel = fabs(result.distance/([[DRVariableManager sharedManager] zone2Thresh]/1.5));
-//
-//        panPos = result.direction == DRDriftDirectionRight ? 0.5-rel/2 : 0.5+rel/2;
-//        panPos = MAX(0.1, MIN(0.9, panPos));
-//    } else {
-//        panPos = 0.5;
-//    }
-//
-//    DLog(@"Drift: %f, Pan: %f, Volume: %f", result.distance, self.pan, self.volume);
-//
-//    self.pan = panPos;
+    if ((result.direction == DRDriftDirectionLeft || result.direction == DRDriftDirectionRight)) {
 
-    //Pan with angle
-    if (result.angle != DRDriftNoAngle) {
-        if (result.direction == DRDriftDirectionLeft) {
-            if (result.angle >= 0) {
-                panPos = 1 - result.angle/180;
-            } else {
-                panPos = 1 + result.angle/180;
-            }
-        } else if (result.direction == DRDriftDirectionRight) {
-            if (result.angle >= 0) {
-                panPos = result.angle/180;
-            } else {
-                panPos = - result.angle/180;
-            }
-        }
+        // relative pan amount from 0 to 1
+        CGFloat rel = fabs(result.distance/([[DRVariableManager sharedManager] zone2Thresh]/1.5));
+
+        panPos = result.direction == DRDriftDirectionRight ? 0.5-rel/2 : 0.5+rel/2;
+    } else {
+        panPos = 0.5;
     }
 
-    //Soften transition from left to right
-    CGFloat panMult = MAX(0, MIN(1, result.distance/14));
-    panPos = panMult*panPos + (1-panMult)*0.5;
+    self.pan = panPos;
+
+    //Pan with angle
+//    if (result.angle != DRDriftNoAngle) {
+//        if (result.direction == DRDriftDirectionLeft) {
+//            if (result.angle >= 0) {
+//                panPos = 1 - result.angle/180;
+//            } else {
+//                panPos = 1 + result.angle/180;
+//            }
+//        } else if (result.direction == DRDriftDirectionRight) {
+//            if (result.angle >= 0) {
+//                panPos = result.angle/180;
+//            } else {
+//                panPos = - result.angle/180;
+//            }
+//        }
+//    }
+//    //Soften transition from left to right
+//    CGFloat panMult = MAX(0, MIN(1, result.distance/14));
+//    panPos = panMult*panPos + (1-panMult)*0.5;
 
     panPos = MAX(0.1, MIN(0.9, panPos));
     self.pan = panPos;
