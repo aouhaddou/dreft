@@ -9,6 +9,8 @@
 #import "DRMusicFeedbackViewController.h"
 #import "Novocaine.h"
 #import "AudioFileReader.h"
+#import "DRPathView.h"
+#import "NSDate+Utilities.h"
 
 @interface DRMusicFeedbackViewController ()
 
@@ -17,6 +19,9 @@
 
 @property (nonatomic, assign) CGFloat volume;
 @property (nonatomic, assign) CGFloat pan;
+
+@property (nonatomic, strong) DRPathView *pathView;
+@property (nonatomic, strong) NSMutableArray *locationHistory;
 
 @end
 
@@ -54,7 +59,7 @@
     [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
     {
         if (wself.volume > 0) {
-            if (wself.fileReader.currentTime > 2) {
+            if (wself.fileReader.currentTime > 0.5) {
                 wself.fileReader.currentTime = 0;
             }
             [wself.fileReader play];
@@ -78,6 +83,19 @@
     }];
 
     [self.audioManager play];
+
+    DRPathView *path = [[DRPathView alloc] initWithFrame:CGRectMake(kSideMargin, 150, self.view.width-2*kSideMargin, self.view.height - 150 - self.bottomButton.height - 3*kSideMargin)];
+    path.backgroundColor = self.view.backgroundColor;
+    path.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:path];
+    path.marksEndOfPrimaryLine = YES;
+    path.secondaryLocations = self.processor.locations;
+    path.primaryLineColor = [DRTheme base4];
+    path.secondaryLineColor = [DRTheme transparentBase4];
+    path.lineWidth = 6;
+    path.verticalAlignment = NSArrayRelativePointsVerticalAlignmentCenter;
+    path.horizontalAlignment = NSArrayRelativePointsHorizontalAlignmentCenter;
+    self.pathView = path;
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,22 +110,61 @@
                                 //<1 = less fine in close ranges, controlled dropoff in far ranges
     self.volume = MAX(0.2, 1 - pow(fabs(result.distance/[[DRVariableManager sharedManager] zone2Thresh]), volumeCurve));
 
-    CGFloat panPos; // 0 = left, 0.5 middle, 1 = right
+    CGFloat panPos = 0.5; // 0 = left, 0.5 middle, 1 = right
 
-    if ((result.direction == DRDriftDirectionLeft || result.direction == DRDriftDirectionRight)) {
+    //Pan with distance
+//    if ((result.direction == DRDriftDirectionLeft || result.direction == DRDriftDirectionRight)) {
+//
+//        // relative pan amount from 0 to 1
+//        CGFloat rel = fabs(result.distance/([[DRVariableManager sharedManager] zone2Thresh]/1.5));
+//
+//        panPos = result.direction == DRDriftDirectionRight ? 0.5-rel/2 : 0.5+rel/2;
+//        panPos = MAX(0.1, MIN(0.9, panPos));
+//    } else {
+//        panPos = 0.5;
+//    }
+//
+//    DLog(@"Drift: %f, Pan: %f, Volume: %f", result.distance, self.pan, self.volume);
+//
+//    self.pan = panPos;
 
-        // relative pan amount from 0 to 1
-        CGFloat rel = fabs(result.distance/([[DRVariableManager sharedManager] zone2Thresh]/1.5));
-
-        panPos = result.direction == DRDriftDirectionRight ? 0.5-rel/2 : 0.5+rel/2;
-        panPos = MAX(0.1, MIN(0.9, panPos));
-    } else {
-        panPos = 0.5;
+    //Pan with angle
+    if (result.angle != DRDriftNoAngle) {
+        if (result.direction == DRDriftDirectionLeft) {
+            if (result.angle >= 0) {
+                panPos = 1 - result.angle/180;
+            } else {
+                panPos = 1 + result.angle/180;
+            }
+        } else if (result.direction == DRDriftDirectionRight) {
+            if (result.angle >= 0) {
+                panPos = result.angle/180;
+            } else {
+                panPos = - result.angle/180;
+            }
+        }
     }
 
-    DLog(@"Drift: %f, Pan: %f, Volume: %f", result.distance, self.pan, self.volume);
+    //Soften transition from left to right
+    CGFloat panMult = MAX(0, MIN(1, result.distance/14));
+    panPos = panMult*panPos + (1-panMult)*0.5;
 
+    panPos = MAX(0.1, MIN(0.9, panPos));
     self.pan = panPos;
+
+    [self addLocationToHistory:result.location];
+    self.pathView.primaryLocations = self.locationHistory;
+}
+
+-(void)addLocationToHistory:(CLLocation *)location {
+    if (self.locationHistory == nil) {
+        self.locationHistory = [[NSMutableArray alloc] init];
+    }
+    CLLocation *last = [self.locationHistory lastObject];
+
+    if (last == nil || [last.timestamp isEarlierThanDate:location.timestamp]) {
+        [self.locationHistory addObject:location];
+    }
 }
 
 -(void)dataProcessor:(DRDataProcessor *)processor didFailWithError:(NSError *)error {
