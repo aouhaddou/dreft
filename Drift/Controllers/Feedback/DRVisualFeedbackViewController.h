@@ -7,8 +7,7 @@
 //
 
 #import "DRFeedbackViewController.h"
-@import MapKit;
 
-@interface DRVisualFeedbackViewController : DRFeedbackViewController <DRFeedbackModule, MKMapViewDelegate>
+@interface DRVisualFeedbackViewController : DRFeedbackViewController <DRFeedbackModule>
 
 @end

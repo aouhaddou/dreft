@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Christoph Albert. All rights reserved.
 //
 
-#import "DRMusicFeedbackViewController.h"
+#import "DRSonarFeedbackViewController.h"
 #import "Novocaine.h"
 #import "AudioFileReader.h"
 #import "DRPathView.h"
 #import "NSDate+Utilities.h"
 
-@interface DRMusicFeedbackViewController ()
+@interface DRSonarFeedbackViewController ()
 
 @property (nonatomic, strong) Novocaine *audioManager;
 @property (nonatomic, strong) AudioFileReader *fileReader;
@@ -25,7 +25,7 @@
 
 @end
 
-@implementation DRMusicFeedbackViewController
+@implementation DRSonarFeedbackViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,7 +43,7 @@
     self.volume = 0;
     self.pan = 0.5;
 
-    __weak DRMusicFeedbackViewController * wself = self;
+    __weak DRSonarFeedbackViewController * wself = self;
 
     self.audioManager = [Novocaine audioManager];
 

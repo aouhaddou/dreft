@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		2CD64F62050C4DB5BE0CC1CA /* libPods-DriftTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A338CB7525492CA914F2AF /* libPods-DriftTests.a */; };
 		83225B8F18D60A3400871913 /* DRCheckpointAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 83225B8E18D60A3400871913 /* DRCheckpointAnnotation.m */; };
+		836EEE6E18E45FAA00D4D5B9 /* DRDriftView.m in Sources */ = {isa = PBXBuildFile; fileRef = 836EEE6D18E45FAA00D4D5B9 /* DRDriftView.m */; };
 		8376E5F518B7A335005CFB78 /* Drift.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8376E5F318B7A335005CFB78 /* Drift.xcdatamodeld */; };
 		8376E60518B7A464005CFB78 /* DRPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 8376E5FD18B7A464005CFB78 /* DRPath.m */; };
 		8376E60618B7A464005CFB78 /* DRRun.m in Sources */ = {isa = PBXBuildFile; fileRef = 8376E5FF18B7A464005CFB78 /* DRRun.m */; };
@@ -69,7 +70,7 @@
 		838D12CF18BCD41200675187 /* NSArray+DRExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 838D12CE18BCD41200675187 /* NSArray+DRExtensions.m */; };
 		8392239818BE51E6003929A0 /* DRLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392239718BE51E6003929A0 /* DRLocationManager.m */; };
 		8392239B18BE5371003929A0 /* DRDataProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8392239A18BE5371003929A0 /* DRDataProcessor.m */; };
-		83994E3F18E31A8300C5F10E /* DRMusicFeedbackViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83994E3E18E31A8300C5F10E /* DRMusicFeedbackViewController.mm */; };
+		83994E3F18E31A8300C5F10E /* DRSonarFeedbackViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83994E3E18E31A8300C5F10E /* DRSonarFeedbackViewController.mm */; };
 		83994E4918E31C2700C5F10E /* AudioFileReader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 83994E4218E31C2700C5F10E /* AudioFileReader.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		83994E4A18E31C2700C5F10E /* AudioFileWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 83994E4418E31C2700C5F10E /* AudioFileWriter.m */; };
 		83994E4B18E31C2700C5F10E /* Novocaine.m in Sources */ = {isa = PBXBuildFile; fileRef = 83994E4618E31C2700C5F10E /* Novocaine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -130,6 +131,8 @@
 		6182D03EDE384F918A26C950 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		83225B8D18D60A3400871913 /* DRCheckpointAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRCheckpointAnnotation.h; sourceTree = "<group>"; };
 		83225B8E18D60A3400871913 /* DRCheckpointAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRCheckpointAnnotation.m; sourceTree = "<group>"; };
+		836EEE6C18E45FAA00D4D5B9 /* DRDriftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRDriftView.h; sourceTree = "<group>"; };
+		836EEE6D18E45FAA00D4D5B9 /* DRDriftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRDriftView.m; sourceTree = "<group>"; };
 		8376E5F418B7A335005CFB78 /* Drift.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Drift.xcdatamodel; sourceTree = "<group>"; };
 		8376E5FC18B7A464005CFB78 /* DRPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRPath.h; sourceTree = "<group>"; };
 		8376E5FD18B7A464005CFB78 /* DRPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRPath.m; sourceTree = "<group>"; };
@@ -216,8 +219,8 @@
 		8392239918BE5371003929A0 /* DRDataProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRDataProcessor.h; sourceTree = "<group>"; };
 		8392239A18BE5371003929A0 /* DRDataProcessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRDataProcessor.m; sourceTree = "<group>"; };
 		8392239C18BE5466003929A0 /* DRMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRMacros.h; sourceTree = "<group>"; };
-		83994E3D18E31A8300C5F10E /* DRMusicFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRMusicFeedbackViewController.h; sourceTree = "<group>"; };
-		83994E3E18E31A8300C5F10E /* DRMusicFeedbackViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DRMusicFeedbackViewController.mm; sourceTree = "<group>"; };
+		83994E3D18E31A8300C5F10E /* DRSonarFeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRSonarFeedbackViewController.h; sourceTree = "<group>"; };
+		83994E3E18E31A8300C5F10E /* DRSonarFeedbackViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DRSonarFeedbackViewController.mm; sourceTree = "<group>"; };
 		83994E4118E31C2700C5F10E /* AudioFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileReader.h; sourceTree = "<group>"; };
 		83994E4218E31C2700C5F10E /* AudioFileReader.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AudioFileReader.mm; sourceTree = "<group>"; };
 		83994E4318E31C2700C5F10E /* AudioFileWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFileWriter.h; sourceTree = "<group>"; };
@@ -450,12 +453,14 @@
 				8384DEB318C639EF002B551B /* DRVisualFeedbackViewController.m */,
 				8384DEB518C63B85002B551B /* DRPathView.h */,
 				8384DEB618C63B85002B551B /* DRPathView.m */,
+				836EEE6C18E45FAA00D4D5B9 /* DRDriftView.h */,
+				836EEE6D18E45FAA00D4D5B9 /* DRDriftView.m */,
 				83DCECC918C7C1DD004D0B34 /* DRAudioFeedbackViewController.h */,
 				83DCECCA18C7C1DD004D0B34 /* DRAudioFeedbackViewController.m */,
 				83B2779C18CA0F43009AA3B4 /* DRCountdownCircle.h */,
 				83B2779D18CA0F43009AA3B4 /* DRCountdownCircle.m */,
-				83994E3D18E31A8300C5F10E /* DRMusicFeedbackViewController.h */,
-				83994E3E18E31A8300C5F10E /* DRMusicFeedbackViewController.mm */,
+				83994E3D18E31A8300C5F10E /* DRSonarFeedbackViewController.h */,
+				83994E3E18E31A8300C5F10E /* DRSonarFeedbackViewController.mm */,
 			);
 			path = Feedback;
 			sourceTree = "<group>";
@@ -837,7 +842,7 @@
 				8376E60818B7A464005CFB78 /* _DRRun.m in Sources */,
 				83B2779E18CA0F43009AA3B4 /* DRCountdownCircle.m in Sources */,
 				8384DEAA18C6305A002B551B /* DRFeedbackViewController.m in Sources */,
-				83994E3F18E31A8300C5F10E /* DRMusicFeedbackViewController.mm in Sources */,
+				83994E3F18E31A8300C5F10E /* DRSonarFeedbackViewController.mm in Sources */,
 				83CFD2AF18CB7761009FB444 /* DROCADXMLParser.m in Sources */,
 				8382943018C7893C003F1FF6 /* DRPathsViewController.m in Sources */,
 				8376E60518B7A464005CFB78 /* DRPath.m in Sources */,
@@ -864,6 +869,7 @@
 				8384DE6E18C53DB9002B551B /* UIColor+Hex.m in Sources */,
 				83994E4C18E31C2700C5F10E /* RingBuffer.mm in Sources */,
 				83225B8F18D60A3400871913 /* DRCheckpointAnnotation.m in Sources */,
+				836EEE6E18E45FAA00D4D5B9 /* DRDriftView.m in Sources */,
 				8384DE7718C54306002B551B /* UIColor+Extensions.m in Sources */,
 				83FF2BBA18C8ECD10011E79F /* DRChoosePathViewController.m in Sources */,
 				8384DE9518C621C9002B551B /* BROverlayView.m in Sources */,

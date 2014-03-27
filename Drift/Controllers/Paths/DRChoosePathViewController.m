@@ -11,7 +11,7 @@
 #import "DRDataProcessor.h"
 #import "DRVisualFeedbackViewController.h"
 #import "DRAudioFeedbackViewController.h"
-#import "DRMusicFeedbackViewController.h"
+#import "DRSonarFeedbackViewController.h"
 
 @interface DRChoosePathViewController ()
 
@@ -49,7 +49,7 @@
     } else if (self.feedbackModality == DRFeedbackModalityAudio) {
         feedbackViewController = [[DRAudioFeedbackViewController alloc] initWithDataProcessor:proc];
     } else {
-        feedbackViewController = [[DRMusicFeedbackViewController alloc] initWithDataProcessor:proc];
+        feedbackViewController = [[DRSonarFeedbackViewController alloc] initWithDataProcessor:proc];
     }
     feedbackViewController.feedbackType = self.feedbackType;
     feedbackViewController.pathID = path.uniqueID;

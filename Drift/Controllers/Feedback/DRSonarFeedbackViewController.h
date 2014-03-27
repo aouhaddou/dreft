@@ -8,6 +8,6 @@
 
 #import "DRFeedbackViewController.h"
 
-@interface DRMusicFeedbackViewController : DRFeedbackViewController <DRFeedbackModule>
+@interface DRSonarFeedbackViewController : DRFeedbackViewController <DRFeedbackModule>
 
 @end
