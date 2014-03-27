@@ -33,7 +33,7 @@ const BOOL debug = NO;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    UILabel *driftLabel = [[UILabel alloc] initWithFrame:CGRectMake(kSideMargin, self.navigationBar.bottom+kSideMargin, self.view.width-2*kSideMargin, 66)];
+    UILabel *driftLabel = [[UILabel alloc] initWithFrame:CGRectMake(kSideMargin, self.navigationBar.bottom, self.view.width-2*kSideMargin, 66)];
     driftLabel.textAlignment = NSTextAlignmentCenter;
     driftLabel.textColor = [DRTheme base4];
     driftLabel.backgroundColor = self.view.backgroundColor;
@@ -57,7 +57,7 @@ const BOOL debug = NO;
     [self.view addSubview:directionLabel];
     self.directionLabel = directionLabel;
 
-    DRDriftView *driftView = [[DRDriftView alloc] initWithFrame:CGRectMake(kSideMargin, debug ? 0 : directionLabel.bottom+20, self.view.width-2*kSideMargin, self.view.width-2*kSideMargin)];
+    DRDriftView *driftView = [[DRDriftView alloc] initWithFrame:CGRectMake(kSideMargin, debug ? 0 : directionLabel.bottom+kSideMargin, self.view.width-2*kSideMargin, self.view.width-2*kSideMargin)];
     driftView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.driftView = driftView;
     [self.view insertSubview:driftView atIndex:0];
