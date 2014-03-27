@@ -63,7 +63,8 @@ const BOOL debug = NO;
     [self.view insertSubview:driftView atIndex:0];
 
     if (debug) {
-        DRPathView *path = [[DRPathView alloc] initWithFrame:CGRectMake(kSideMargin, directionLabel.bottom+70, self.view.width, self.view.height - directionLabel.bottom- self.bottomButton.height - 3*kSideMargin)];
+        self.driftView.hidden = YES;
+        DRPathView *path = [[DRPathView alloc] initWithFrame:CGRectMake(kSideMargin, directionLabel.bottom+70, self.view.width, self.view.height - directionLabel.bottom- self.bottomButton.height - 4*kSideMargin)];
         path.backgroundColor = self.view.backgroundColor;
         path.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         path.marksEndOfPrimaryLine = YES;

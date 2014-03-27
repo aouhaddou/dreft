@@ -97,6 +97,11 @@
     self.pathView = path;
 }
 
+-(void)dealloc {
+    [self.fileReader stop];
+    [self.audioManager pause];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

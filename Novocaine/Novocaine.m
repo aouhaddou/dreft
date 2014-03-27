@@ -177,6 +177,7 @@ static Novocaine *audioManager = nil;
 
 #pragma mark - Properties
 
+// TODO: Implement this.
 //- (void)setInputEnabled:(BOOL)inputEnabled
 //{
 //    _inputEnabled = inputEnabled;
@@ -293,14 +294,14 @@ static Novocaine *audioManager = nil;
     
     // Enable input
     // TODO: Conditionally disable input if option has not been specified
-//    UInt32 one = 1;
-//    CheckError( AudioUnitSetProperty(_inputUnit,
-//                                     kAudioOutputUnitProperty_EnableIO,
-//                                     kAudioUnitScope_Input,
-//                                     kInputBus,
-//                                     &one,
-//                                     sizeof(one)), "Couldn't enable IO on the input scope of output unit");
-
+    UInt32 one = 1;
+    CheckError( AudioUnitSetProperty(_inputUnit,
+                                     kAudioOutputUnitProperty_EnableIO,
+                                     kAudioUnitScope_Input,
+                                     kInputBus,
+                                     &one,
+                                     sizeof(one)), "Couldn't enable IO on the input scope of output unit");
+    
     
 #if defined ( USING_OSX )    
     // Disable output on the input unit
@@ -403,13 +404,13 @@ static Novocaine *audioManager = nil;
     
     
     // Set the current device to the default input unit.
-//    CheckError( AudioUnitSetProperty( _inputUnit, 
-//                                     kAudioOutputUnitProperty_CurrentDevice, 
-//                                     kAudioUnitScope_Global, 
-//                                     kOutputBus, 
-//                                     &_defaultInputDeviceID,
-//                                     sizeof(AudioDeviceID) ), "Couldn't set the current input audio device");
-
+    CheckError( AudioUnitSetProperty( _inputUnit, 
+                                     kAudioOutputUnitProperty_CurrentDevice, 
+                                     kAudioUnitScope_Global, 
+                                     kOutputBus, 
+                                     &_defaultInputDeviceID,
+                                     sizeof(AudioDeviceID) ), "Couldn't set the current input audio device");
+    
     CheckError( AudioUnitSetProperty( _outputUnit,
                                      kAudioOutputUnitProperty_CurrentDevice, 
                                      kAudioUnitScope_Global, 
