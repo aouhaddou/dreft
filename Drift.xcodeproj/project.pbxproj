@@ -78,7 +78,6 @@
 		83994E4E18E31C5800C5F10E /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83994E4D18E31C5800C5F10E /* Accelerate.framework */; };
 		83994E5018E31C6100C5F10E /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83994E4F18E31C6100C5F10E /* CoreAudio.framework */; };
 		83994E5218E31C6B00C5F10E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83994E5118E31C6B00C5F10E /* AudioToolbox.framework */; };
-		83994E5618E33F9B00C5F10E /* Sonar.wav in Resources */ = {isa = PBXBuildFile; fileRef = 83994E5518E33F9B00C5F10E /* Sonar.wav */; };
 		83B2779818C9FEF7009AA3B4 /* DRDrift.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B2779718C9FEF7009AA3B4 /* DRDrift.m */; };
 		83B2779B18CA0D3D009AA3B4 /* NSNumber+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B2779A18CA0D3D009AA3B4 /* NSNumber+Extensions.m */; };
 		83B2779E18CA0F43009AA3B4 /* DRCountdownCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B2779D18CA0F43009AA3B4 /* DRCountdownCircle.m */; };
@@ -86,6 +85,7 @@
 		83B277A418CA270F009AA3B4 /* DRToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B277A318CA270F009AA3B4 /* DRToolbar.m */; };
 		83B277A718CB4EBE009AA3B4 /* BRSettingsIcon.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B277A618CB4EBE009AA3B4 /* BRSettingsIcon.m */; };
 		83B277AA18CB5C8D009AA3B4 /* DRDraggableTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 83B277A918CB5C8D009AA3B4 /* DRDraggableTableViewCell.m */; };
+		83B28E4818E4D3B9001ED26A /* Sonar1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 83B28E4718E4D3B9001ED26A /* Sonar1.wav */; };
 		83B988A918B256F2009AA6E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988A818B256F2009AA6E7 /* Foundation.framework */; };
 		83B988AB18B256F2009AA6E7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988AA18B256F2009AA6E7 /* CoreGraphics.framework */; };
 		83B988AD18B256F2009AA6E7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83B988AC18B256F2009AA6E7 /* UIKit.framework */; };
@@ -232,7 +232,6 @@
 		83994E4D18E31C5800C5F10E /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		83994E4F18E31C6100C5F10E /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		83994E5118E31C6B00C5F10E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		83994E5518E33F9B00C5F10E /* Sonar.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = Sonar.wav; path = ../../../Desktop/Sonar.wav; sourceTree = "<group>"; };
 		83B2779618C9FEF7009AA3B4 /* DRDrift.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRDrift.h; sourceTree = "<group>"; };
 		83B2779718C9FEF7009AA3B4 /* DRDrift.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRDrift.m; sourceTree = "<group>"; };
 		83B2779918CA0D3D009AA3B4 /* NSNumber+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+Extensions.h"; sourceTree = "<group>"; };
@@ -247,6 +246,7 @@
 		83B277A618CB4EBE009AA3B4 /* BRSettingsIcon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BRSettingsIcon.m; sourceTree = "<group>"; };
 		83B277A818CB5C8D009AA3B4 /* DRDraggableTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DRDraggableTableViewCell.h; sourceTree = "<group>"; };
 		83B277A918CB5C8D009AA3B4 /* DRDraggableTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DRDraggableTableViewCell.m; sourceTree = "<group>"; };
+		83B28E4718E4D3B9001ED26A /* Sonar1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Sonar1.wav; sourceTree = "<group>"; };
 		83B988A518B256F2009AA6E7 /* Drift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83B988A818B256F2009AA6E7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		83B988AA18B256F2009AA6E7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -602,7 +602,7 @@
 		83B988B118B256F2009AA6E7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				83994E5518E33F9B00C5F10E /* Sonar.wav */,
+				83B28E4718E4D3B9001ED26A /* Sonar1.wav */,
 				83CFD2AB18CB76DC009FB444 /* Courses.xml */,
 				83B988B218B256F2009AA6E7 /* Drift-Info.plist */,
 				83B988B318B256F2009AA6E7 /* InfoPlist.strings */,
@@ -716,7 +716,7 @@
 				83CFD2AC18CB76DC009FB444 /* Courses.xml in Resources */,
 				8384DEA218C62910002B551B /* OpenSans-Semibold.ttf in Resources */,
 				8384DEAB18C6305A002B551B /* DRFeedbackViewController.xib in Resources */,
-				83994E5618E33F9B00C5F10E /* Sonar.wav in Resources */,
+				83B28E4818E4D3B9001ED26A /* Sonar1.wav in Resources */,
 				83FF2BB118C8A6C70011E79F /* DRNewPathViewController.xib in Resources */,
 				83B988B518B256F2009AA6E7 /* InfoPlist.strings in Resources */,
 				8382941918C77653003F1FF6 /* Play@2x.png in Resources */,

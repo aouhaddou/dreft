@@ -87,11 +87,15 @@ CGFloat const lineWidth = 4;
             self.transform = CGAffineTransformIdentity;
         } else {
             CLLocationDegrees deg = drift.angle;
-            if (deg > 90) {
-                deg = 90;
-            } else if (deg < -90) {
-                deg = -90;
+
+            //Small ranges graphically less severe
+            CGFloat factor = 1.6;
+            if (deg >= 0 && deg < 90) {
+                deg = pow(deg/90,factor)*90;
+            } else if (deg < 0 && deg > -90) {
+                deg = -pow(fabs(deg)/90,factor)*90;
             }
+
             if (drift.direction == DRDriftDirectionLeft) {
                 self.transform = CGAffineTransformMakeRotation(deg*M_PI/180);
             } else {

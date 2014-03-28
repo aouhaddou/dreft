@@ -15,6 +15,7 @@
 #import "DRDriftView.h"
 
 const BOOL debug = NO;
+const BOOL showAngle = YES;
 
 @interface DRVisualFeedbackViewController ()
 
@@ -64,7 +65,7 @@ const BOOL debug = NO;
 
     if (debug) {
         self.driftView.hidden = YES;
-        DRPathView *path = [[DRPathView alloc] initWithFrame:CGRectMake(kSideMargin, directionLabel.bottom+70, self.view.width, self.view.height - directionLabel.bottom- self.bottomButton.height - 4*kSideMargin)];
+        DRPathView *path = [[DRPathView alloc] initWithFrame:CGRectMake(kSideMargin, directionLabel.bottom+kSideMargin, self.view.width-2*kSideMargin, self.view.height - directionLabel.bottom- self.bottomButton.height - 3*kSideMargin)];
         path.backgroundColor = self.view.backgroundColor;
         path.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         path.marksEndOfPrimaryLine = YES;
@@ -92,14 +93,14 @@ const BOOL debug = NO;
     [super dataProcessor:processor didCalculateDrift:result];
     self.driftLabel.text = self.feedbackType == DRFeedbackTypeQualitative ? [self qualitativeStringForDrift:result] : [self quantitativeStringForDrift:result];
 
+    NSString *directionString = nil;
     if (result.direction == DRDriftDirectionRight) {
-        self.directionLabel.text = [NSLocalizedString(@"right", nil) uppercaseString];
+        directionString = [NSLocalizedString(@"right", nil) uppercaseString];
     } else if (result.direction == DRDriftDirectionLeft) {
-        self.directionLabel.text = [NSLocalizedString(@"left", nil) uppercaseString];
-    } else {
-        self.directionLabel.text = nil;
+        directionString = [NSLocalizedString(@"left", nil) uppercaseString];
     }
 
+    self.directionLabel.text = showAngle ? [NSString stringWithFormat:@"%.0f°, %@",result.angle,directionString] : directionString;
     self.driftView.drift = result;
 
     if (debug) {

@@ -47,7 +47,7 @@
 
     self.audioManager = [Novocaine audioManager];
 
-    NSURL *inputFileURL = [[NSBundle mainBundle] URLForResource:@"Sonar" withExtension:@"wav"];
+    NSURL *inputFileURL = [[NSBundle mainBundle] URLForResource:@"Sonar1" withExtension:@"wav"];
 
     [self.audioManager setOutputBlock:^(float *data, UInt32 numFrames, UInt32 numChannels)
     {

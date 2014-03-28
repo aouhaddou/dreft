@@ -78,6 +78,7 @@
         NSInteger leg = -1;
         CLLocation *p1;
         CLLocation *p2;
+        CLLocation *r;
 
         for (NSInteger i = 0; i<count-1; i++) {
             CLLocation *point1 = self.locations[i];
@@ -89,6 +90,7 @@
                 leg = i;
                 p1 = point1;
                 p2 = point2;
+                r = perp;
             }
         }
 
