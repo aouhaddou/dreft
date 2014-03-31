@@ -3,8 +3,6 @@ platform :ios, '7.0'
 pod 'MagicalRecord'
 pod 'FrameAccessor'
 pod 'FlatUIKit'
-pod 'TBXML'
-pod 'TBXML+NSDictionary'
 
 target :DriftTests, :exclusive => true do
     pod 'Expecta'

@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DROCADXMLParser : NSObject
+@interface DRGPXParser : NSObject
 
-+(void)parseXMLData:(NSData *)data;
++(void)parseContentsOfURL:(NSURL *)url;
 
 @end

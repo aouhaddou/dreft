@@ -9,7 +9,7 @@
 #import "DRAppDelegate.h"
 #import "DRRunsViewController.h"
 #import "CoreData+MagicalRecord.h"
-#import "DROCADXMLParser.h"
+#import "DRGPXParser.h"
 
 @import CoreLocation;
 
@@ -31,15 +31,14 @@
 
     [self.window makeKeyAndVisible];
 
-//    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"Courses" ofType:@"xml"];
-//    NSData *myData = [NSData dataWithContentsOfFile:filePath];
-//    [DROCADXMLParser parseXMLData:myData];
+//    NSURL *url = [[NSBundle mainBundle] URLForResource:@"mystic_basin_trail" withExtension:@"gpx"];
+//    [DRGPXParser parseContentsOfURL:url];
 
     return YES;
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    [DROCADXMLParser parseXMLData:[NSData dataWithContentsOfURL:url]];
+    [DRGPXParser parseContentsOfURL:url];
     return YES;
 }
 
