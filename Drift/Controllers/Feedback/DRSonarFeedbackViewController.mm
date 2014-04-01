@@ -11,8 +11,11 @@
 #import "AudioFileReader.h"
 #import "DRPathView.h"
 #import "NSDate+Utilities.h"
+#import "DRSonarView.h"
 
-@interface DRSonarFeedbackViewController ()
+@interface DRSonarFeedbackViewController () {
+    BOOL _animatingSonar;
+}
 
 @property (nonatomic, strong) Novocaine *audioManager;
 @property (nonatomic, strong) AudioFileReader *fileReader;
@@ -22,6 +25,8 @@
 
 @property (nonatomic, strong) DRPathView *pathView;
 @property (nonatomic, strong) NSMutableArray *locationHistory;
+
+@property (nonatomic, strong) DRSonarView *circle;
 
 @end
 
@@ -83,18 +88,64 @@
 
     [self.audioManager play];
 
-    DRPathView *path = [[DRPathView alloc] initWithFrame:CGRectMake(kSideMargin, 150, self.view.width-2*kSideMargin, self.view.height - 150 - self.bottomButton.height - 3*kSideMargin)];
-    path.backgroundColor = self.view.backgroundColor;
-    path.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [self.view addSubview:path];
-    path.marksEndOfPrimaryLine = YES;
-    path.secondaryLocations = self.processor.locations;
-    path.primaryLineColor = [DRTheme base4];
-    path.secondaryLineColor = [DRTheme transparentBase4];
-    path.lineWidth = 6;
-    path.verticalAlignment = NSArrayRelativePointsVerticalAlignmentCenter;
-    path.horizontalAlignment = NSArrayRelativePointsHorizontalAlignmentCenter;
-    self.pathView = path;
+    if (NO) { //Debug
+        DRPathView *path = [[DRPathView alloc] initWithFrame:CGRectMake(kSideMargin, 150, self.view.width-2*kSideMargin, self.view.height - 150 - self.bottomButton.height - 3*kSideMargin)];
+        path.backgroundColor = self.view.backgroundColor;
+        path.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        [self.view addSubview:path];
+        path.marksEndOfPrimaryLine = YES;
+        path.secondaryLocations = self.processor.locations;
+        path.primaryLineColor = [DRTheme base4];
+        path.secondaryLineColor = [DRTheme transparentBase4];
+        path.lineWidth = 6;
+        path.verticalAlignment = NSArrayRelativePointsVerticalAlignmentCenter;
+        path.horizontalAlignment = NSArrayRelativePointsHorizontalAlignmentCenter;
+        self.pathView = path;
+    } else {
+        CGFloat width = 180;
+        self.circle = [[DRSonarView alloc] initWithFrame:CGRectMake((self.view.width-width)/2, self.navigationBar.bottom + (self.bottomButton.top - self.navigationBar.bottom - 20 - width)/2, width, width)];
+        self.circle.backgroundColor = self.view.backgroundColor;
+        self.circle.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
+        self.circle.layer.cornerRadius = width/2;
+        self.circle.layer.masksToBounds = YES;
+        [self.view addSubview:self.circle];
+    }
+}
+
+-(void)start {
+    [super start];
+    if (!_animatingSonar) {
+        _animatingSonar = YES;
+        [self spinSonar];
+    }
+}
+
+-(void)stopRun {
+    [super stopRun];
+    _animatingSonar = NO;
+}
+
+-(void)cancelRun {
+    [super cancelRun];
+    _animatingSonar = NO;
+}
+
+-(void)spinSonar {
+    // this spin completes 360 degrees every 2 seconds
+    [UIView animateWithDuration: 0.5f
+                          delay: 0.0f
+                        options: UIViewAnimationOptionCurveLinear
+                     animations: ^{
+                         self.circle.transform = CGAffineTransformRotate(self.circle.transform, M_PI / 2);
+                     }
+                     completion: ^(BOOL finished) {
+                         if (finished) {
+                             if (_animatingSonar) {
+                                 // if flag still set, keep spinning with constant speed
+                                 [self spinSonar];
+                             }
+                         }
+                     }];
 }
 
 -(void)dealloc {

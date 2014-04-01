@@ -1,28 +1,24 @@
 PODS:
-  - Expecta (0.2.4)
+  - AngleGradientLayer (1.2.1)
+  - Expecta (0.3.0)
   - FlatUIKit (1.3)
   - FrameAccessor (1.3.2)
   - MagicalRecord (2.2):
     - MagicalRecord/Core
   - MagicalRecord/Core (2.2)
-  - TBXML (1.5)
-  - TBXML+NSDictionary (0.0.1):
-    - TBXML (~> 1.5.0)
 
 DEPENDENCIES:
+  - AngleGradientLayer
   - Expecta
   - FlatUIKit
   - FrameAccessor
   - MagicalRecord
-  - TBXML
-  - TBXML+NSDictionary
 
 SPEC CHECKSUMS:
-  Expecta: 5c147dedfea5fbcf773995f7e65020abcc936ce5
+  AngleGradientLayer: 419ecf6c99f08b76c7fbf5cb4bd687923d5d56ab
+  Expecta: 322f1dc42610106a5ba9871b4924cf1635d80833
   FlatUIKit: 3b32b52bb3c266477709cfe4812ab2c877ae942b
   FrameAccessor: 1c383c4dc298925749fb2a6b9c05cd45be0d8857
   MagicalRecord: 95d49d74ef752cd52f6ad87bcb474817fc3978cf
-  TBXML: 0511ac325d83e59d3aefa4bc8cd6cbeff07a8d9e
-  TBXML+NSDictionary: 9bec5f9179a9f42dae1a9ba560f26c7ba732d8ac
 
 COCOAPODS: 0.29.0
