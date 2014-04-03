@@ -57,11 +57,13 @@
                 [locations addObject:loc];
             }
         }
-
-        NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
-        DRPath *path = [DRPath MR_createInContext:context];
-        path.locations = locations;
-        [context MR_saveToPersistentStoreAndWait];
+        if ([locations count] > 0) {
+            NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
+            DRPath *path = [DRPath MR_createInContext:context];
+            path.locations = locations;
+            [self reverseGeocodePath:path];
+            [context MR_saveToPersistentStoreAndWait];
+        }
     }
 }
 
@@ -80,10 +82,27 @@
                 }
             }
         }
-        NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
-        DRPath *path = [DRPath MR_createInContext:context];
-        path.locations = locations;
-        [context MR_saveToPersistentStoreAndWait];
+        if ([locations count] > 0) {
+            NSManagedObjectContext *context = [NSManagedObjectContext MR_context];
+            DRPath *path = [DRPath MR_createInContext:context];
+            path.locations = locations;
+            [self reverseGeocodePath:path];
+            [context MR_saveToPersistentStoreAndWait];
+        }
+    }
+}
+
++(void)reverseGeocodePath:(DRPath *)path {
+    if ([path.locations count] > 0) {
+        NSString *pathID = path.uniqueID;
+        CLLocation *first = [path.locations firstObject];
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder reverseGeocodeLocation:first completionHandler:^(NSArray *placemarks, NSError *error) {
+            DRPath *path = [DRPath objectWithID:pathID];
+            if (path) {
+                path.placemark = [placemarks firstObject];
+            }
+        }];
     }
 }
 

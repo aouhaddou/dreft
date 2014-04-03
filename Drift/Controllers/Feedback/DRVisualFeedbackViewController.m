@@ -15,7 +15,7 @@
 #import "DRDriftView.h"
 
 const BOOL debug = NO;
-const BOOL showAngle = YES;
+const BOOL showAngle = NO;
 
 @interface DRVisualFeedbackViewController ()
 

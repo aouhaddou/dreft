@@ -17,7 +17,6 @@ typedef NS_ENUM(NSInteger, DRDriftDirection) {
 };
 
 extern CLLocationDirection const DRDriftNoAngle;
-extern NSInteger const DRDriftLegUnknown;
 
 @interface DRDrift : NSObject <NSCoding>
 
