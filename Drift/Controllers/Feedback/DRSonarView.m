@@ -29,6 +29,8 @@
 	l.colors = [NSArray arrayWithObjects:
                 (id)[UIColor colorWithWhite:1 alpha:0.8].CGColor,
                 (id)[UIColor colorWithWhite:1 alpha:0].CGColor,
+                (id)[UIColor colorWithWhite:1 alpha:0].CGColor,
+                (id)[UIColor colorWithWhite:1 alpha:0].CGColor,
                 nil];
     
 	return self;

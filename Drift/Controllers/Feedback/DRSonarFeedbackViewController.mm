@@ -102,7 +102,7 @@
         path.horizontalAlignment = NSArrayRelativePointsHorizontalAlignmentCenter;
         self.pathView = path;
     } else {
-        CGFloat width = 180;
+        CGFloat width = 240;
         self.circle = [[DRSonarView alloc] initWithFrame:CGRectMake((self.view.width-width)/2, self.navigationBar.bottom + (self.bottomButton.top - self.navigationBar.bottom - 20 - width)/2, width, width)];
         self.circle.backgroundColor = self.view.backgroundColor;
         self.circle.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
@@ -114,23 +114,24 @@
 
 -(void)start {
     [super start];
-    if (!_animatingSonar) {
-        _animatingSonar = YES;
-        [self spinSonar];
-    }
+    [self spinSonar];
 }
 
 -(void)stopRun {
     [super stopRun];
-    _animatingSonar = NO;
+    [self stopSonar];
 }
 
 -(void)cancelRun {
     [super cancelRun];
-    _animatingSonar = NO;
+    [self stopSonar];
 }
 
 -(void)spinSonar {
+    if (!_animatingSonar) {
+        _animatingSonar = YES;
+
+    }
     // this spin completes 360 degrees every 2 seconds
     [UIView animateWithDuration: 0.5f
                           delay: 0.0f
@@ -146,6 +147,10 @@
                              }
                          }
                      }];
+}
+
+-(void)stopSonar {
+    _animatingSonar = NO;
 }
 
 -(void)dealloc {
@@ -220,6 +225,7 @@
 
 -(void)dataProcessor:(DRDataProcessor *)processor didFailWithError:(NSError *)error {
     self.volume = 0;
+    [self stopSonar];
 }
 
 @end
