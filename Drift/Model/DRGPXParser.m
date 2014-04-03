@@ -98,9 +98,9 @@
         CLLocation *first = [path.locations firstObject];
         CLGeocoder *geocoder = [[CLGeocoder alloc] init];
         [geocoder reverseGeocodeLocation:first completionHandler:^(NSArray *placemarks, NSError *error) {
-            DRPath *path = [DRPath objectWithID:pathID];
-            if (path) {
-                path.placemark = [placemarks firstObject];
+            DRPath *path2 = [DRPath objectWithID:pathID];
+            if (path2) {
+                path2.placemark = [placemarks firstObject];
             }
         }];
     }
