@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="yes"?>
+<gpx version="1.1"
+    creator="Christoph Albert"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.topografix.com/GPX/1/1"
+    xmlns:topografix="http://www.topografix.com/GPX/Private/TopoGrafix/0/1"
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+	<rte>
+		<name><![CDATA[Test Course 1]]></name>
+		<desc><![CDATA[Södertörn]]></desc>
+		<rtept lat="59.23394109" lon="18.06093449">
+		</rtept>
+		<rtept lat="59.23190150" lon="18.06471556">
+		</rtept>
+		<rtept lat="59.23072944" lon="18.06268499">
+		</rtept>
+		<rtept lat="59.23293386" lon="18.05768241">
+		</rtept>
+		<rtept lat="59.23395723" lon="18.06093594">
+		</rtept>
+	</rte>
+</gpx>
