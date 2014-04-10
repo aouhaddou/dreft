@@ -30,8 +30,8 @@
     self.window.rootViewController = nav;
 
     [self.window makeKeyAndVisible];
-
-//    NSURL *url = [[NSBundle mainBundle] URLForResource:@"mystic_basin_trail" withExtension:@"gpx"];
+//
+//    NSURL *url = [[NSBundle mainBundle] URLForResource:@"sodertorn" withExtension:@"gpx"];
 //    [DRGPXParser parseContentsOfURL:url];
 
     return YES;

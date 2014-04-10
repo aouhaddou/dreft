@@ -33,6 +33,7 @@ const BOOL showAngle = NO;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
 	// Do any additional setup after loading the view.
     UILabel *driftLabel = [[UILabel alloc] initWithFrame:CGRectMake(kSideMargin, self.navigationBar.bottom, self.view.width-2*kSideMargin, 66)];
     driftLabel.textAlignment = NSTextAlignmentCenter;
@@ -58,7 +59,9 @@ const BOOL showAngle = NO;
     [self.view addSubview:directionLabel];
     self.directionLabel = directionLabel;
 
-    DRDriftView *driftView = [[DRDriftView alloc] initWithFrame:CGRectMake(kSideMargin, debug ? 0 : directionLabel.bottom+kSideMargin, self.view.width-2*kSideMargin, self.view.width-2*kSideMargin)];
+    CGFloat iphone4width = 210;
+    CGFloat viewMargin = valueForScreen((self.view.width-iphone4width)/2, kSideMargin);
+    DRDriftView *driftView = [[DRDriftView alloc] initWithFrame:CGRectMake(viewMargin, directionLabel.bottom+kSideMargin, valueForScreen(iphone4width, self.view.width-2*viewMargin), valueForScreen(iphone4width, self.view.width-2*viewMargin))];
     driftView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     self.driftView = driftView;
     [self.view insertSubview:driftView atIndex:0];
@@ -78,6 +81,8 @@ const BOOL showAngle = NO;
         self.pathView = path;
         [self.view addSubview:path];
     }
+
+    [self updateTitle];
 }
 
 -(DRDistanceFormatter *)distanceFormatter {
@@ -87,6 +92,19 @@ const BOOL showAngle = NO;
         _distanceFormatter = distance;
     }
     return _distanceFormatter;
+}
+
+-(void)updateTitle {
+    if (self.feedbackType == DRFeedbackTypeQualitative) {
+        self.navigationBar.topItem.title = [NSLocalizedString(@"You are in", nil) uppercaseString];
+    } else {
+        self.navigationBar.topItem.title = [NSLocalizedString(@"You are", nil) uppercaseString];
+    }
+}
+
+-(void)setFeedbackType:(DRFeedbackType)feedbackType {
+    [super setFeedbackType:feedbackType];
+    [self updateTitle];
 }
 
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDrift *)result {

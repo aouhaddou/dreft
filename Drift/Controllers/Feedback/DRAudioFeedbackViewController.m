@@ -37,6 +37,7 @@
     self.speaker = [DRSpeaker viewWithColor:[DRTheme transparentBase4]];
     self.speaker.centerX = self.circle.centerX-3;
     self.speaker.centerY = self.circle.centerY;
+    self.speaker.autoresizingMask = UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleBottomMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin;
     [self.view addSubview:self.speaker];
 }
 
@@ -128,19 +129,19 @@
         if (drift.angle != DRDriftNoAngle) {
             if (drift.angle > 0) {
                 if (drift.angle < 45) {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are off %@ to the %@, slowly drifting away.", nil),stringDistance, direction];
+                    return [NSString stringWithFormat:NSLocalizedString(@"You are %@ to the %@, slowly drifting away.", nil),stringDistance, direction];
                 } else {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are off %@ to the %@, drifting away fast.", nil),stringDistance, direction];
+                    return [NSString stringWithFormat:NSLocalizedString(@"You are %@ to the %@, drifting away fast.", nil),stringDistance, direction];
                 }
             } else {
                 if (drift.angle > -45) {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are off %@ to the %@, slowly getting closer.", nil),stringDistance, direction];
+                    return [NSString stringWithFormat:NSLocalizedString(@"You are %@ to the %@, slowly getting closer.", nil),stringDistance, direction];
                 } else {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are off %@ to the %@, getting closer fast.", nil),stringDistance, direction];
+                    return [NSString stringWithFormat:NSLocalizedString(@"You are %@ to the %@, getting closer fast.", nil),stringDistance, direction];
                 }
             }
         } else {
-            return [NSString stringWithFormat:NSLocalizedString(@"You are off %@ to the %@.", nil),stringDistance, direction];
+            return [NSString stringWithFormat:NSLocalizedString(@"You are %@ to the %@.", nil),stringDistance, direction];
         }
     } else {
         return [NSString stringWithFormat:NSLocalizedString(@"You are off by %@.", nil),stringDistance];
@@ -161,19 +162,19 @@
         if (drift.angle != DRDriftNoAngle) {
             if (drift.angle > 0) {
                 if (drift.angle < 45) {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are to the %@ in %@, slowly drifting away.", nil),direction,zoneString];
+                    return [NSString stringWithFormat:NSLocalizedString(@"You are on the %@ in %@, slowly drifting away.", nil),direction,zoneString];
                 } else {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are to the %@ in %@, drifting away fast.", nil),direction,zoneString];
+                    return [NSString stringWithFormat:NSLocalizedString(@"You are on the %@ in %@, drifting away fast.", nil),direction,zoneString];
                 }
             } else {
                 if (drift.angle > -45) {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are to the %@ in %@, slowly getting closer.", nil),direction,zoneString];
+                    return [NSString stringWithFormat:NSLocalizedString(@"You are on the %@ in %@, slowly getting closer.", nil),direction,zoneString];
                 } else {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are to the %@ in %@, getting closer fast.", nil),direction,zoneString];
+                    return [NSString stringWithFormat:NSLocalizedString(@"You are on the %@ in %@, getting closer fast.", nil),direction,zoneString];
                 }
             }
         } else {
-            return [NSString stringWithFormat:NSLocalizedString(@"You are to the %@ in %@.", nil),direction,zoneString];
+            return [NSString stringWithFormat:NSLocalizedString(@"You are on the %@ in %@.", nil),direction,zoneString];
         }
     } else {
         return [NSString stringWithFormat:NSLocalizedString(@"You are in %@.", nil),zoneString];

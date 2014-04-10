@@ -139,7 +139,7 @@ static NSString *const kPathCellIdentifier = @"kPathCell";
             break;
 
         case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
             break;
 
         case NSFetchedResultsChangeUpdate:

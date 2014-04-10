@@ -134,8 +134,9 @@ static CGFloat const headerHeight = 82.f;
 -(void)settingsButtonTapped:(UIButton *)button {
     button.selected = !button.selected;
     CGFloat trans = self.view.height-self.tableView.tableHeaderView.height-20;
-    [self.view bringSubviewToFront:self.headerView];
     if (button.selected) {
+        self.settingsView.y = -trans+20;
+        [self.view bringSubviewToFront:self.settingsView];
         [UIView animateWithDuration:0.4 animations:^{
             self.tableView.y = 20+trans;
             self.settingsButton.transform = CGAffineTransformMakeRotation(M_PI-0.0001);
@@ -149,7 +150,7 @@ static CGFloat const headerHeight = 82.f;
             self.headerView.y = 0;
             self.settingsView.y = -trans+20;
         } completion:^(BOOL finished) {
-            //
+            [self.view bringSubviewToFront:self.headerView];
         }];
     }
 }
@@ -405,7 +406,7 @@ static CGFloat const headerHeight = 82.f;
             break;
 
         case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPathTrans] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPathTrans] withRowAnimation:UITableViewRowAnimationLeft];
             break;
 
         case NSFetchedResultsChangeUpdate:
