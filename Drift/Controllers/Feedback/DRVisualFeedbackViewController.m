@@ -14,8 +14,8 @@
 #import "DRDistanceFormatter.h"
 #import "DRDriftView.h"
 
-const BOOL debug = NO;
-const BOOL showAngle = NO;
+const BOOL debug = YES;
+const BOOL showAngle = YES;
 
 @interface DRVisualFeedbackViewController ()
 
@@ -118,7 +118,16 @@ const BOOL showAngle = NO;
         directionString = [NSLocalizedString(@"left", nil) uppercaseString];
     }
 
-    self.directionLabel.text = showAngle ? [NSString stringWithFormat:@"%.0f°, %@",result.angle,directionString] : directionString;
+    if (showAngle) {
+        if (result.angle != DRDriftNoAngle) {
+            self.directionLabel.text = [NSString stringWithFormat:@"h:%.0f°, %.0f°, %@",result.location.course,result.angle,directionString];
+        } else {
+            self.directionLabel.text = [NSString stringWithFormat:@"h:%.0f°, -°, %@",result.location.course,directionString];
+        }
+    } else {
+        self.directionLabel.text = directionString;
+    }
+
     self.driftView.drift = result;
 
     if (debug) {

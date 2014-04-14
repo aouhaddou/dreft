@@ -103,7 +103,10 @@
         result.direction = [self directionForFirstPoint:p1 secondPoint:p2 currentPosition:location];
 
         //Calculate angle
-        result.angle = [self angleForFirstPoint:p1 secondPoint:p2 currentPosition:location driftDirection:result.direction];
+        if (location.horizontalAccuracy < 20) {
+            result.angle = [self angleForFirstPoint:p1 secondPoint:p2 currentPosition:location driftDirection:result.direction];
+        }
+
 
         return result;
     }
@@ -130,7 +133,7 @@
 }
 
 -(CLLocationDirection)angleForFirstPoint:(CLLocation *)first secondPoint:(CLLocation *)second currentPosition:(CLLocation *)position driftDirection:(DRDriftDirection)direction {
-    if (!CLLocationCoordinate2DIsValid(first.coordinate) || !CLLocationCoordinate2DIsValid(second.coordinate) || !CLLocationCoordinate2DIsValid(position.coordinate) || position.course < 0 || !(direction == DRDriftDirectionRight || direction == DRDriftDirectionLeft)) {
+    if (!CLLocationCoordinate2DIsValid(first.coordinate) || !CLLocationCoordinate2DIsValid(second.coordinate) || !CLLocationCoordinate2DIsValid(position.coordinate) || position.course < 0 || position.speed < 1 || !(direction == DRDriftDirectionRight || direction == DRDriftDirectionLeft)) {
         return DRDriftNoAngle;
     }
 
