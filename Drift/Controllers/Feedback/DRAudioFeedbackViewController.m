@@ -120,30 +120,18 @@
     [self speakString:NSLocalizedString(@"No location information.", nil)];
 }
 
+CGFloat const angleThresh = 55;
+
 #pragma mark feedback string
 
 -(NSString *)quantitativeStringForDrift:(DRDrift *)drift {
     NSString *stringDistance = [self.distanceFormatterSound stringFromDistance:floor(drift.distance)];
     if (drift.direction == DRDriftDirectionRight || drift.direction == DRDriftDirectionLeft) {
         NSString *direction = drift.direction == DRDriftDirectionLeft ? NSLocalizedString(@"left", nil) : NSLocalizedString(@"right", nil);
-        if (drift.angle != DRDriftNoAngle) {
-            if (drift.angle > 0) {
-                if (drift.angle < 10) {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are %@ to the %@, running parallel to the course.", nil),stringDistance, direction];
-                } else if (drift.angle < 55) {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are %@ to the %@, slowly drifting away.", nil),stringDistance, direction];
-                } else {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are %@ to the %@, drifting away fast.", nil),stringDistance, direction];
-                }
-            } else {
-                if (drift.angle > -10) {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are %@ to the %@, running parallel to the course.", nil),stringDistance, direction];
-                } else if (drift.angle > -55) {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are %@ to the %@, slowly getting closer.", nil),stringDistance, direction];
-                } else {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are %@ to the %@, getting closer fast.", nil),stringDistance, direction];
-                }
-            }
+        if (drift.angle != DRDriftNoAngle && drift.angle > angleThresh) {
+            return [NSString stringWithFormat:NSLocalizedString(@"You are %@ to the %@, drifting away fast.", nil),stringDistance, direction];
+        } else if (drift.angle != DRDriftNoAngle && drift.angle < -angleThresh) {
+            return [NSString stringWithFormat:NSLocalizedString(@"You are %@ to the %@, getting closer fast.", nil),stringDistance, direction];
         } else {
             return [NSString stringWithFormat:NSLocalizedString(@"You are %@ to the %@.", nil),stringDistance, direction];
         }
@@ -153,9 +141,6 @@
 }
 
 -(NSString *)qualitativeStringForDrift:(DRDrift *)drift {
-    CGFloat tAngle1 = 10; //< Parallel angle
-    CGFloat tAngle2 = 55; //< Slow drift angle
-
     NSString *zoneString;
     if (drift.distance < [[DRVariableManager sharedManager] zone1Thresh]) {
         zoneString = NSLocalizedString(@"zone 1", nil);
@@ -166,24 +151,10 @@
     }
     if (drift.direction == DRDriftDirectionRight || drift.direction == DRDriftDirectionLeft) {
         NSString *direction = drift.direction == DRDriftDirectionLeft ? NSLocalizedString(@"left", nil) : NSLocalizedString(@"right", nil);
-        if (drift.angle != DRDriftNoAngle) {
-            if (drift.angle > 0) {
-                if (drift.angle < tAngle1) {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are on the %@ in %@, running parallel to the course.", nil),direction,zoneString];
-                } else if (drift.angle < tAngle2) {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are on the %@ in %@, slowly drifting away.", nil),direction,zoneString];
-                } else {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are on the %@ in %@, drifting away fast.", nil),direction,zoneString];
-                }
-            } else {
-                if (drift.angle > -tAngle1) {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are on the %@ in %@, running parallel to the course.", nil),direction,zoneString];
-                } else if (drift.angle > -tAngle2) {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are on the %@ in %@, slowly getting closer.", nil),direction,zoneString];
-                } else {
-                    return [NSString stringWithFormat:NSLocalizedString(@"You are on the %@ in %@, getting closer fast.", nil),direction,zoneString];
-                }
-            }
+        if (drift.angle != DRDriftNoAngle && drift.angle > angleThresh) {
+            return [NSString stringWithFormat:NSLocalizedString(@"You are on the %@ in %@, drifting away fast.", nil),direction,zoneString];
+        } else if (drift.angle != DRDriftNoAngle && drift.angle < -angleThresh) {
+            return [NSString stringWithFormat:NSLocalizedString(@"You are on the %@ in %@, getting closer fast.", nil),direction,zoneString];
         } else {
             return [NSString stringWithFormat:NSLocalizedString(@"You are on the %@ in %@.", nil),direction,zoneString];
         }
