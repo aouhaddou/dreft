@@ -128,20 +128,16 @@
 
     }
     // this spin completes 360 degrees every 2 seconds
-    [UIView animateWithDuration: 0.5f
-                          delay: 0.0f
-                        options: UIViewAnimationOptionCurveLinear
-                     animations: ^{
-                         self.circle.transform = CGAffineTransformRotate(self.circle.transform, M_PI / 2);
-                     }
-                     completion: ^(BOOL finished) {
-                         if (finished) {
-                             if (_animatingSonar) {
-                                 // if flag still set, keep spinning with constant speed
-                                 [self spinSonar];
-                             }
-                         }
-                     }];
+    [UIView animateWithDuration:0.5f delay:0.0f options:UIViewAnimationOptionCurveLinear animations: ^{
+        self.circle.transform = CGAffineTransformRotate(self.circle.transform, M_PI / 2);
+    } completion: ^(BOOL finished) {
+        if (finished) {
+            if (_animatingSonar) {
+                // if flag still set, keep spinning with constant speed
+                [self spinSonar];
+            }
+        }
+    }];
 }
 
 -(void)stopSonar {
@@ -160,7 +156,9 @@
 }
 
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDrift *)result {
-    [self spinSonar];
+    if (!_animatingSonar) {
+        [self spinSonar];
+    }
     CGFloat volumeCurve = 2;  //1 = linear,
                                 //>1 = more fine in close ranges, more dropoff in far ranges
                                 //<1 = less fine in close ranges, controlled dropoff in far ranges
