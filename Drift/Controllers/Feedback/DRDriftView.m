@@ -14,6 +14,8 @@ CGFloat const locationThickness = 14;
 CGFloat const destinationRadius = 17;
 CGFloat const lineWidth = 4;
 
+BOOL const rotate = NO;
+
 @interface DRDriftView() {
     CGPoint _locCenter;
     CGPoint _desCenter;
@@ -81,28 +83,30 @@ CGFloat const lineWidth = 4;
     CGPathRef newLine = [self linePath].CGPath;
     [self animateNewPath:newLine ofLayer:self.line];
 
-    self.transform = old;
-    [UIView animateWithDuration:0.5 animations:^{
-        if (drift.angle == DRDriftNoAngle) {
-            self.transform = CGAffineTransformIdentity;
-        } else {
-            CLLocationDegrees deg = drift.angle;
-
-            //Small ranges graphically less severe
-            CGFloat factor = 1.6;
-            if (deg >= 0 && deg < 90) {
-                deg = pow(deg/90,factor)*90;
-            } else if (deg < 0 && deg > -90) {
-                deg = -pow(fabs(deg)/90,factor)*90;
-            }
-
-            if (drift.direction == DRDriftDirectionLeft) {
-                self.transform = CGAffineTransformMakeRotation(deg*M_PI/180);
+    if (rotate) {
+        self.transform = old;
+        [UIView animateWithDuration:0.5 animations:^{
+            if (drift.angle == DRDriftNoAngle) {
+                self.transform = CGAffineTransformIdentity;
             } else {
-                self.transform = CGAffineTransformMakeRotation(-deg*M_PI/180);
+                CLLocationDegrees deg = drift.angle;
+
+                //Small ranges graphically less severe
+                CGFloat factor = 1.6;
+                if (deg >= 0 && deg < 90) {
+                    deg = pow(deg/90,factor)*90;
+                } else if (deg < 0 && deg > -90) {
+                    deg = -pow(fabs(deg)/90,factor)*90;
+                }
+
+                if (drift.direction == DRDriftDirectionLeft) {
+                    self.transform = CGAffineTransformMakeRotation(deg*M_PI/180);
+                } else {
+                    self.transform = CGAffineTransformMakeRotation(-deg*M_PI/180);
+                }
             }
-        }
-    }];
+        }];
+    }
 }
 
 -(void)animateNewPath:(CGPathRef)path ofLayer:(CAShapeLayer *)layer {

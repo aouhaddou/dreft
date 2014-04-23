@@ -112,11 +112,6 @@
     }
 }
 
--(void)start {
-    [super start];
-    [self spinSonar];
-}
-
 -(void)stopRun {
     [super stopRun];
     [self stopSonar];
@@ -165,6 +160,7 @@
 }
 
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDrift *)result {
+    [self spinSonar];
     CGFloat volumeCurve = 2;  //1 = linear,
                                 //>1 = more fine in close ranges, more dropoff in far ranges
                                 //<1 = less fine in close ranges, controlled dropoff in far ranges

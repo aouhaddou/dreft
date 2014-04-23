@@ -14,8 +14,8 @@
 #import "DRDistanceFormatter.h"
 #import "DRDriftView.h"
 
-const BOOL debug = YES;
-const BOOL showAngle = YES;
+const BOOL debug = NO;
+const BOOL showAngle = NO;
 
 @interface DRVisualFeedbackViewController ()
 
@@ -98,7 +98,7 @@ const BOOL showAngle = YES;
     if (self.feedbackType == DRFeedbackTypeQualitative) {
         self.navigationBar.topItem.title = [NSLocalizedString(@"You are in", nil) uppercaseString];
     } else {
-        self.navigationBar.topItem.title = [NSLocalizedString(@"You are", nil) uppercaseString];
+        self.navigationBar.topItem.title = [NSLocalizedString(@"The course is", nil) uppercaseString];
     }
 }
 
@@ -113,9 +113,17 @@ const BOOL showAngle = YES;
 
     NSString *directionString = nil;
     if (result.direction == DRDriftDirectionRight) {
-        directionString = [NSLocalizedString(@"right", nil) uppercaseString];
+        if (self.feedbackType == DRFeedbackTypeQualitative) {
+            directionString = [NSLocalizedString(@"go left", nil) uppercaseString];
+        } else {
+            directionString = [NSLocalizedString(@"left", nil) uppercaseString];
+        }
     } else if (result.direction == DRDriftDirectionLeft) {
-        directionString = [NSLocalizedString(@"left", nil) uppercaseString];
+        if (self.feedbackType == DRFeedbackTypeQualitative) {
+            directionString = [NSLocalizedString(@"go right", nil) uppercaseString];
+        } else {
+            directionString = [NSLocalizedString(@"right", nil) uppercaseString];
+        }
     }
 
     if (showAngle) {
