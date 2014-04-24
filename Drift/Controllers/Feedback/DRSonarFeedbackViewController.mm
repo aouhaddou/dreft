@@ -170,7 +170,7 @@
     if ((result.direction == DRDriftDirectionLeft || result.direction == DRDriftDirectionRight)) {
 
         // relative pan amount from 0 to 1
-        CGFloat rel = fabs(result.distance/([[DRVariableManager sharedManager] zone2Thresh]/1.5));
+        CGFloat rel = fabs(result.distance/[[DRVariableManager sharedManager] zone1Thresh]);
 
         panPos = result.direction == DRDriftDirectionRight ? 0.5-rel/2 : 0.5+rel/2;
     } else {
