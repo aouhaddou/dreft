@@ -72,6 +72,10 @@
     CGFloat dY = biggestYVal-smallestYVal;
     CGFloat align;
 
+    if (dX == 0 && dY == 0) {
+        return nil;
+    }
+
     if (dX > dY) {
         switch (verticalAlignment) {
             case NSArrayRelativePointsVerticalAlignmentTop:
