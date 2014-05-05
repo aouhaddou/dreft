@@ -121,7 +121,7 @@ BOOL const rotate = NO;
 }
 
 -(CGFloat)xPosForDrift:(DRDrift *)drift margin:(CGFloat)margin reverse:(BOOL)reverse {
-    CGFloat relOffset = MIN(1, sqrt(drift.distance/[[DRVariableManager sharedManager] zone2Thresh]));
+    CGFloat relOffset = MIN(1, sqrt(drift.distance/([[DRVariableManager sharedManager] zone1Thresh]*2)));
     if (drift.direction == DRDriftDirectionRight) {
         return interpolate(self.centerX, reverse ? margin : self.width-margin, relOffset);
     } else {

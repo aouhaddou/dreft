@@ -25,7 +25,7 @@ static CGFloat const strokeEnd = 1;
     self = [super initWithFrame:frame];
     if (self) {
         self.windupDuration = 1;
-        self.countdownDuration = [[DRVariableManager sharedManager] baseRateForAcousticFeedback]-self.windupDuration;
+        self.countdownDuration = [[DRVariableManager sharedManager] audioFeedbackRate]-self.windupDuration;
 
         CAShapeLayer *layer = [[CAShapeLayer alloc] init];
         layer.strokeColor = [DRTheme base4].CGColor;

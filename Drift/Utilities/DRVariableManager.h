@@ -10,14 +10,14 @@
 
 @interface DRVariableManager : NSObject
 
-@property (nonatomic, assign) CGFloat baseRateForAcousticFeedback;
-
 @property (nonatomic, assign) CGFloat GPSOneBarThresh;
 @property (nonatomic, assign) CGFloat GPSTwoBarThresh;
 @property (nonatomic, assign) CGFloat GPSThreeBarThresh;
 
 @property (nonatomic, assign) CGFloat zone1Thresh;
-@property (nonatomic, assign) CGFloat zone2Thresh;
+@property (nonatomic, assign) CGFloat audioFeedbackRate;
+
+@property (nonatomic, assign) CGFloat infoThresh;
 
 + (instancetype)sharedManager;
 

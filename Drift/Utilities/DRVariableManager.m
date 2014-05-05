@@ -23,13 +23,14 @@
 -(id)init {
     self = [super init];
     if (self) {
-        self.baseRateForAcousticFeedback = 20;
         self.GPSOneBarThresh = 50;
         self.GPSTwoBarThresh = 15;
         self.GPSThreeBarThresh = 6;
 
         self.zone1Thresh = 15;
-        self.zone2Thresh = 40;
+        self.audioFeedbackRate = 20;
+
+        self.infoThresh = 10;
     }
     return self;
 }

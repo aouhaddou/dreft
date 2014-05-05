@@ -88,9 +88,9 @@ static CGFloat const headerHeight = 82.f;
     self.zone1Slider.minimumTrackTintColor = [DRTheme base4];
 
 
-    self.zone2Slider.minimumValue = self.zone1Slider.value+2;
-    self.zone2Slider.maximumValue = 100;
-    self.zone2Slider.value = [[DRVariableManager sharedManager] zone2Thresh];
+    self.zone2Slider.minimumValue = 5;
+    self.zone2Slider.maximumValue = 120;
+    self.zone2Slider.value = [[DRVariableManager sharedManager] audioFeedbackRate];
     self.zone2Slider.maximumTrackTintColor = [DRTheme transparentBase4];
     self.zone2Slider.tintColor = [DRTheme base4];
     self.zone2Slider.minimumTrackTintColor = [DRTheme base4];
@@ -109,16 +109,16 @@ static CGFloat const headerHeight = 82.f;
     CGFloat val = round(slider.value);
     if (slider == self.zone1Slider) {
         [DRVariableManager sharedManager].zone1Thresh = val;
-        self.zone2Slider.minimumValue = val+1;
     } else if (slider == self.zone2Slider) {
-        [DRVariableManager sharedManager].zone2Thresh = val;
+        [DRVariableManager sharedManager].audioFeedbackRate = val;
     }
     [self updateSliderLabels];
 }
 
 -(void)updateSliderLabels {
-    self.zone1Label.text = [NSString stringWithFormat:NSLocalizedString(@"Zone 1 Threshold: %.0f m", nil),round(self.zone1Slider.value)];
-    self.zone2Label.text = [NSString stringWithFormat:NSLocalizedString(@"Zone 2 Threshold: %.0f m", nil),round(self.zone2Slider.value)];
+    CGFloat thresh = round(self.zone1Slider.value);
+    self.zone1Label.text = [NSString stringWithFormat:NSLocalizedString(@"Zone 1: %.0f m | Zone 2: %.0f m", nil),thresh,thresh*2];
+    self.zone2Label.text = [NSString stringWithFormat:NSLocalizedString(@"Audio Feedback: %.0f s", nil),round(self.zone2Slider.value)];
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {

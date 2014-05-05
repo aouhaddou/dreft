@@ -78,7 +78,7 @@
     [super start];
     [self speakString:NSLocalizedString(@"Started run.", nil)];
     [self.circle start];
-    self.feedbackTimer = [NSTimer scheduledTimerWithTimeInterval:[[DRVariableManager sharedManager] baseRateForAcousticFeedback] target:self selector:@selector(feedbackTimerFired) userInfo:nil repeats:YES];
+    self.feedbackTimer = [NSTimer scheduledTimerWithTimeInterval:[[DRVariableManager sharedManager] audioFeedbackRate] target:self selector:@selector(feedbackTimerFired) userInfo:nil repeats:YES];
 }
 
 -(void)stopRun {
@@ -125,29 +125,34 @@ CGFloat const angleThresh = 55;
 #pragma mark feedback string
 
 -(NSString *)quantitativeStringForDrift:(DRDrift *)drift {
-    NSString *stringDistance = [self.distanceFormatterSound stringFromDistance:floor(drift.distance)];
-    if (drift.direction == DRDriftDirectionRight || drift.direction == DRDriftDirectionLeft) {
-        NSString *direction = drift.direction == DRDriftDirectionLeft ? NSLocalizedString(@"right", nil) : NSLocalizedString(@"left", nil);
-        return [NSString stringWithFormat:NSLocalizedString(@"The course is %@ to the %@.", nil),stringDistance, direction];
+    if (drift.distance >= [[DRVariableManager sharedManager] infoThresh]) {
+        NSString *stringDistance = [self.distanceFormatterSound stringFromDistance:floor(drift.distance)];
+        if (drift.direction == DRDriftDirectionRight || drift.direction == DRDriftDirectionLeft) {
+            NSString *direction = drift.direction == DRDriftDirectionLeft ? NSLocalizedString(@"left", nil) : NSLocalizedString(@"right", nil);
+            return [NSString stringWithFormat:NSLocalizedString(@"%@ %@.", nil),stringDistance, direction];
+        } else {
+            return [NSString stringWithFormat:NSLocalizedString(@"%@.", nil),stringDistance];
+        }
     } else {
-        return [NSString stringWithFormat:NSLocalizedString(@"The course is %@ away.", nil),stringDistance];
+        return [NSString stringWithFormat:NSLocalizedString(@"On course.", nil)];
     }
 }
 
 -(NSString *)qualitativeStringForDrift:(DRDrift *)drift {
     NSString *zoneString;
     if (drift.distance < [[DRVariableManager sharedManager] zone1Thresh]) {
-        zoneString = NSLocalizedString(@"zone 1", nil);
-    } else if (drift.distance < [[DRVariableManager sharedManager] zone2Thresh]) {
-        zoneString = NSLocalizedString(@"zone 2", nil);
+        zoneString = NSLocalizedString(@"Zone 1", nil);
+    } else if (drift.distance < [[DRVariableManager sharedManager] zone1Thresh]*2) {
+        zoneString = NSLocalizedString(@"Zone 2", nil);
     } else {
-        zoneString = NSLocalizedString(@"zone 3", nil);
+        zoneString = NSLocalizedString(@"Zone 3", nil);
     }
-    if (drift.direction == DRDriftDirectionRight || drift.direction == DRDriftDirectionLeft) {
-        NSString *direction = drift.direction == DRDriftDirectionLeft ? NSLocalizedString(@"right", nil) : NSLocalizedString(@"left", nil);
-        return [NSString stringWithFormat:NSLocalizedString(@"You are in %@. The course is to the %@.", nil),zoneString,direction];
+    
+    if (drift.distance >= [[DRVariableManager sharedManager] infoThresh] && (drift.direction == DRDriftDirectionRight || drift.direction == DRDriftDirectionLeft)) {
+        NSString *direction = drift.direction == DRDriftDirectionLeft ? NSLocalizedString(@"left", nil) : NSLocalizedString(@"right", nil);
+        return [NSString stringWithFormat:NSLocalizedString(@"%@, %@.", nil),zoneString,direction];
     } else {
-        return [NSString stringWithFormat:NSLocalizedString(@"You are in %@.", nil),zoneString];
+        return [NSString stringWithFormat:NSLocalizedString(@"%@.", nil),zoneString];
     }
 }
 

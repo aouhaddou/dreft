@@ -14,7 +14,7 @@
 #import "DRDistanceFormatter.h"
 #import "DRDriftView.h"
 
-const BOOL debug = NO;
+const BOOL debug = YES;
 const BOOL showAngle = NO;
 
 @interface DRVisualFeedbackViewController ()
@@ -98,7 +98,7 @@ const BOOL showAngle = NO;
     if (self.feedbackType == DRFeedbackTypeQualitative) {
         self.navigationBar.topItem.title = [NSLocalizedString(@"You are in", nil) uppercaseString];
     } else {
-        self.navigationBar.topItem.title = [NSLocalizedString(@"The course is", nil) uppercaseString];
+        self.navigationBar.topItem.title = [NSLocalizedString(@"You are", nil) uppercaseString];
     }
 }
 
@@ -113,17 +113,9 @@ const BOOL showAngle = NO;
 
     NSString *directionString = nil;
     if (result.direction == DRDriftDirectionRight) {
-        if (self.feedbackType == DRFeedbackTypeQualitative) {
-            directionString = [NSLocalizedString(@"go left", nil) uppercaseString];
-        } else {
-            directionString = [NSLocalizedString(@"left", nil) uppercaseString];
-        }
+        directionString = [NSLocalizedString(@"right", nil) uppercaseString];
     } else if (result.direction == DRDriftDirectionLeft) {
-        if (self.feedbackType == DRFeedbackTypeQualitative) {
-            directionString = [NSLocalizedString(@"go right", nil) uppercaseString];
-        } else {
-            directionString = [NSLocalizedString(@"right", nil) uppercaseString];
-        }
+        directionString = [NSLocalizedString(@"left", nil) uppercaseString];
     }
 
     if (showAngle) {
@@ -170,7 +162,7 @@ const BOOL showAngle = NO;
 -(NSString *)qualitativeStringForDrift:(DRDrift *)drift {
     if (drift.distance < [[DRVariableManager sharedManager] zone1Thresh]) {
         return NSLocalizedString(@"Zone 1", nil);
-    } else if (drift.distance < [[DRVariableManager sharedManager] zone2Thresh]) {
+    } else if (drift.distance < [[DRVariableManager sharedManager] zone1Thresh]*2) {
         return NSLocalizedString(@"Zone 2", nil);
     } else {
         return NSLocalizedString(@"Zone 3", nil);

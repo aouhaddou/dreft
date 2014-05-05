@@ -162,7 +162,7 @@
     CGFloat volumeCurve = 2;  //1 = linear,
                                 //>1 = more fine in close ranges, more dropoff in far ranges
                                 //<1 = less fine in close ranges, controlled dropoff in far ranges
-    self.volume = MAX(0.2, 1 - pow(fabs(result.distance/[[DRVariableManager sharedManager] zone2Thresh]), volumeCurve));
+    self.volume = MAX(0.2, 1 - pow(fabs(result.distance/([[DRVariableManager sharedManager] zone1Thresh]*2)), volumeCurve));
 
     CGFloat panPos = 0.5; // 0 = left, 0.5 middle, 1 = right
 
