@@ -100,6 +100,7 @@ static CGFloat const headerHeight = 82.f;
     [self.feedbackControl setTitle:NSLocalizedString(@"Visual", nil) forSegmentAtIndex:DRFeedbackModalityVisual];
     [self.feedbackControl setTitle:NSLocalizedString(@"Audio", nil) forSegmentAtIndex:DRFeedbackModalityAudio];
     [self.feedbackControl setTitle:NSLocalizedString(@"Sonar", nil) forSegmentAtIndex:DRFeedbackModalitySonar];
+    self.feedbackControl.selectedSegmentIndex = DRFeedbackModalityAudio;
 
     [self.typeControl setTitle:NSLocalizedString(@"Meters", nil) forSegmentAtIndex:DRFeedbackTypeQuantitative];
     [self.typeControl setTitle:NSLocalizedString(@"Zones", nil) forSegmentAtIndex:DRFeedbackTypeQualitative];
