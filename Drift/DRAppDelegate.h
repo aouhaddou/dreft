@@ -14,4 +14,6 @@
 
 - (NSURL *)applicationDocumentsDirectory;
 
+- (void)finishedTutorial;
+
 @end

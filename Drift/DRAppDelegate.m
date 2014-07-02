@@ -8,10 +8,13 @@
 
 #import "DRAppDelegate.h"
 #import "DRRunsViewController.h"
+#import "DRTutorialViewController.h"
 #import "CoreData+MagicalRecord.h"
 #import "DRGPXParser.h"
 
 @import CoreLocation;
+
+static NSString *tutorialFinishedFlag = @"com.christophalbert.tutorialFinishedFlag";
 
 @implementation DRAppDelegate
 
@@ -25,16 +28,34 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor blackColor];
 
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[[DRRunsViewController alloc] init]];
-    nav.navigationBarHidden = YES;
-    self.window.rootViewController = nav;
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:tutorialFinishedFlag] == YES) {
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[[DRRunsViewController alloc] init]];
+        nav.navigationBarHidden = YES;
+        self.window.rootViewController = nav;
+    } else {
+        DRTutorialViewController *tutorial = [[DRTutorialViewController alloc] init];
+        self.window.rootViewController = tutorial;
+    }
+
 
     [self.window makeKeyAndVisible];
-//
+
+//    Import Test Data
 //    NSURL *url = [[NSBundle mainBundle] URLForResource:@"sodertorn" withExtension:@"gpx"];
 //    [DRGPXParser parseContentsOfURL:url];
 
     return YES;
+}
+
+- (void)finishedTutorial {
+//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:tutorialFinishedFlag];
+
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[[DRRunsViewController alloc] init]];
+    nav.navigationBarHidden = YES;
+
+    [UIView transitionFromView:self.window.rootViewController.view toView:nav.view duration:0.7 options:UIViewAnimationOptionTransitionFlipFromRight completion:^(BOOL finished) {
+        self.window.rootViewController = nav;
+    }];
 }
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {

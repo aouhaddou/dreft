@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DRTutorialViewController : UIViewController
+@interface DRTutorialViewController : UIViewController <UIScrollViewDelegate>
+
+@property (strong, nonatomic) IBOutlet UIPageControl *pageControl;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
