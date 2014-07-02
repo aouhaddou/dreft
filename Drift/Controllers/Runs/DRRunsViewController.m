@@ -133,14 +133,14 @@ static CGFloat const headerHeight = 82.f;
     if (button.selected) {
         self.settingsView.y = -trans+20;
         [self.view bringSubviewToFront:self.settingsView];
-        [UIView animateWithDuration:0.4 animations:^{
+        [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:1 initialSpringVelocity:0 options:0 animations:^{
             self.tableView.y = 20+trans;
             self.settingsButton.transform = CGAffineTransformMakeRotation(M_PI-0.0001);
             self.headerView.y = trans;
             self.settingsView.y = 20;
-        }];
+        } completion:nil];
     } else {
-        [UIView animateWithDuration:0.4 animations:^{
+        [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:1 initialSpringVelocity:0 options:0 animations:^{
             self.tableView.y = 20;
             self.settingsButton.transform = CGAffineTransformIdentity;
             self.headerView.y = 0;

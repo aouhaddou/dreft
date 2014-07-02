@@ -20,6 +20,9 @@ static NSString *tutorialFinishedFlag = @"com.christophalbert.tutorialFinishedFl
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //Reset Tutorial
+//    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:tutorialFinishedFlag];[[NSUserDefaults standardUserDefaults] synchronize];
+
     [MagicalRecord setupAutoMigratingCoreDataStack];
 
     [DRTheme apply];
@@ -48,7 +51,8 @@ static NSString *tutorialFinishedFlag = @"com.christophalbert.tutorialFinishedFl
 }
 
 - (void)finishedTutorial {
-//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:tutorialFinishedFlag];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:tutorialFinishedFlag];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[[DRRunsViewController alloc] init]];
     nav.navigationBarHidden = YES;
