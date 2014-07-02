@@ -97,11 +97,6 @@ static CGFloat const headerHeight = 82.f;
 
     [self updateSliderLabels];
 
-    [self.feedbackControl setTitle:NSLocalizedString(@"Visual", nil) forSegmentAtIndex:DRFeedbackModalityVisual];
-    [self.feedbackControl setTitle:NSLocalizedString(@"Audio", nil) forSegmentAtIndex:DRFeedbackModalityAudio];
-    [self.feedbackControl setTitle:NSLocalizedString(@"Sonar", nil) forSegmentAtIndex:DRFeedbackModalitySonar];
-    self.feedbackControl.selectedSegmentIndex = DRFeedbackModalityAudio;
-
     [self.typeControl setTitle:NSLocalizedString(@"Meters", nil) forSegmentAtIndex:DRFeedbackTypeQuantitative];
     [self.typeControl setTitle:NSLocalizedString(@"Zones", nil) forSegmentAtIndex:DRFeedbackTypeQualitative];
 }
@@ -231,7 +226,6 @@ static CGFloat const headerHeight = 82.f;
 
 -(void)startButtonTapped:(id)sender {
     DRChoosePathViewController *choose = [[DRChoosePathViewController alloc] init];
-    choose.feedbackModality = self.feedbackControl.selectedSegmentIndex;
     choose.feedbackType = self.typeControl.selectedSegmentIndex;
 
     [self.navigationController pushViewController:choose animated:YES];

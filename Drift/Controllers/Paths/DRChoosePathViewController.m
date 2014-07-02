@@ -10,8 +10,6 @@
 #import "DRModel.h"
 #import "DRDataProcessor.h"
 #import "DRVisualFeedbackViewController.h"
-#import "DRAudioFeedbackViewController.h"
-#import "DRSonarFeedbackViewController.h"
 
 @interface DRChoosePathViewController ()
 
@@ -23,7 +21,6 @@
     self = [super initWithNibName:@"DRPathsViewController" bundle:nil];
     if (self) {
         self.feedbackType = DRFeedbackTypeQuantitative;
-        self.feedbackModality = DRFeedbackModalityVisual;
     }
     return self;
 }
@@ -43,14 +40,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     DRPath *path = [self.fetchedResultsController objectAtIndexPath:indexPath];
     DRDataProcessor *proc = [[DRDataProcessor alloc] initWithLocations:path.locations];
-    DRFeedbackViewController *feedbackViewController;
-    if (self.feedbackModality == DRFeedbackModalityVisual) {
-        feedbackViewController =  [[DRVisualFeedbackViewController alloc] initWithDataProcessor:proc];
-    } else if (self.feedbackModality == DRFeedbackModalityAudio) {
-        feedbackViewController = [[DRAudioFeedbackViewController alloc] initWithDataProcessor:proc];
-    } else {
-        feedbackViewController = [[DRSonarFeedbackViewController alloc] initWithDataProcessor:proc];
-    }
+    DRFeedbackViewController *feedbackViewController = [[DRVisualFeedbackViewController alloc] initWithDataProcessor:proc];
     feedbackViewController.feedbackType = self.feedbackType;
     feedbackViewController.pathID = path.uniqueID;
     [self.navigationController pushViewController:feedbackViewController animated:YES];

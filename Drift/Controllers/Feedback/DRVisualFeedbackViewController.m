@@ -13,9 +13,9 @@
 #import "CLLocation+DRExtensions.h"
 #import "DRDistanceFormatter.h"
 #import "DRDriftView.h"
+#import "DRDistanceFormatter.h"
 
-const BOOL debug = YES;
-const BOOL showAngle = NO;
+const BOOL debug = NO;
 
 @interface DRVisualFeedbackViewController ()
 
@@ -25,6 +25,11 @@ const BOOL showAngle = NO;
 @property (nonatomic, strong) DRPathView *pathView;
 @property (nonatomic, strong) DRDistanceFormatter *distanceFormatter;
 @property (nonatomic, strong) DRDriftView *driftView;
+
+@property (nonatomic, strong) DRDistanceFormatter *distanceFormatterSound;
+@property (nonatomic, strong) NSTimer *feedbackTimer;
+@property (nonatomic, strong) AVSpeechSynthesizer *synthesizer;
+@property (nonatomic, strong) NSString *lastFeedbackString;
 
 @end
 
@@ -109,7 +114,7 @@ const BOOL showAngle = NO;
 
 -(void)dataProcessor:(DRDataProcessor *)processor didCalculateDrift:(DRDrift *)result {
     [super dataProcessor:processor didCalculateDrift:result];
-    self.driftLabel.text = self.feedbackType == DRFeedbackTypeQualitative ? [self qualitativeStringForDrift:result] : [self quantitativeStringForDrift:result];
+    self.driftLabel.text = self.feedbackType == DRFeedbackTypeQualitative ? [self qualitativeVisualStringForDrift:result] : [self quantitativeVisualStringForDrift:result];
 
     NSString *directionString = nil;
     if (result.direction == DRDriftDirectionRight) {
@@ -118,27 +123,21 @@ const BOOL showAngle = NO;
         directionString = [NSLocalizedString(@"left", nil) uppercaseString];
     }
 
-    if (showAngle) {
-        if (result.angle != DRDriftNoAngle) {
-            self.directionLabel.text = [NSString stringWithFormat:@"h:%.0f°, %.0f°, %@",result.location.course,result.angle,directionString];
-        } else {
-            self.directionLabel.text = [NSString stringWithFormat:@"h:%.0f°, -°, %@",result.location.course,directionString];
-        }
-    } else {
-        self.directionLabel.text = directionString;
-    }
-
+    self.directionLabel.text = directionString;
     self.driftView.drift = result;
 
     if (debug) {
         [self addLocationToHistory:result.location];
         self.pathView.primaryLocations = self.locationHistory;
     }
+
+    self.lastFeedbackString = self.feedbackType == DRFeedbackTypeQualitative ? [self qualitativeAudioStringForDrift:result] : [self quantitativeAudioStringForDrift:result];
 }
 
 -(void)dataProcessor:(DRDataProcessor *)processor didFailWithError:(NSError *)error {
     [super dataProcessor:processor didFailWithError:error];
     self.driftLabel.text = NSLocalizedString(@"–", nil);
+    [self speakString:NSLocalizedString(@"No location information.", nil)];
 }
 
 -(void)addLocationToHistory:(CLLocation *)location {
@@ -152,14 +151,83 @@ const BOOL showAngle = NO;
     }
 }
 
-#pragma mark feedback string
+#pragma mark audio
 
--(NSString *)quantitativeStringForDrift:(DRDrift *)drift {
+-(void)start {
+    [super start];
+    [self speakString:NSLocalizedString(@"Started run.", nil)];
+    self.feedbackTimer = [NSTimer scheduledTimerWithTimeInterval:[[DRVariableManager sharedManager] audioFeedbackRate] target:self selector:@selector(feedbackTimerFired) userInfo:nil repeats:YES];
+}
+
+-(void)stopRun {
+    [super stopRun];
+    [self.feedbackTimer invalidate];
+}
+
+-(void)cancelRun {
+    [super cancelRun];
+    [self.feedbackTimer invalidate];
+}
+
+-(void)feedbackTimerFired {
+    if (self.lastFeedbackString) {
+        [self speakString:self.lastFeedbackString];
+    } else {
+        [self speakString:NSLocalizedString(@"No location information.", nil)];
+    }
+}
+
+-(DRDistanceFormatter *)distanceFormatterSound {
+    if (_distanceFormatterSound == nil) {
+        DRDistanceFormatter *distance = [[DRDistanceFormatter alloc] init];
+        distance.abbreviate = NO;
+        distance.maximumFractionDigits = 0;
+        _distanceFormatterSound = distance;
+    }
+    return _distanceFormatterSound;
+}
+
+-(void)speakString:(NSString *)string {
+    if (self.synthesizer == nil) {
+        self.synthesizer = [[AVSpeechSynthesizer alloc] init];
+        self.synthesizer.delegate = self;
+        [self configureAudioSession];
+    }
+    AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:string];
+    utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+    utterance.rate = 0.13f;
+    [self.synthesizer speakUtterance:utterance];
+}
+
+-(void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didStartSpeechUtterance:(AVSpeechUtterance *)utterance {
+    //
+}
+
+-(void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utterance {
+    //
+}
+
+- (void)configureAudioSession{
+    NSError *error = NULL;
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback withOptions:AVAudioSessionCategoryOptionMixWithOthers error:&error];
+    if(error) {
+        DLog(@"Error setting category of audio session: %@",error.description);
+    }
+    error = NULL;
+    [[AVAudioSession sharedInstance] setActive:YES error: &error];
+    if (error) {
+        DLog(@"Error activating audio session: %@",error.description);
+    }
+}
+
+#pragma mark feedback strings
+
+-(NSString *)quantitativeVisualStringForDrift:(DRDrift *)drift {
     NSString *distance = [self.distanceFormatter stringFromDistance:drift.distance];
     return distance;
 }
 
--(NSString *)qualitativeStringForDrift:(DRDrift *)drift {
+-(NSString *)qualitativeVisualStringForDrift:(DRDrift *)drift {
     if (drift.distance < [[DRVariableManager sharedManager] zone1Thresh]) {
         return NSLocalizedString(@"Zone 1", nil);
     } else if (drift.distance < [[DRVariableManager sharedManager] zone1Thresh]*2) {
@@ -169,6 +237,36 @@ const BOOL showAngle = NO;
     }
 }
 
+-(NSString *)quantitativeAudioStringForDrift:(DRDrift *)drift {
+    if (drift.distance >= [[DRVariableManager sharedManager] infoThresh]) {
+        NSString *stringDistance = [self.distanceFormatterSound stringFromDistance:floor(drift.distance)];
+        if (drift.direction == DRDriftDirectionRight || drift.direction == DRDriftDirectionLeft) {
+            NSString *direction = drift.direction == DRDriftDirectionLeft ? NSLocalizedString(@"left", nil) : NSLocalizedString(@"right", nil);
+            return [NSString stringWithFormat:NSLocalizedString(@"%@ %@.", nil),stringDistance, direction];
+        } else {
+            return [NSString stringWithFormat:NSLocalizedString(@"%@.", nil),stringDistance];
+        }
+    } else {
+        return [NSString stringWithFormat:NSLocalizedString(@"On course.", nil)];
+    }
+}
 
+-(NSString *)qualitativeAudioStringForDrift:(DRDrift *)drift {
+    NSString *zoneString;
+    if (drift.distance < [[DRVariableManager sharedManager] zone1Thresh]) {
+        zoneString = NSLocalizedString(@"Zone 1", nil);
+    } else if (drift.distance < [[DRVariableManager sharedManager] zone1Thresh]*2) {
+        zoneString = NSLocalizedString(@"Zone 2", nil);
+    } else {
+        zoneString = NSLocalizedString(@"Zone 3", nil);
+    }
+
+    if (drift.distance >= [[DRVariableManager sharedManager] infoThresh] && (drift.direction == DRDriftDirectionRight || drift.direction == DRDriftDirectionLeft)) {
+        NSString *direction = drift.direction == DRDriftDirectionLeft ? NSLocalizedString(@"left", nil) : NSLocalizedString(@"right", nil);
+        return [NSString stringWithFormat:NSLocalizedString(@"%@, %@.", nil),zoneString,direction];
+    } else {
+        return [NSString stringWithFormat:NSLocalizedString(@"%@.", nil),zoneString];
+    }
+}
 
 @end

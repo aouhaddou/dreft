@@ -11,7 +11,6 @@
 
 @interface DRChoosePathViewController : DRPathsViewController
 
-@property (nonatomic, assign) DRFeedbackModality feedbackModality;
 @property (nonatomic, assign) DRFeedbackType feedbackType;
 
 @end

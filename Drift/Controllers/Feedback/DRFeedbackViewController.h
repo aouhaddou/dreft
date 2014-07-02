@@ -18,12 +18,6 @@ typedef NS_ENUM(NSInteger, DRFeedbackType) {
     DRFeedbackTypeQualitative = 1
 };
 
-typedef NS_ENUM(NSInteger, DRFeedbackModality) {
-    DRFeedbackModalityVisual = 0,
-    DRFeedbackModalityAudio = 1,
-    DRFeedbackModalitySonar = 2
-};
-
 @interface DRFeedbackViewController : UIViewController <DRFeedbackModule>
 
 @property (strong, nonatomic) IBOutlet DRNavigationBar *navigationBar;
