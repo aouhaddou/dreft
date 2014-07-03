@@ -12,6 +12,7 @@
 #import "DRGPSParser.h"
 #import "DRModel.h"
 #import "DRCheckpointAnnotation.h"
+#import "SIAlertView.h"
 
 @interface DRPathCheckpointAnnotation : NSObject <MKAnnotation>
 @end
@@ -38,6 +39,8 @@
 
 @property (nonatomic, strong) NSMutableArray *locations;
 @property (nonatomic, strong) CLPlacemark *placemark;
+
+@property (nonatomic, strong) UIButton *infoButton;
 
 @end
 
@@ -75,6 +78,19 @@
     [self.mapView addGestureRecognizer:tapGesture];
 
     _shouldZoomToUserLocation = YES;
+
+    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
+    [infoButton addTarget:self action:@selector(infoButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:infoButton];
+    infoButton.tintColor = [DRTheme base2];
+    self.infoButton = infoButton;
+}
+
+-(void)infoButtonTapped:(id)sender {
+    [self.textField resignFirstResponder];
+    SIAlertView *alert = [[SIAlertView alloc] initWithTitle:nil andMessage:NSLocalizedString(@"You can enter WGS84 coordinates as decimal latitude, longitude. Here is an example:\n\n59.361195, 18.059378\n\n", nil)];
+    [alert addButtonWithTitle:NSLocalizedString(@"Got it!", nil) type:SIAlertViewButtonTypeDefault handler:nil];
+    [alert show];
 }
 
 -(void)mapViewTapped:(UITapGestureRecognizer *)tap {
@@ -84,7 +100,9 @@
 
 -(void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
-    [self.textField becomeFirstResponder];
+    self.infoButton.centerY = self.textField.centerY;
+    self.infoButton.x = self.view.width-self.infoButton.width-20;
+    self.mapView.height = self.toolBar.top-self.mapView.top;
 }
 
 -(void)viewWillAppear:(BOOL)animated {

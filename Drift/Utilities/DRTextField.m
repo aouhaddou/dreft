@@ -9,6 +9,7 @@
 #import "DRTextField.h"
 
 static CGFloat const margin = 10;
+static CGFloat const buttonMargin = 24;
 
 @implementation DRTextField
 
@@ -38,12 +39,12 @@ static CGFloat const margin = 10;
 
 // placeholder position
 - (CGRect)textRectForBounds:(CGRect)bounds {
-    return CGRectInset(bounds, margin, margin);
+    return CGRectMake(bounds.origin.x+margin, bounds.origin.y, bounds.size.width-2*margin-buttonMargin, bounds.size.height);
 }
 
 // text position
 - (CGRect)editingRectForBounds:(CGRect)bounds {
-    return CGRectInset(bounds, margin, margin);
+    return CGRectMake(bounds.origin.x+margin, bounds.origin.y, bounds.size.width-2*margin-buttonMargin, bounds.size.height);
 }
 
 @end
