@@ -1,7 +1,7 @@
 Drift
 =====
 
-<p align="center"><img src="https://raw.githubusercontent.com/chrisalbert/Drift/master/Assets/overview.png?token=3205738__eyJzY29wZSI6IlJhd0Jsb2I6Y2hyaXNhbGJlcnQvRHJpZnQvbWFzdGVyL0Fzc2V0cy9vdmVydmlldy5wbmciLCJleHBpcmVzIjoxNDA1NjA5ODU1fQ%3D%3D--00e41cfe4d4daee7523ec16f1c1876d0079ceab9"/></p>
+<p align="center" style="border:1px #dddddd"><img src="https://raw.githubusercontent.com/chrisalbert/Drift/master/Assets/overview.png?token=3205738__eyJzY29wZSI6IlJhd0Jsb2I6Y2hyaXNhbGJlcnQvRHJpZn"vbWFzdGVyL0Fzc2V0cy9vdmVydmlldy5wbmciLCJleHBpcmVzIjoxNDA1NjA5ODU1fQ%3D%3D--00e41cfe4d4daee7523ec16f1c1876d0079ceab9"/></p>
 
 This app explores an approach to provide real-time feedback for orienteers.
 
