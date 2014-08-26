@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UISlider *zone1Slider;
 @property (strong, nonatomic) IBOutlet UILabel *zone2Label;
 @property (strong, nonatomic) IBOutlet UISlider *zone2Slider;
+@property (strong, nonatomic) IBOutlet UILabel *attributeLabel;
 
 -(IBAction)sliderChangedValue:(UISlider *)slider;
 

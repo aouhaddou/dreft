@@ -99,6 +99,10 @@ static CGFloat const headerHeight = 82.f;
 
     [self.typeControl setTitle:NSLocalizedString(@"Meters", nil) forSegmentAtIndex:DRFeedbackTypeQuantitative];
     [self.typeControl setTitle:NSLocalizedString(@"Zones", nil) forSegmentAtIndex:DRFeedbackTypeQualitative];
+
+    self.attributeLabel.font = [DRTheme semiboldFontWithSize:14.f];
+    self.attributeLabel.textColor = [DRTheme base4];
+    self.attributeLabel.text = NSLocalizedString(@"Developed together with the\nSwedish Orienteering Foundation", nil);
 }
 
 -(IBAction)sliderChangedValue:(UISlider *)slider {
